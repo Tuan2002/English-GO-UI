@@ -1,0 +1,18 @@
+.banner-box {
+  width: 100%;
+  height: 130px;
+  position: relative;
+}
+.avatar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  margin-top: 50px;
+}

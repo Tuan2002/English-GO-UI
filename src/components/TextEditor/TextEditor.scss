@@ -1,0 +1,17 @@
+.toolbarClassName {
+  background: transparent;
+  border-bottom: 1px solid var(--primary-color);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+.wrapperClassName {
+  background: var(--primary-bg-color);
+  border: 1px solid var(--primary-color);
+  // border-radius: 5px;
+}
+.editorClassName {
+  min-height: 200px;
+  max-height: 80vh;
+  padding: 10px;
+}

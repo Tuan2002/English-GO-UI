@@ -1,0 +1,40 @@
+.reason-wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  .reason-title {
+    font-size: 4rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  .reason-content {
+    .reason-item {
+      .box-content {
+        padding: 20px;
+        .title {
+          font-size: 2.5rem;
+          font-weight: 500;
+          margin-bottom: 15px;
+        }
+
+        .descriptions {
+          .desc-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 500;
+          }
+          .icon {
+            font-size: 2.5rem;
+            display: flex;
+            align-items: center;
+            margin-right: 10px;
+            color: var(--primary-color);
+          }
+        }
+      }
+    }
+  }
+}

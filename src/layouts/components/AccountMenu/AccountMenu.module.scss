@@ -1,0 +1,61 @@
+.account-menu-wrapper {
+  min-width: 270px;
+  max-height: calc(100vh - 100px);
+  overflow: auto;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    border-bottom: 1px solid #8c52ff;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    .avatar {
+      border: 2px solid #8c52ff;
+      border-radius: 50%;
+    }
+    .info {
+      min-width: 150px;
+      .name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #8c52ff;
+      }
+      .email {
+        font-size: 14px;
+        color: #8c52ff;
+      }
+    }
+  }
+  .menu-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    .menu-item {
+      display: flex;
+      width: 100%;
+      height: 40px;
+      align-items: center;
+      padding: 0px 10px;
+      background-color: #f6ffed;
+      border-radius: 5px;
+      cursor: pointer;
+      color: #8c52ff;
+      &:hover {
+        background-color: var(--secondary-bg-color);
+        color: #07bc0c;
+        box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+      }
+
+      .icon {
+        font-size: 20px;
+        display: block;
+        width: 40px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}

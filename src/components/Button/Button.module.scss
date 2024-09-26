@@ -1,0 +1,45 @@
+.button {
+}
+
+.danger {
+  background-color: #ff0000;
+
+  &:hover {
+    background-color: #ff6666 !important;
+  }
+}
+.success {
+  background-color: #00ff00;
+
+  &:hover {
+    background-color: #09c909 !important;
+  }
+}
+.warning {
+  background-color: #c4c40d;
+
+  &:hover {
+    background-color: #d1d113 !important;
+  }
+}
+.info {
+  background-color: #0000ff;
+
+  &:hover {
+    background-color: #6666ff !important;
+  }
+}
+.primary {
+  background-color: var(--primary-color);
+
+  &:hover {
+    background-color: var(--primary-hover-color) !important;
+  }
+}
+.secondary {
+  background-color: var(--secondary-color);
+
+  &:hover {
+    background-color: var(--secondary-hover-color) !important;
+  }
+}

@@ -1,0 +1,28 @@
+.modal-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-bg-color);
+  padding: 10px;
+  border-bottom: 1px solid var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+.modal-body {
+  padding: 10px;
+}
+.scroll-body {
+  height: calc(100vh - 150px);
+  overflow: auto;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 5px 10px;
+  border-top: 1px solid var(--primary-color);
+}

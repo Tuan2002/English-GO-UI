@@ -1,0 +1,68 @@
+.header-wrapper {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  width: 100vw;
+  box-shadow: 0 0 10px 0 rgba(82, 63, 105, 0.1);
+  height: 70px;
+  background-color: var(--primary-bg-color);
+  display: flex;
+  align-items: center;
+  .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 25px;
+    .header-leftbox {
+      width: 290px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      .button {
+        font-size: 30px;
+        margin-right: 30px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+      .logo {
+        width: 130px;
+        cursor: pointer;
+      }
+      .arrow {
+        position: absolute;
+        right: 20px;
+        width: 50px;
+        background-image: url("/src/assets/bg-left.webp");
+        height: 70px;
+        background-size: auto 130px;
+        background-repeat: no-repeat;
+        background-position: center center;
+      }
+    }
+    .header-rightbox {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      .header-icon {
+        color: var(--primary-color);
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--secondary-bg-color);
+        box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+        &:hover {
+          color: var(--secondary-color);
+        }
+        .icon {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
