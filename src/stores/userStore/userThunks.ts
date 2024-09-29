@@ -1,5 +1,5 @@
 import { IAppResposeBase, IFilterPayload } from "@/types/AppType";
-import { ICreateUserPayload, IGetUserDataResponse, IUserData } from "@/types/user/UserType";
+import { ICreateUserPayload, IGetUserDataResponse, IUpdateUserPayload, IUserData } from "@/types/user/UserType";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -69,6 +69,17 @@ const unBlockUser = createAsyncThunk("user/unBlockUser", async (id: string, { re
     return rejectWithValue(error.response.data) as any;
   }
 });
+const updateUser = createAsyncThunk(
+  "user/updateUser",
+  async (payload: { id: string; data: IUpdateUserPayload }, { rejectWithValue }): Promise<IAppResposeBase<IUserData>> => {
+    try {
+      const userUpdated: IAppResposeBase<IUserData> = await http.put(`/api/users/update-user/${payload.id}`, payload.data);
+      return userUpdated;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
 
 const userThunks = {
   getAllUsers,
@@ -77,5 +88,6 @@ const userThunks = {
   restoreUser,
   blockUser,
   unBlockUser,
+  updateUser,
 };
 export default userThunks;

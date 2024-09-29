@@ -1,5 +1,5 @@
 export interface ILoginRequestData {
-  email: string;
+  username: string;
   password: string;
   isRememberMe: boolean;
 }
@@ -11,7 +11,7 @@ export interface ILoginResponseData {
     expiresAtUtc: string;
   };
   userInfo: {
-    email: string;
+    username: string;
     fullName: string;
     role: {
       roleName: string;

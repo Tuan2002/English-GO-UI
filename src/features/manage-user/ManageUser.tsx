@@ -4,10 +4,11 @@ import classNames from "classnames/bind";
 import FilterBox from "./FilterBox";
 import ActionBox from "./ActionBox";
 import TableUser from "./TableUser";
-import ModalSaveUser from "./ModalSaveUser";
+import ModalSaveUser from "./ModalCreateUser";
 import { useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import PaginationCustom from "@/components/Pagination";
+import ModalUpdateUser from "./ModalUpdateUser";
 const cx = classNames.bind(style);
 const ManageUser = () => {
   const { totalUser, limit } = useSelector((state: RootState) => state.userStore);
@@ -32,6 +33,7 @@ const ManageUser = () => {
         </div>
         <div className={cx("footer")}>
           <ModalSaveUser />
+          <ModalUpdateUser />
         </div>
       </div>
     </CardCustom>

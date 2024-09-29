@@ -11,21 +11,13 @@ enum ROUTE_PATH {
   ADMIN_DASHBOARD = "/admin/dashboard",
   ADMIN_USERS = "/admin/users/manage-users",
   ADMIN_ROLES = "/admin/roles/manage-roles",
-  ADMIN_PROFESSIONS = "/admin/generals/manage-professions",
-  ADMIN_EXPERIENCES = "/admin/generals/manage-experiences",
-  ADMIN_JOB_LOCATIONS = "/admin/generals/manage-job-locations",
-  ADMIN_POSITIONS = "/admin/generals/manage-positions",
-  ADMIN_SALARY_RANGES = "/admin/generals/manage-salary-ranges",
-  ADMIN_MANAGE_COMPANY = "/admin/manage-company",
+  ADMIN_QUESTION_BANK = "/admin/question-bank",
+  ADMIN_LIST_EXAM = "/admin/list-exam",
 
   // recruiter routes
-  RECRUITER_DASHBOARD = "/recruiter/dashboard",
-  RECRUITER_COMPANY = "/recruiter/company",
-  RECRUITER_RECRUITMENT_NEW = "/recruiter/recruitment-news",
-
-  // manager routes
-  MANAGER_DASHBOARD = "/manager/dashboard",
-  MANAGER_COMPANY = "/manager/company",
+  EXAMINER_DASHBOARD = "/examiner/dashboard",
+  EXAMINER_QUESTION_BANK = "/examiner/question-bank",
+  EXAMINER_LIST_EXAM = "/examiner/list-exam",
 
   REGISTER_RECRUITMENT = "/company/register-recruitment",
 }

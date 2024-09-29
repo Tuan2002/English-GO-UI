@@ -1,5 +1,4 @@
 import { AppAction } from "@/stores/appStore/appReducer";
-import { GeneralAction } from "@/stores/generalStore/generalReducer";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
@@ -10,10 +9,9 @@ interface GetAppVariableProviderProps {
 const GetAppVariableProvider = ({ children }: GetAppVariableProviderProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch<any>(AppAction.getAllGroupRoles());
-    dispatch<any>(GeneralAction.getProvinces());
-    dispatch<any>(GeneralAction.getMemberCounts());
-  }, []);
+  }, [dispatch]);
   return <>{children}</>;
 };
 export default GetAppVariableProvider;

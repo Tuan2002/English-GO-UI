@@ -1,24 +1,20 @@
-import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, PieChartOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import style from "./Sidebar.module.scss";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
-import ROUTE_PATH from "@/routes/routePath";
 import adminMenu from "./adminMenu";
-import managerMenu from "./managerMenu";
-import recruiterMenu from "./recruiterMenu";
+import examinerMenu from "./examinerMenu";
 const cx = classNames.bind(style);
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 interface ISidebarProps {
   collapsed: boolean;
-  menuType?: "admin" | "manager" | "recruiter";
+  menuType?: "admin" | "examiner";
 }
 
 const Sidebar = ({ collapsed, menuType = "admin" }: ISidebarProps): JSX.Element => {
-  const items: MenuItem[] = menuType === "admin" ? adminMenu : menuType === "manager" ? managerMenu : recruiterMenu;
+  const items: MenuItem[] = menuType === "admin" ? adminMenu : examinerMenu;
   return (
     <div className={cx("menu", "scrollbar")}>
       <Menu

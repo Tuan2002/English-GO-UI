@@ -4,7 +4,7 @@ import ROUTE_PATH from "./routePath";
 import { toast } from "react-toastify";
 import React from "react";
 
-const AdminProtectRoute = (): JSX.Element => {
+const ExaminerProtectRoute = (): JSX.Element => {
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const parseJwt = (token: any) => {
@@ -18,14 +18,13 @@ const AdminProtectRoute = (): JSX.Element => {
   if (!accessToken) return <Navigate to={ROUTE_PATH.LOGIN} />;
 
   const decodedToken = parseJwt(accessToken);
-  console.log(decodedToken);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   React.useEffect(() => {
-    if (decodedToken.roleName !== "admin") {
+    if (decodedToken.roleName !== "examiner") {
       toast.info("Bạn không có quyền truy cập vào trang này!");
       navigate(ROUTE_PATH.HOME);
     }
-  }, [decodedToken]);
+  }, [decodedToken, navigate]);
   return <Outlet />;
 };
-export default AdminProtectRoute;
+export default ExaminerProtectRoute;

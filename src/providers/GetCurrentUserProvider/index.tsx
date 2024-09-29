@@ -9,8 +9,9 @@ const GetCurrentUserProvider = ({ children }: { children: JSX.Element }) => {
 
   React.useEffect(() => {
     if (!accessToken) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch<any>(authAction.getCurrentUser());
-  }, [accessToken]);
+  }, [accessToken, dispatch]);
   return children;
 };
 export default GetCurrentUserProvider;

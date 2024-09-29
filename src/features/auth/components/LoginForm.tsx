@@ -7,7 +7,6 @@ import ROUTE_PATH from "@/routes/routePath";
 import { toast } from "react-toastify";
 import authService from "@/services/authService";
 import { ILoginRequestData } from "@/types/auth/LoginType";
-import { AxiosError } from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { authAction } from "@/stores/authStore/authReducer";
@@ -30,18 +29,20 @@ const LoginForm = () => {
     setIsLoading(true);
     try {
       const loginData: ILoginRequestData = {
-        email: values.username,
+        username: values.username,
         password: values.password,
         isRememberMe: true,
       };
       const res = await authService.login(loginData);
       if (res.success) {
         toast.success("Đăng nhập thành công!");
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         dispatch<any>(authAction.getCurrentUser());
         navigate(ROUTE_PATH.HOME);
       }
       setIsLoading(false);
-    } catch (error: AxiosError | any) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
       console.log(error);
       setIsLoading(false);
       toast.error(error.errorMessage);
@@ -52,8 +53,8 @@ const LoginForm = () => {
     <div className={cx("login-form-wrapper")}>
       <h4 className={cx("title")}>Đăng nhập tài khoản</h4>
       <Form name='basic' initialValues={{ remember: true }} autoComplete='off' onFinish={onFinish}>
-        <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền email để đăng nhập!" }]}>
-          <Input autoFocus size='large' placeholder='Email' className='full-width' />
+        <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền tài khoản để đăng nhập!" }]}>
+          <Input autoFocus size='large' placeholder='Tên tài khoản' className='full-width' />
         </Form.Item>
 
         <Form.Item<FieldType>

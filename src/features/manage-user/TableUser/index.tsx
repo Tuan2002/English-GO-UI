@@ -35,18 +35,21 @@ const TableUser: React.FC = () => {
     dispatch<any>(UserActions.deleteUser(id));
   };
 
+  const handleUpdateUser = (user: IUserData) => {
+    dispatch(UserActions.changeSelectedUser(user));
+    dispatch(UserActions.openModalUpdateUser());
+  };
+
   const columns: TableColumnsType<DataType> = [
     {
       title: "STT",
-      width: 20,
+      width: 30,
       render: (_, __, index) => index + 1,
-      fixed: "left",
       align: "center",
     },
     {
       title: "Thông tin người dùng",
       width: 100,
-      fixed: "left",
       render: (_, record) => {
         return (
           <div className={cx("user-box")}>
@@ -57,10 +60,19 @@ const TableUser: React.FC = () => {
             </div>
             <div className={cx("info")}>
               <div className={cx("name")}>{record.fullName}</div>
-              <div className={cx("email")}>{record.email}</div>
+              <div className={cx("email")}>{record.username}</div>
             </div>
           </div>
         );
+      },
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+      width: 100,
+      render: (_, record) => {
+        return record.email ?? "Chưa cập nhật";
       },
     },
     {
@@ -92,7 +104,7 @@ const TableUser: React.FC = () => {
           <div className={cx("actions", "flex", "justify-content-center")}>
             <ButtonShow onClick={() => {}} />
             <ButtonLock onClick={() => {}} />
-            <ButtonUpdate onClick={() => {}} />
+            <ButtonUpdate onClick={() => handleUpdateUser(record)} />
             <ButtonDelete onConfirmDelete={() => onConfirmDelete(record.id)} onClick={() => {}} />
           </div>
         );

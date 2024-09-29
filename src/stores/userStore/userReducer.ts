@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 
 export interface AuthState {
   user?: IUserData;
+  selectedUser?: IUserData;
   listUser?: IUserData[];
 
-  openModalSaveUser: boolean;
+  openModalCreateUser: boolean;
+  openModalUpdateUser: boolean;
 
   page?: number;
   limit?: number;
@@ -25,7 +27,8 @@ const initialState: AuthState = {
   user: undefined,
   listUser: [],
 
-  openModalSaveUser: false,
+  openModalCreateUser: false,
+  openModalUpdateUser: false,
 
   page: 1,
   limit: 10,
@@ -42,11 +45,20 @@ export const UserSlice = createSlice({
   name: "userSlice",
   initialState,
   reducers: {
-    openModalSaveUser: (state) => {
-      state.openModalSaveUser = true;
+    openModalCreateUser: (state) => {
+      state.openModalCreateUser = true;
     },
-    closeModalSaveUser: (state) => {
-      state.openModalSaveUser = false;
+    closeModalCreateUser: (state) => {
+      state.openModalCreateUser = false;
+    },
+    openModalUpdateUser: (state) => {
+      state.openModalUpdateUser = true;
+    },
+    closeModalUpdateUser: (state) => {
+      state.openModalUpdateUser = false;
+    },
+    changeSelectedUser: (state, action: PayloadAction<IUserData | undefined>) => {
+      state.selectedUser = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
@@ -56,6 +68,9 @@ export const UserSlice = createSlice({
     },
     setSearch: (state, action: PayloadAction<string>) => {
       state.search = action.payload;
+    },
+    changeSubmitting: (state, action: PayloadAction<boolean>) => {
+      state.isSubmitting = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -69,9 +84,9 @@ export const UserSlice = createSlice({
         state.totalUser = action.payload.data.totalItem;
         state.totalPage = action.payload.data.totalPage;
       })
-      .addCase(userThunks.getAllUsers.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(userThunks.getAllUsers.rejected, (state, action) => {
         state.loading = false;
-        toast.error(action.payload.errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
     builder
       .addCase(userThunks.createNewUser.pending, (state) => {
@@ -80,12 +95,26 @@ export const UserSlice = createSlice({
       .addCase(userThunks.createNewUser.fulfilled, (state, action) => {
         state.isSubmitting = false;
         state.listUser?.unshift(action.payload.data);
-        state.openModalSaveUser = false;
+        state.openModalCreateUser = false;
         toast.success("Tạo mới người dùng thành công");
       })
-      .addCase(userThunks.createNewUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(userThunks.createNewUser.rejected, (state, action) => {
         state.isSubmitting = false;
-        toast.error(action.payload.errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
+      });
+    builder
+      .addCase(userThunks.updateUser.pending, (state) => {
+        state.isSubmitting = true;
+      })
+      .addCase(userThunks.updateUser.fulfilled, (state, action) => {
+        state.isSubmitting = false;
+        state.listUser = state.listUser?.map((user) => (user.id === action.payload.data.id ? action.payload.data : user));
+        state.openModalUpdateUser = false;
+        toast.success("Cập nhật người dùng thành công");
+      })
+      .addCase(userThunks.updateUser.rejected, (state, action) => {
+        state.isSubmitting = false;
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
     builder
       .addCase(userThunks.deleteUser.pending, (state) => {
@@ -96,9 +125,9 @@ export const UserSlice = createSlice({
         state.listUser = state.listUser?.filter((user) => user.id !== action.meta.arg);
         toast.success("Xóa người dùng thành công");
       })
-      .addCase(userThunks.deleteUser.rejected, (state, action: PayloadAction<any>) => {
+      .addCase(userThunks.deleteUser.rejected, (state, action) => {
         state.isDeleting = false;
-        toast.error(action.payload.errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
   },
 });

@@ -1,29 +1,39 @@
-import { BsTextIndentLeft } from "react-icons/bs";
 import { BiSolidBellRing, BiSolidMessage } from "react-icons/bi";
-import style from "./AdminHeader.module.scss";
+import style from "./ContestantHeader.module.scss";
 import classNames from "classnames/bind";
-import { Avatar, Badge, Popover } from "antd";
+import { Avatar, Badge, Col, Popover, Row } from "antd";
+import AccountMenu from "../../AccountMenu";
 import HeaderNotify from "../../HeaderNotify";
 import HeaderMessage from "../../HeaderMessage";
-import AccountMenu from "../../AccountMenu";
-import { useSelector } from "react-redux";
+import HeaderMenu from "./HeaderMenu";
 import { RootState } from "@/stores";
+import { useSelector } from "react-redux";
 const cx = classNames.bind(style);
 
-interface IAdminHeaderProps {
-  toggleCollapsed: () => void;
-}
-
-const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
+const ContestantHeader = () => {
   const { currentUser } = useSelector((state: RootState) => state.authStore);
   return (
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
         <div className={cx("header-leftbox")}>
-          <span className={cx("button")} onClick={toggleCollapsed}>
-            <BsTextIndentLeft />
-          </span>
-          <img className={cx("logo")} src='/src/assets/logo-full-exampro.png' alt='logo' />
+          <Row align='middle'>
+            <Col xs={0} sm={24}>
+              <div className={cx("logo-box")}>
+                <img className={cx("logo")} src='/src/assets/logo-full-exampro.png' alt='logo' />
+                <div className={cx("arrow")}></div>
+              </div>
+            </Col>
+            <Col xs={24} sm={0}>
+              <div className={cx("logo-box")}>
+                <div className='d-flex align-items-center'>
+                  <img className={cx("logo-less")} src='/src/assets/logo-less.png' alt='logo' />
+                </div>
+              </div>
+            </Col>
+          </Row>
+          <div className={cx("menu-box")}>
+            <HeaderMenu />
+          </div>
         </div>
         <div className={cx("header-rightbox")}>
           <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>
@@ -51,4 +61,4 @@ const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
     </div>
   );
 };
-export default AdminHeader;
+export default ContestantHeader;

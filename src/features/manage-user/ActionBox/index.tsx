@@ -6,7 +6,7 @@ const ActionBox = () => {
   const dispatch = useDispatch();
 
   const handleOpenModalSaveUser = () => {
-    dispatch(UserActions.openModalSaveUser());
+    dispatch(UserActions.openModalCreateUser());
   };
   return (
     <div>

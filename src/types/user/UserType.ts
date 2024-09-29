@@ -5,6 +5,10 @@ export interface IUserData {
   id: string;
   email: string;
   fullName: string;
+  username: string;
+  birthday?: string;
+  gender?: GenderStatus;
+  phoneNumber?: string;
   groupRoleId: string;
   groupRole: {
     name: string;
@@ -21,8 +25,9 @@ export interface IGetUserDataResponse extends IGetDataResponse {
 }
 
 export interface ICreateUserPayload {
-  email: string;
+  email?: string;
   fullName: string;
+  username: string;
   groupRoleId: string;
   avatar?: string;
   password: string;
@@ -31,9 +36,13 @@ export interface ICreateUserPayload {
 export interface IUpdateProfilePayload {
   id: string;
   avatar?: string;
-  banner?: string;
+  email: string;
   fullName: string;
   birthday: string;
   gender: GenderStatus;
   phoneNumber?: string;
+}
+
+export interface IUpdateUserPayload extends IUpdateProfilePayload {
+  groupRoleId: string;
 }

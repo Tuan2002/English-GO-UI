@@ -7,11 +7,10 @@ import React from "react";
 import { toast } from "react-toastify";
 import authService from "@/services/authService";
 import { IRegisterRequestData } from "@/types/auth/RegisterType";
-import { IErrorResponse } from "@/types/AppType";
 const cx = classNames.bind(style);
 
 type FieldType = {
-  email: string;
+  username: string;
   fullName: string;
   password: string;
   confirmPassword: string;
@@ -22,7 +21,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const onFinish = async (values: FieldType) => {
-    if (!values.email || !values.fullName || !values.password || !values.password) {
+    if (!values.username || !values.fullName || !values.password || !values.password) {
       toast.error("Vui lòng điền đầy đủ thông tin để đăng ký!");
       return;
     }
@@ -32,7 +31,7 @@ const RegisterForm = () => {
     }
     setIsLoading(true);
     const dataRegister: IRegisterRequestData = {
-      email: values.email,
+      username: values.username,
       fullName: values.fullName,
       password: values.password,
     };
@@ -43,9 +42,13 @@ const RegisterForm = () => {
         navigate(ROUTE_PATH.LOGIN);
       }
       setIsLoading(false);
-    } catch (error: IErrorResponse | any) {
+    } catch (error: unknown) {
       setIsLoading(false);
-      toast.error(error.errorMessage);
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
     }
   };
 
@@ -53,10 +56,14 @@ const RegisterForm = () => {
     <div className={cx("register-form-wrapper")}>
       <h4 className={cx("title")}>Đăng kí tài khoản</h4>
       <Form onFinish={onFinish} name='basic' initialValues={{ remember: true }} autoComplete='off'>
-        <Form.Item<FieldType> name='email' rules={[{ required: true, message: "Vui lòng điền email để đăng nhập!" }]}>
-          <Input size='large' placeholder='Email' className='full-width' />
+        <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền tên tài khoản để đăng ký!" }]}>
+          <Input size='large' placeholder='Tên tài khoản' className='full-width' />
         </Form.Item>
-        <Form.Item<FieldType> className='mt-30' name='fullName' rules={[{ required: true, message: "Vui lòng điền họ tên để nhà tuyển dụng xem hồ sơ!" }]}>
+        <Form.Item<FieldType>
+          className='mt-30'
+          name='fullName'
+          rules={[{ required: true, message: "Vui lòng điền họ tên để nhà tuyển dụng xem hồ sơ!" }]}
+        >
           <Input size='large' placeholder='Họ và tên' className='full-width' />
         </Form.Item>
 
@@ -95,7 +102,7 @@ const RegisterForm = () => {
         </Row>
 
         <Form.Item className='mt-10'>
-          <Checkbox>Tôi đồng ý với việc xử lý và cung cấp thông tin dữ liệu cá nhân, đồng thời đã đọc và đồng ý với Thoả thuận sử dụng và Quy định bảo mật của JobViet.</Checkbox>
+          <Checkbox>Tôi đồng ý với các điều khoản sử dụng của hệ thống</Checkbox>
         </Form.Item>
 
         <Form.Item className='mt-10'>

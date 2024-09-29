@@ -49,30 +49,6 @@ const AccountMenu = () => {
           <span className={cx("icon")}>
             <BiEdit />
           </span>
-          <span className={cx("name")}>Nhà tuyển dụng xem hồ sơ</span>
-        </div>
-        <div className={cx("menu-item")}>
-          <span className={cx("icon")}>
-            <BiEdit />
-          </span>
-          <span className={cx("name")}>Cài đặt gợi ý việc làm</span>
-        </div>
-        <div className={cx("menu-item")}>
-          <span className={cx("icon")}>
-            <BiEdit />
-          </span>
-          <span className={cx("name")}>Cài đặt thông báo việc làm</span>
-        </div>
-        <div className={cx("menu-item")}>
-          <span className={cx("icon")}>
-            <BiEdit />
-          </span>
-          <span className={cx("name")}>Cài đặt nhận email tuyển dụng</span>
-        </div>
-        <div className={cx("menu-item")}>
-          <span className={cx("icon")}>
-            <BiEdit />
-          </span>
           <span className={cx("name")}>Đổi mật khẩu</span>
         </div>
         <div className={cx("menu-item")} onClick={() => handleLogout()}>

@@ -17,6 +17,7 @@ const uploadAnImage = async (image: File, CloudPreset?: CloudPresets): Promise<I
       errorMessage: "",
     };
     return data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw error.response.data;
   }
@@ -33,8 +34,8 @@ const deleteAnImage = async (url: string): Promise<IAppResposeBase<IUploadImageR
     }
     const params = {
       public_id: publicId,
-      api_key: "your_api_key",
-      api_secret: "your_api_secret",
+      api_key: Environment.CLOUD_API_KEY,
+      api_secret: Environment.CLOUD_API_SECRET,
     };
     const response = await axios.post(`${Environment.CLOUD_BASE_URL}${Environment.CLOUD_NAME}/image/destroy`, params);
     const data: IAppResposeBase<IUploadImageResponse> = {
@@ -44,6 +45,7 @@ const deleteAnImage = async (url: string): Promise<IAppResposeBase<IUploadImageR
       errorMessage: "",
     };
     return data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw error.response.data;
   }

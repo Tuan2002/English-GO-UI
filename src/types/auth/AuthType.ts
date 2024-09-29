@@ -3,6 +3,7 @@ import GenderStatus from "@/constants/GenderStatus";
 export interface ICurrentUser {
   id: string;
   email: string;
+  username: string;
   fullName: string;
   roleName: string;
   groupRole: {

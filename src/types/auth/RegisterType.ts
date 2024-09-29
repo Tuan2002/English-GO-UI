@@ -1,12 +1,12 @@
 export interface IRegisterRequestData {
-  email: string;
+  username: string;
   password: string;
   fullName: string;
 }
 
 export interface IRegisterResponseData {
   id: string;
-  email: string;
+  username: string;
   fullName: string;
   role: string;
 }
