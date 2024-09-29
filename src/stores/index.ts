@@ -3,6 +3,7 @@ import { AuthSlice } from "./authStore/authReducer";
 import { UserSlice } from "./userStore/userReducer";
 import { AppSlice } from "./appStore/appReducer";
 import { RoleSlice } from "./roleStore/roleReducer";
+import { SkillSlice } from "./skillStore/skillReducer";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     userStore: UserSlice.reducer,
     appStore: AppSlice.reducer,
     roleStore: RoleSlice.reducer,
+    skillStore: SkillSlice.reducer,
   },
   // Added this mdware to fix error "A none-serializable value was detected..."
   middleware: (getDefaultMiddleware) =>

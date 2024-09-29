@@ -1,8 +1,11 @@
+import CardCustom from "@/components/Card";
+import ListSkill from "./ListSkill";
+
 const ManageQuestionBank = () => {
   return (
-    <div>
-      <h1>Manage Question Bank</h1>
-    </div>
+    <CardCustom title='Ngân hàng câu hỏi' fullHeight>
+      <ListSkill />
+    </CardCustom>
   );
 };
 export default ManageQuestionBank;
