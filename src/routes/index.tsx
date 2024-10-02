@@ -18,6 +18,7 @@ import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/Ex
 import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
 import AdminListExamPage from "@/pages/admin/admin-list-exam/AdminListExamPage";
 import AdminQuestionBankPage from "@/pages/admin/admin-question-bank/AdminQuestionBankPage";
+import AdminSkillDetailPage from "@/pages/admin/admin-question-bank/AdminSkillDetailPage";
 
 const AppRoute = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_USERS} element={<ManageUserPage />} />
               <Route path={ROUTE_PATH.ADMIN_ROLES} element={<ManageRolePage />} />
               <Route path={ROUTE_PATH.ADMIN_QUESTION_BANK} element={<AdminQuestionBankPage />} />
+              <Route path={ROUTE_PATH.ADMIN_SKILL_DETAIL} element={<AdminSkillDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_LIST_EXAM} element={<AdminListExamPage />} />
             </Route>
           </Route>

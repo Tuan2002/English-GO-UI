@@ -7,6 +7,18 @@ import { AdminHeader } from "../components/headers";
 const cx = classNames.bind(style);
 const MainLayout: React.FC = () => {
   const [collapsed, setCollapsed] = React.useState(false);
+  const [width, setWidth] = React.useState(window.innerWidth);
+
+  React.useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+  React.useEffect(() => {
+    if (width < 992) {
+      setCollapsed(true);
+    }
+  }, [width]);
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };

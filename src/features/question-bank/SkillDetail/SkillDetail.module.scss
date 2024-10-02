@@ -1,9 +1,9 @@
-.skill-item-wrapper {
+.level-item-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  .skill-item-box {
+  .level-item-box {
     background-image: url("../../../assets/empty.webp");
     background-repeat: no-repeat;
     background-size: contain;
@@ -24,7 +24,7 @@
       box-shadow: 0 0 13px 0 rgba(0, 0, 0, 0.2);
     }
 
-    .skill-info {
+    .level-info {
       width: 100%;
       background-color: #d8e2dfa3;
       color: #333;

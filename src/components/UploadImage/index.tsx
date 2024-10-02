@@ -10,9 +10,10 @@ interface IUploadImageProps {
   size?: number;
   defaultImage?: string;
   onChangeImage?: (e: any) => void;
+  disabled?: boolean;
 }
 
-const Uploadimage = ({ type = "cover", size = 100, defaultImage, onChangeImage }: IUploadImageProps) => {
+const Uploadimage = ({ type = "cover", size = 100, defaultImage, onChangeImage, disabled = false }: IUploadImageProps) => {
   const id = useMemo(() => {
     return `${type}-${Math.floor(Math.random() * 1000)}`;
   }, []);
@@ -23,6 +24,7 @@ const Uploadimage = ({ type = "cover", size = 100, defaultImage, onChangeImage }
     if (image === undefined) {
       return;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     onChangeImage && onChangeImage(image);
     setImagePreview(URL.createObjectURL(image));
   };
@@ -56,7 +58,7 @@ const Uploadimage = ({ type = "cover", size = 100, defaultImage, onChangeImage }
           </label>
         </div>
       )}
-      <input type='file' id={id} hidden onChange={handleChangeImage} />
+      <input disabled={disabled} type='file' id={id} hidden onChange={handleChangeImage} />
     </>
   );
 };

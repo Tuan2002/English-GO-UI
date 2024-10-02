@@ -1,3 +1,4 @@
+import ButtonBackPage from "../Button/ButtonBackPage";
 import style from "./Card.module.scss";
 import classNames from "classnames/bind";
 const cx = classNames.bind(style);
@@ -9,6 +10,7 @@ interface ICardProps {
   cardFooter?: React.ReactNode;
   showFooter?: boolean;
   fullHeight?: boolean;
+  showBackButton?: boolean;
 }
 const CardCustom = ({
   children,
@@ -16,11 +18,17 @@ const CardCustom = ({
   showHeader = true,
   cardHeader = null,
   fullHeight = false,
+  showBackButton = false,
 }: ICardProps) => {
   return (
     <div className={cx("card-wrapper")}>
       {/* {showHeader && cardHeader ? cardHeader : <div className={cx("card-header")}>{title}</div>} */}
-      {showHeader && <div className={cx("card-header")}>{cardHeader ? cardHeader : title}</div>}
+      {showHeader && (
+        <div className={cx("card-header")}>
+          {showBackButton && <ButtonBackPage />}
+          <div className={cx("card-title")}>{cardHeader ? cardHeader : title}</div>
+        </div>
+      )}
       <div
         className={cx("card-body", "scrollbar", {
           "full-height": fullHeight,

@@ -43,3 +43,20 @@
     background-color: var(--secondary-hover-color) !important;
   }
 }
+
+.button-back-page {
+  font-size: 20px;
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  background-color: #f1f1f1;
+
+  &:hover {
+    background-color: #e1e1e1;
+  }
+}

@@ -10,6 +10,17 @@
   background-color: #f5f5f5;
 }
 
+.text-clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Số dòng bạn muốn hiển thị */
+  line-clamp: 2; /* Số dòng bạn muốn hiển thị */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.5; /* Độ cao dòng, có thể điều chỉnh */
+  max-height: 3em; /* line-height * số dòng, trong ví dụ này là 1.5 * 2 */
+}
+
 .font-size-2rem {
   font-size: 2rem;
 }
@@ -114,4 +125,7 @@
 .ant-modal-close {
   top: 5px !important;
   right: 5px !important;
+}
+.ant-input-disabled {
+  color: rgb(0 0 0 / 80%) !important;
 }

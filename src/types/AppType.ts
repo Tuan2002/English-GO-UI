@@ -1,6 +1,6 @@
 export interface IAppResposeBase<T> {
   status: number;
-  errorMessage?: string;
+  message?: string;
   data: T;
   error?: {
     message: string;
@@ -14,7 +14,7 @@ export interface IErrorResponse {
     message?: string;
     errorDetail?: string;
   };
-  errorMessage: string;
+  message: string;
 }
 
 export interface IGetDataResponse {

@@ -4,11 +4,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SkillItem from "./SkillItem";
 import { Col, Row } from "antd";
+import ModalSkillInfomation from "./ModalSkillInfomation";
 
 const ListSkill = () => {
   const dispatch = useDispatch();
   const { listSkill } = useSelector((state: RootState) => state.skillStore);
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch<any>(SkillActions.getAllSkills());
   }, [dispatch]);
   return (
@@ -20,6 +22,7 @@ const ListSkill = () => {
           </Col>
         ))}
       </Row>
+      <ModalSkillInfomation />
     </div>
   );
 };

@@ -14,7 +14,7 @@ const uploadAnImage = async (image: File, CloudPreset?: CloudPresets): Promise<I
       success: true,
       data: response.data,
       status: response.status,
-      errorMessage: "",
+      message: "",
     };
     return data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -42,7 +42,7 @@ const deleteAnImage = async (url: string): Promise<IAppResposeBase<IUploadImageR
       success: true,
       data: response.data,
       status: response.status,
-      errorMessage: "",
+      message: "",
     };
     return data;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

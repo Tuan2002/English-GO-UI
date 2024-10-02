@@ -5,3 +5,9 @@ export interface ISkill {
   description: string;
   image: string;
 }
+
+export interface ISkillDataUpdate {
+  skillId: string;
+  image?: string;
+  description?: string;
+}
