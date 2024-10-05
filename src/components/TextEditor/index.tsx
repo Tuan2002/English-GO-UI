@@ -1,8 +1,8 @@
-import React, { memo, useMemo, useRef } from "react";
+import React, { memo, useMemo } from "react";
 import JoditEditor from "jodit-react";
 
 const copyStringToClipboard = function (str: any) {
-  var el = document.createElement("textarea");
+  const el = document.createElement("textarea");
   el.value = str;
   el.setAttribute("readonly", "");
   document.body.appendChild(el);
@@ -24,10 +24,10 @@ const facilityMergeFields = [
 ];
 const inspectionMergeFields = ["InspectionCompleteDate", "InspectionEventType"];
 const createOptionGroupElement = (mergeFields: any, optionGrouplabel: any) => {
-  let optionGroupElement = document.createElement("optgroup");
+  const optionGroupElement = document.createElement("optgroup");
   optionGroupElement.setAttribute("label", optionGrouplabel);
   for (let index = 0; index < mergeFields.length; index++) {
-    let optionElement = document.createElement("option");
+    const optionElement = document.createElement("option");
     optionElement.setAttribute("class", "merge-field-select-option");
     optionElement.setAttribute("value", mergeFields[index]);
     optionElement.text = mergeFields[index];
@@ -80,19 +80,19 @@ const buttons = [
     iconURL: "images/merge.png",
     popup: (editor: any) => {
       function onSelected(e: any) {
-        let mergeField = e.target.value;
+        const mergeField = e.target.value;
         if (mergeField) {
           console.log(mergeField);
           editor.selection.insertNode(editor.create.inside.fromHTML("{{" + mergeField + "}}"));
         }
       }
-      let divElement = editor.create.div("merge-field-popup");
+      const divElement = editor.create.div("merge-field-popup");
 
-      let labelElement = document.createElement("label");
+      const labelElement = document.createElement("label");
       labelElement.setAttribute("class", "merge-field-label");
       divElement.appendChild(labelElement);
 
-      let selectElement = document.createElement("select");
+      const selectElement = document.createElement("select");
       selectElement.setAttribute("class", "merge-field-select");
       selectElement.appendChild(createOptionGroupElement(facilityMergeFields, "Facility"));
       selectElement.appendChild(createOptionGroupElement(inspectionMergeFields, "Inspection"));
@@ -107,7 +107,7 @@ const buttons = [
     tooltip: "Copy HTML to Clipboard",
     iconURL: "images/copy.png",
     exec: function (editor: any) {
-      let html = editor.value;
+      const html = editor.value;
       copyStringToClipboard(html);
     },
   },
@@ -117,10 +117,12 @@ const TextEditor = ({
   value = "",
   onChange,
   disabled = false,
+  height = 500,
 }: {
   value: string;
   disabled?: boolean;
   onChange: (htmlString: string) => void;
+  height?: number;
 }): JSX.Element => {
   // Cấu hình cho JoditEditor
   const config = useMemo(() => {
@@ -129,8 +131,8 @@ const TextEditor = ({
       toolbar: true,
       spellcheck: true,
       toolbarAdaptive: false,
-      showCharsCounter: true,
-      showWordsCounter: true,
+      showCharsCounter: false,
+      showWordsCounter: false,
       showXPathInStatusbar: false,
       askBeforePasteHTML: false,
       askBeforePasteFromWord: false,
@@ -138,9 +140,9 @@ const TextEditor = ({
       uploader: {
         insertImageAsBase64URI: true,
       },
-      height: 500,
+      height,
     };
-  }, [disabled]);
+  }, [disabled, height]);
   return (
     <div>
       <JoditEditor

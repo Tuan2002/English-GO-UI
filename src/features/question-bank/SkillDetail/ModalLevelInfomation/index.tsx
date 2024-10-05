@@ -72,7 +72,7 @@ const ModalLevelInfomation = () => {
       levelId: selectedLevel?.id || "",
       image,
       description,
-      subQuestionNumber: selectedLevel?.subQuestionNumber || 0,
+      subQuestionNumber,
     };
     dispatch<any>(LevelActions.updateLevel(dataUpdate));
     setIsDisable(true);

@@ -1,0 +1,29 @@
+.upload-audio {
+  width: 60px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-left: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #fafafa;
+  }
+}
+.custom-audio {
+  flex: 1;
+}
+.custom-audio::-webkit-media-controls-enclosure {
+  overflow: hidden;
+}
+
+.custom-audio::-webkit-media-controls-download-button {
+  display: none;
+}
+
+.custom-audio::-webkit-media-controls-playback-rate-button {
+  display: none;
+}
