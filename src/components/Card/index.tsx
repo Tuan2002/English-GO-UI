@@ -27,6 +27,7 @@ const CardCustom = ({
         <div className={cx("card-header")}>
           {showBackButton && <ButtonBackPage />}
           <div className={cx("card-title")}>{cardHeader ? cardHeader : title}</div>
+          
         </div>
       )}
       <div

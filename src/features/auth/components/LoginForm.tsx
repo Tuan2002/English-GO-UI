@@ -45,7 +45,7 @@ const LoginForm = () => {
     } catch (error: any) {
       console.log(error);
       setIsLoading(false);
-      toast.error(error.errorMessage);
+      toast.error(error.message);
     }
   };
 

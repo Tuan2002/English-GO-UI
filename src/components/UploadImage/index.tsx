@@ -9,7 +9,7 @@ interface IUploadImageProps {
   type: "avatar" | "cover";
   size?: number;
   defaultImage?: string;
-  onChangeImage?: (e: any) => void;
+  onChangeImage?: (file: File) => void;
   disabled?: boolean;
 }
 
@@ -19,13 +19,17 @@ const Uploadimage = ({ type = "cover", size = 100, defaultImage, onChangeImage, 
   }, []);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
-  const handleChangeImage = (e: any) => {
-    const image = e.target.files[0];
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) {
+      return;
+    }
+    const image = files[0];
     if (image === undefined) {
       return;
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    onChangeImage && onChangeImage(image);
+    onChangeImage && onChangeImage(image as File);
     setImagePreview(URL.createObjectURL(image));
   };
   return (

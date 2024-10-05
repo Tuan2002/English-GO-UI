@@ -42,13 +42,9 @@ const RegisterForm = () => {
         navigate(ROUTE_PATH.LOGIN);
       }
       setIsLoading(false);
-    } catch (error: unknown) {
+    } catch (error: any) {
       setIsLoading(false);
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("An unknown error occurred.");
-      }
+      toast.error(error.message);
     }
   };
 

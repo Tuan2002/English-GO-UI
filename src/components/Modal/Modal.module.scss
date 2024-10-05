@@ -26,3 +26,23 @@
   padding: 5px 10px;
   border-top: 1px solid var(--primary-color);
 }
+.footerCenter {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modal-confirm {
+  .warning-icon {
+    display: flex;
+    justify-content: center;
+    .warning-img {
+      width: 120px;
+    }
+  }
+  .warning-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+  }
+}

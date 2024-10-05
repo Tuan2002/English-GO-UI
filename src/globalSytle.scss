@@ -12,12 +12,19 @@
 
 .text-clamp {
   display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Số dòng bạn muốn hiển thị */
-  line-clamp: 2; /* Số dòng bạn muốn hiển thị */
   overflow: hidden;
   text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
   line-height: 1.5; /* Độ cao dòng, có thể điều chỉnh */
+}
+.text-clamp-1 {
+  -webkit-line-clamp: 1; /* Số dòng bạn muốn hiển thị */
+  line-clamp: 1; /* Số dòng bạn muốn hiển thị */
+  max-height: 1.5em; /* line-height * số dòng, trong ví dụ này là 1.5 * 2 */
+}
+.text-clamp-2 {
+  -webkit-line-clamp: 2; /* Số dòng bạn muốn hiển thị */
+  line-clamp: 2; /* Số dòng bạn muốn hiển thị */
   max-height: 3em; /* line-height * số dòng, trong ví dụ này là 1.5 * 2 */
 }
 

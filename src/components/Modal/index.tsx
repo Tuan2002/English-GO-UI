@@ -13,6 +13,7 @@ interface ModalCustomProps {
   customHeader?: React.ReactNode;
   showFooter?: boolean;
   customFooter?: React.ReactNode;
+  footerCenter?: boolean;
   showCloseButton?: boolean;
   children: React.ReactNode;
   width?: number | string;
@@ -34,6 +35,7 @@ const ModalCustom = ({
   showFooter = true,
   customFooter = null,
   showCloseButton = true,
+  footerCenter = false,
   scrollBody = false,
   width = 1200,
   isLoading = false,
@@ -70,7 +72,7 @@ const ModalCustom = ({
         customFooter ? (
           customFooter
         ) : (
-          <div className={cx("modal-footer")}>
+          <div className={cx("modal-footer", { footerCenter })}>
             <Button type='primary' danger onClick={onCancel}>
               {cancelTitle}
             </Button>

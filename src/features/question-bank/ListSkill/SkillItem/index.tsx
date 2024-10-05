@@ -29,7 +29,7 @@ const SkillItem = ({ skill }: ISkillItemProps) => {
         </span>
         <div className={cx("skill-info")}>
           <h5 className={cx("skill-name")}>{skill.displayName}</h5>
-          <span className={cx("skill-description", "text-clamp")}>{skill.description}</span>
+          <span className={cx("skill-description", "text-clamp", "text-clamp-2")}>{skill.description}</span>
         </div>
       </Link>
     </div>

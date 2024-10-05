@@ -31,7 +31,7 @@ const LevelItem = ({ level }: ILevelItemProps) => {
         </span>
         <div className={cx("level-info")}>
           <h5 className={cx("level-name")}>{`${currentSkill?.displayName} ${level.displayName}`}</h5>
-          <span className={cx("level-description", "text-clamp")}>{level.description}</span>
+          <span className={cx("level-description", "text-clamp", "text-clamp-2")}>{level.description}</span>
         </div>
       </Link>
     </div>
