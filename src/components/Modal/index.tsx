@@ -1,6 +1,7 @@
 import { Button, Modal } from "antd";
 import style from "./Modal.module.scss";
 import classNames from "classnames/bind";
+import { useEffect, useRef } from "react";
 const cx = classNames.bind(style);
 interface ModalCustomProps {
   open: boolean;
@@ -41,6 +42,20 @@ const ModalCustom = ({
   isLoading = false,
   maskClosable = true,
 }: ModalCustomProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollToTop = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => {
+        scrollToTop();
+      }, 0);
+    }
+  }, [open]);
   return (
     <Modal
       maskClosable={maskClosable}
@@ -66,6 +81,7 @@ const ModalCustom = ({
           "scroll-body": scrollBody,
         })}
       >
+        <div ref={scrollRef}></div>
         {children}
       </div>
       {showFooter ? (

@@ -143,13 +143,21 @@ const TextEditor = ({
       height,
     };
   }, [disabled, height]);
+  const [data, setData] = React.useState(value);
+  const handeChangeData = (htmlString: string) => {
+    setData(htmlString);
+  };
+  React.useEffect(() => {
+    setData(value);
+  }, [value]);
+
   return (
     <div>
       <JoditEditor
-        value={value}
+        value={data}
         config={config}
         onBlur={(htmlString: string) => onChange(htmlString)} // Gọi mỗi khi editor mất focus
-        onChange={(htmlString: string) => onChange(htmlString)} // Gọi mỗi khi nội dung thay đổi
+        onChange={(htmlString: string) => handeChangeData(htmlString)} // Gọi mỗi khi nội dung thay đổi
       />
     </div>
   );

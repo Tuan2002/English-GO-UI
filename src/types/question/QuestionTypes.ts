@@ -4,7 +4,7 @@ export interface ISubQuestion {
   content: string;
   order: number;
   correctAnswer?: string;
-  subQuestionAnswers: ISubQuestionAnswer[];
+  answers: ISubQuestionAnswer[];
 }
 export interface ISubQuestionAnswer {
   id: string;

@@ -6,7 +6,7 @@ import { RoleSlice } from "./roleStore/roleReducer";
 import { SkillSlice } from "./skillStore/skillReducer";
 import { LevelSlice } from "./levelStore/levelReducer";
 import { CategorySlice } from "./categoryStore/categoryReducer";
-import { QuestionSlice } from "./questionStore/roleReducer";
+import { QuestionSlice } from "./questionStore/questionReducer";
 
 export const store = configureStore({
   reducer: {
