@@ -37,7 +37,7 @@ const ModalSaveCategory = () => {
       let image = selectedCategory?.image;
       try {
         if (imageFile !== null) {
-          const uploadImage = await uploadService.uploadAnImage(imageFile, CloudPresets.AVATAR);
+          const uploadImage = await uploadService.uploadAnImage(imageFile, CloudPresets.IMAGE);
           image = uploadImage.data.secure_url;
         }
       } catch {

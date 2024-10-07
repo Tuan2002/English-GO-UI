@@ -19,13 +19,25 @@ export interface IQuestion {
   levelId: string;
   skillId: string;
   questionContent: string;
-  questionDescription?: string;
+  description?: string;
+  category?: {
+    id: string;
+    name: string;
+  };
+  level?: {
+    id: string;
+    displayName: string;
+  };
+  skill?: {
+    id: string;
+    displayName: string;
+  };
   questionNote?: string;
   attachedFile?: string;
   isDeleted: boolean;
   isActive: boolean;
 }
 
-export interface IQuestionData extends IQuestion {
+export interface IQuestionDetail extends IQuestion {
   subQuestions?: ISubQuestion[];
 }

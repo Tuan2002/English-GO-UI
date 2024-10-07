@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BiCloudUpload } from "react-icons/bi";
 import style from "./UploadFileAudio.module.scss";
 import classNames from "classnames/bind";
@@ -6,9 +6,10 @@ const cx = classNames.bind(style);
 
 interface IUploadFileAudioProps {
   onChangeAudio?: (file: File) => void;
+  defaultAudio?: string;
 }
 
-const UploadFileAudio = ({ onChangeAudio }: IUploadFileAudioProps) => {
+const UploadFileAudio = ({ onChangeAudio, defaultAudio }: IUploadFileAudioProps) => {
   const [audioPreview, setAudioPreview] = useState<string | undefined>(undefined);
   const handleAudioUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -23,6 +24,11 @@ const UploadFileAudio = ({ onChangeAudio }: IUploadFileAudioProps) => {
       }
     }
   };
+  useEffect(() => {
+    if (defaultAudio) {
+      setAudioPreview(defaultAudio);
+    }
+  }, [defaultAudio]);
   return (
     <div className='d-flex'>
       <audio key={audioPreview} controls className={cx("custom-audio")}>

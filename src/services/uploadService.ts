@@ -23,6 +23,26 @@ const uploadAnImage = async (image: File, CloudPreset?: CloudPresets): Promise<I
   }
 };
 
+const uploadAnAudio = async (audio: File, CloudPreset?: CloudPresets): Promise<IAppResposeBase<IUploadImageResponse>> => {
+  try {
+    const formData = new FormData();
+    formData.append("file", audio);
+    formData.append("cloud_name", String(Environment.CLOUD_NAME));
+    formData.append("upload_preset", CloudPreset ?? CloudPresets.IMAGE);
+    const response = await axios.post(`${Environment.CLOUD_BASE_URL}${Environment.CLOUD_NAME}/video/upload`, formData);
+    const data: IAppResposeBase<IUploadImageResponse> = {
+      success: true,
+      data: response.data,
+      status: response.status,
+      message: "",
+    };
+    return data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    throw error.response.data;
+  }
+};
+
 const deleteAnImage = async (url: string): Promise<IAppResposeBase<IUploadImageResponse>> => {
   try {
     if (!url || !url.trim()) {
@@ -53,6 +73,7 @@ const deleteAnImage = async (url: string): Promise<IAppResposeBase<IUploadImageR
 
 const uploadService = {
   uploadAnImage,
+  uploadAnAudio,
   deleteAnImage,
 };
 export default uploadService;

@@ -58,7 +58,7 @@ const ModalSkillInfomation = () => {
     let image = selectedSkill?.image;
     if (avatarFile) {
       try {
-        const response = await uploadService.uploadAnImage(avatarFile, CloudPresets.AVATAR);
+        const response = await uploadService.uploadAnImage(avatarFile, CloudPresets.IMAGE);
         if (response.data.public_id) {
           image = response.data.secure_url;
         }

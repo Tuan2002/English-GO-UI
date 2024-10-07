@@ -16,6 +16,18 @@ const getAllCategoryOfLevel = createAsyncThunk(
   }
 );
 
+const getCategoryById = createAsyncThunk(
+  "categories/getCategoryById",
+  async (categoryId: string, { rejectWithValue }): Promise<IAppResposeBase<ICategory | null>> => {
+    try {
+      const category: IAppResposeBase<ICategory> = await http.get(`/api/categories/get-category/${categoryId}`);
+      return category;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+
 const createNewCategory = createAsyncThunk(
   "categories/createNewCategory",
   async (dataCreate: ICategoryRequestData, { rejectWithValue }): Promise<IAppResposeBase<ICategory | null>> => {
@@ -102,6 +114,7 @@ const deleteCategoryPermanently = createAsyncThunk(
 
 const categoryThunks = {
   getAllCategoryOfLevel,
+  getCategoryById,
   createNewCategory,
   updateCategory,
   deleteCategory,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICategory } from "@/types/category/CategoryTypes";
 import categoryThunks from "./categoryThunks";
@@ -7,6 +8,7 @@ export interface AppState {
   loading: boolean;
   categories: ICategory[];
   selectedCategory?: ICategory;
+  currentCategory?: ICategory;
   actionModal: "create" | "update" | "delete" | "restore" | "active" | "inactive";
   openModalSaveCategory: boolean;
   openModalConfirm: boolean;
@@ -17,6 +19,7 @@ const initialState: AppState = {
   loading: false,
   categories: [],
   selectedCategory: undefined,
+  currentCategory: undefined,
   openModalSaveCategory: false,
   openModalConfirm: false,
   actionModal: "create",
@@ -50,6 +53,17 @@ export const CategorySlice = createSlice({
         state.categories = action.payload.data || [];
       })
       .addCase(categoryThunks.getAllCategoryOfLevel.rejected, (state) => {
+        state.loading = false;
+      });
+    builder
+      .addCase(categoryThunks.getCategoryById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(categoryThunks.getCategoryById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentCategory = action.payload.data as ICategory;
+      })
+      .addCase(categoryThunks.getCategoryById.rejected, (state) => {
         state.loading = false;
       });
     builder

@@ -1,5 +1,4 @@
 export enum CloudPresets {
-  AVATAR = "avatars",
-  BANNER = "banners",
+  AUDIO = "audios",
   IMAGE = "images",
 }

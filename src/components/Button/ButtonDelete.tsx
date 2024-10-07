@@ -5,16 +5,21 @@ import { BiTrash } from "react-icons/bi";
 interface ButtonDeleteProps {
   onClick: () => void;
   onConfirmDelete: () => void;
+  confirmTitle?: string;
 }
 
-const ButtonDelete = ({ onClick, onConfirmDelete }: ButtonDeleteProps) => {
+const ButtonDelete = ({
+  onClick,
+  onConfirmDelete,
+  confirmTitle = "Bạn có chắc chắn muốn xoá bản ghi này không",
+}: ButtonDeleteProps) => {
   return (
     <Popconfirm
       onConfirm={onConfirmDelete}
-      title='Xác nhận xóa'
-      description='Bạn có chắc chắn muốn xoá bản ghi này không'
-      okText='Xác nhận'
-      cancelText='Huỷ'
+      title='Confirm delete?'
+      description={confirmTitle}
+      okText='Confirm'
+      cancelText='Cancel'
       placement='topRight'
     >
       <Tooltip title='prompt text' trigger={"hover"} color='green'>

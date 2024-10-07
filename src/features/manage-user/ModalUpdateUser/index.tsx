@@ -55,7 +55,7 @@ const ModalUpdateUser = () => {
     dispatch(UserActions.changeSubmitting(true));
     let avatar = selectedUser?.avatar;
     if (avatarFile) {
-      const uploadImage = await uploadService.uploadAnImage(avatarFile, CloudPresets.AVATAR);
+      const uploadImage = await uploadService.uploadAnImage(avatarFile, CloudPresets.IMAGE);
       if (uploadImage.data.public_id) {
         avatar = uploadImage.data.secure_url;
       }

@@ -43,4 +43,4 @@ export interface IUploadImageResponse {
   format: string;
 }
 
-export type ActionModal = "create" | "update" | "delete" | "restore" | "active" | "inactive";
+export type ActionModal = "create" | "update" | "delete" | "restore" | "active" | "inactive" | "show";

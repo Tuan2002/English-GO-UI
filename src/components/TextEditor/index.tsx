@@ -137,6 +137,7 @@ const TextEditor = ({
       askBeforePasteHTML: false,
       askBeforePasteFromWord: false,
       buttons: buttons,
+      placeholder: "",
       uploader: {
         insertImageAsBase64URI: true,
       },
