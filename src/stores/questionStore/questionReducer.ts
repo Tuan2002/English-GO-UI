@@ -10,19 +10,25 @@ export interface QuestionState {
   loading: boolean;
   openModalSaveQuestion: boolean;
   openModalShowQuestionDetail: boolean;
+  openModalImportQuestion: boolean;
   listQuestions: IQuestion[];
+  listCreateQuestions: IQuestionDetail[];
   selectedQuestion?: IQuestionDetail;
   actionModal: ActionModal;
   isSubmitting: boolean;
+  isImporting: boolean;
 }
 
 const initialState: QuestionState = {
   loading: false,
   openModalSaveQuestion: false,
   openModalShowQuestionDetail: false,
+  openModalImportQuestion: false,
   selectedQuestion: undefined,
   listQuestions: [],
+  listCreateQuestions: [],
   isSubmitting: false,
+  isImporting: false,
   actionModal: "create",
 };
 
@@ -36,14 +42,58 @@ export const QuestionSlice = createSlice({
     changeActionModal: (state, action) => {
       state.actionModal = action.payload;
     },
+    changeListCreateQuestions: (state, action) => {
+      state.listCreateQuestions = action.payload;
+    },
     changeIsSubmitting: (state, action) => {
       state.isSubmitting = action.payload;
+    },
+    changeIsImporting: (state, action) => {
+      state.isImporting = action.payload;
     },
     changeSelectedQuestion: (state, action) => {
       state.selectedQuestion = action.payload;
     },
     changeOpenModalShowQuestionDetail: (state, action) => {
       state.openModalShowQuestionDetail = action.payload;
+    },
+    changeOpenModalImportQuestion: (state, action) => {
+      state.openModalImportQuestion = action.payload;
+    },
+    setSelectedQuestion: (state, action) => {
+      const { subQuestionNumber, question } = action.payload;
+      const subQuestions: ISubQuestion[] = [];
+      const length = question.subQuestions?.length > subQuestionNumber ? question.subQuestions.length : subQuestionNumber;
+      for (let i = 0; i < length; i++) {
+        if (question.subQuestions[i]?.id) {
+          subQuestions.push(question.subQuestions[i]);
+        } else {
+          const subQuestionId = uuidv4();
+          const answers: ISubQuestionAnswer[] = [];
+          for (let j = 0; j < 4; j++) {
+            const answer: ISubQuestionAnswer = {
+              id: uuidv4(),
+              answerContent: "",
+              isCorrect: false,
+              subQuestionId,
+              order: j,
+            };
+            answers.push(answer);
+          }
+          subQuestions.push({
+            id: subQuestionId,
+            content: "",
+            answers: answers,
+            correctAnswer: undefined,
+            questionId: question.id,
+            order: i,
+          });
+        }
+      }
+      state.selectedQuestion = {
+        ...question,
+        subQuestions,
+      };
     },
     initSelectedQuestion: (state, action) => {
       const { categoryId, skillId, levelId, subQuestionNumber } = action.payload;

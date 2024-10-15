@@ -21,7 +21,7 @@ import AdminQuestionBankPage from "@/pages/admin/admin-question-bank/AdminQuesti
 import AdminSkillDetailPage from "@/pages/admin/admin-question-bank/AdminSkillDetailPage";
 import AdminLevelDetailPage from "@/pages/admin/admin-question-bank/AdminLevelDetailPage";
 import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCategoryDetailPage";
-
+import AdminCreateQuestionPage from "@/pages/admin/admin-question-bank/AdminCreateQuestionPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -37,6 +37,7 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_SKILL_DETAIL} element={<AdminSkillDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_LEVEL_DETAIL} element={<AdminLevelDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_CATEGORY_DETAIL} element={<AdminCategoryDetailPage />} />
+              <Route path={ROUTE_PATH.ADMIN_QUESTION_CREATE} element={<AdminCreateQuestionPage />} />
               <Route path={ROUTE_PATH.ADMIN_LIST_EXAM} element={<AdminListExamPage />} />
             </Route>
           </Route>

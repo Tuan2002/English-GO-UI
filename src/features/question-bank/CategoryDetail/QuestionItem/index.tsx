@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IQuestion } from "@/types/question/QuestionTypes";
-import style from "../CategoryDetail.module.scss";
+import style from "./QuestionItem.module.scss";
 import classNames from "classnames/bind";
 import ButtonUpdate from "@/components/Button/ButtonUpdate";
 import ButtonDelete from "@/components/Button/ButtonDelete";
@@ -20,6 +20,7 @@ const QuestionItem = ({ question, index }: IQuestionItemProps) => {
     dispatch(QuestionActions.changeOpenModalSaveQuestion(true));
     dispatch<any>(QuestionActions.getQuestionDetail(question.id));
     dispatch(QuestionActions.changeActionModal("update"));
+    dispatch(QuestionActions.changeIsImporting(false));
   };
   const handleShowQuestionDetail = () => {
     dispatch<any>(QuestionActions.getQuestionDetail(question.id));

@@ -15,6 +15,7 @@ enum ROUTE_PATH {
   ADMIN_SKILL_DETAIL = "/admin/question-bank/:skillId",
   ADMIN_LEVEL_DETAIL = "/admin/question-bank/:skillId/:levelId",
   ADMIN_CATEGORY_DETAIL = "/admin/question-bank/:skillId/:levelId/:categoryId",
+  ADMIN_QUESTION_CREATE = "/admin/question-bank/:skillId/:levelId/:categoryId/create-question",
   ADMIN_LIST_EXAM = "/admin/list-exam",
 
   // recruiter routes

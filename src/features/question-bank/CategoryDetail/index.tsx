@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import CardCustom from "@/components/Card";
 import { Button, Select } from "antd";
-import ModalSaveQuestion from "./ModalSaveQuestion";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LevelActions } from "@/stores/levelStore/levelReducer";
 import { SkillActions } from "@/stores/skillStore/skillReducer";
@@ -12,9 +11,11 @@ import { RootState } from "@/stores";
 import QuestionItem from "./QuestionItem";
 import ModalShowQuestionDetail from "./ModalShowQuestionDetail";
 import { CategoryAction } from "@/stores/categoryStore/categoryReducer";
+import ModalSaveQuestion from "../components/ModalSaveQuestion";
 
 const CategoryDetail = () => {
   const { levelId, skillId, categoryId } = useParams();
+  const navigate = useNavigate();
   const { currentSkill } = useSelector((state: RootState) => state.skillStore);
   const { listQuestions } = useSelector((state: RootState) => state.questionStore);
   const { currentLevel } = useSelector((state: RootState) => state.levelStore);
@@ -32,6 +33,10 @@ const CategoryDetail = () => {
         subQuestionNumber: currentLevel?.subQuestionNumber ?? 0,
       })
     );
+    dispatch(QuestionActions.changeIsImporting(false));
+  };
+  const handleGotoImportQuestionPage = () => {
+    navigate(`create-question`);
   };
   useEffect(() => {
     dispatch<any>(LevelActions.getLevelById(levelId ?? ""));
@@ -66,7 +71,7 @@ const CategoryDetail = () => {
           <Button type='primary' danger>
             Deleted Question
           </Button>
-          <Button type='dashed' className='ml-10'>
+          <Button onClick={handleGotoImportQuestionPage} type='dashed' className='ml-10'>
             Import Question
           </Button>
           <Button onClick={handleClickBtnCreateQuestion} type='primary' className='ml-10'>

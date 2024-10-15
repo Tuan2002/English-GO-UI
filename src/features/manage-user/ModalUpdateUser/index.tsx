@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable react-hooks/exhaustive-deps */
 import ModalCustom from "@/components/Modal";
 import { RootState } from "@/stores";
 import { UserActions } from "@/stores/userStore/userReducer";

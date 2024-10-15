@@ -18,7 +18,7 @@ const getAllQuestions = createAsyncThunk(
 );
 const createNewQuestion = createAsyncThunk(
   "questions/createNewQuestion",
-  async (dataCreate: IQuestionDetail, { rejectWithValue }): Promise<IAppResposeBase<IQuestion | null>> => {
+  async (dataCreate: IQuestionDetail[], { rejectWithValue }): Promise<IAppResposeBase<IQuestion | null>> => {
     try {
       const question: IAppResposeBase<IQuestion> = await http.post("/api/questions/create-question", dataCreate);
       return question;

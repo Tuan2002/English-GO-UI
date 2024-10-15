@@ -2,9 +2,9 @@
 import ModalCustom from "@/components/Modal";
 import TextEditor from "@/components/TextEditor";
 import { useState } from "react";
-import style from "../CategoryDetail.module.scss";
+import style from "./ModalSaveQuestion.module.scss";
 import classNames from "classnames/bind";
-import { Input, Radio } from "antd";
+import { Button, Input, Radio } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/stores";
 import { useParams } from "react-router-dom";
@@ -15,13 +15,18 @@ import uploadService from "@/services/uploadService";
 import { CloudPresets } from "@/constants/CloudPreset";
 const cx = classNames.bind(style);
 
-const ModalSaveQuestion = () => {
+interface IModalSaveQuestionProps {
+  onChangeAudioFile?: (questionId: string, file: File) => void;
+}
+
+const ModalSaveQuestion = ({ onChangeAudioFile }: IModalSaveQuestionProps) => {
   const dispatch = useDispatch();
-  const { openModalSaveQuestion, selectedQuestion, actionModal, isSubmitting } = useSelector(
+  const { openModalSaveQuestion, listCreateQuestions, selectedQuestion, actionModal, isSubmitting, isImporting } = useSelector(
     (state: RootState) => state.questionStore
   );
   const { currentLevel } = useSelector((state: RootState) => state.levelStore);
-  const [audioFile, setAudioFile] = useState<File | null>(null);
+  const { currentSkill } = useSelector((state: RootState) => state.skillStore);
+  const [audioFile, setAudioFile] = useState<File | undefined>(undefined);
   const { categoryId, skillId, levelId } = useParams();
   const handleCancel = () => {
     dispatch(QuestionActions.changeOpenModalSaveQuestion(false));
@@ -31,16 +36,11 @@ const ModalSaveQuestion = () => {
     );
     dispatch(QuestionActions.changeActionModal("create"));
   };
-  const handleChangeAudioFile = (file: File) => {
+  const handleChangeAudioFile = (file?: File) => {
     setAudioFile(file);
+    const audioURL = file ? URL.createObjectURL(file) : undefined;
+    dispatch(QuestionActions.changeSelectedQuestion({ ...selectedQuestion, attachedFile: audioURL }));
   };
-  // useEffect(() => {
-  //   if (categoryId && skillId && levelId && currentLevel?.subQuestionNumber) {
-  //     dispatch(
-  //       QuestionActions.initSelectedQuestion({ categoryId, skillId, levelId, subQuestionNumber: currentLevel.subQuestionNumber })
-  //     );
-  //   }
-  // }, [categoryId, skillId, levelId, currentLevel?.subQuestionNumber, dispatch, openModalSaveQuestion]);
   const handleChangeQuestionData = (e: React.ChangeEvent<HTMLInputElement>, attribute: string) => {
     if (selectedQuestion) {
       dispatch(QuestionActions.changeSelectedQuestion({ ...selectedQuestion, [attribute]: e.target.value }));
@@ -79,6 +79,20 @@ const ModalSaveQuestion = () => {
       dispatch(QuestionActions.changeSelectedQuestion({ ...selectedQuestion, subQuestions }));
     }
   };
+  const handleDeleteSubQuestion = (subQuestionId: string) => {
+    if (
+      selectedQuestion?.subQuestions &&
+      currentLevel?.subQuestionNumber &&
+      selectedQuestion?.subQuestions?.length <= currentLevel?.subQuestionNumber
+    ) {
+      toast.warning(`You must have at least ${currentLevel?.subQuestionNumber} sub questions`);
+      return;
+    }
+    if (selectedQuestion) {
+      const subQuestions = selectedQuestion.subQuestions?.filter((subQuestion) => subQuestion.id !== subQuestionId);
+      dispatch(QuestionActions.changeSelectedQuestion({ ...selectedQuestion, subQuestions }));
+    }
+  };
   const handleChangeCorrectAnswer = (subQuestionId: string, answerId: string) => {
     if (selectedQuestion) {
       const subQuestions = selectedQuestion?.subQuestions?.map((subQuestion) => {
@@ -102,7 +116,9 @@ const ModalSaveQuestion = () => {
       return;
     }
     if (!selectedQuestion?.subQuestions || selectedQuestion.subQuestions.length !== currentLevel?.subQuestionNumber) {
-      toast.warning("Number of sub questions is not correct");
+      toast.warning(
+        `Please enter ${currentLevel?.subQuestionNumber} sub questions for level ${currentLevel?.displayName} of ${currentSkill?.displayName}`
+      );
       return;
     }
     const checkSubQuestionContent = selectedQuestion.subQuestions.some(
@@ -128,25 +144,49 @@ const ModalSaveQuestion = () => {
       ...selectedQuestion,
     };
     dispatch(QuestionActions.changeIsSubmitting(true));
-    try {
-      if (audioFile) {
-        const uploadAudio = await uploadService.uploadAnAudio(audioFile, CloudPresets.AUDIO);
-        dataSave.attachedFile = uploadAudio.data.secure_url;
-      }
-    } catch {
-      toast.error("Upload audio file failed");
-      dispatch(QuestionActions.changeIsSubmitting(false));
-      return;
-    }
+
     if (skillId === "listening" && dataSave?.attachedFile === null) {
       toast.warning("Listening question must have audio file");
       return;
     }
 
-    if (actionModal === "create") {
-      dispatch<any>(QuestionActions.createNewQuestion(dataSave));
+    if (isImporting) {
+      if (audioFile) {
+        const audioURL = URL.createObjectURL(audioFile);
+        dataSave.attachedFile = audioURL;
+        onChangeAudioFile?.(dataSave.id, audioFile);
+      }
+      if (actionModal === "create") {
+        dispatch(QuestionActions.changeListCreateQuestions([dataSave, ...listCreateQuestions]));
+      } else {
+        const newListCreateQuestions = listCreateQuestions.map((question) => {
+          if (question.id === dataSave.id) {
+            return dataSave;
+          }
+          return question;
+        });
+        dispatch(QuestionActions.changeListCreateQuestions(newListCreateQuestions));
+      }
+      dispatch(QuestionActions.changeOpenModalSaveQuestion(false));
+      dispatch(QuestionActions.changeIsSubmitting(false));
+      setAudioFile(undefined);
     } else {
-      dispatch<any>(QuestionActions.updateQuestion(dataSave));
+      try {
+        if (audioFile) {
+          const uploadAudio = await uploadService.uploadAnAudio(audioFile, CloudPresets.AUDIO);
+          dataSave.attachedFile = uploadAudio.data.secure_url;
+        }
+      } catch {
+        toast.error("Upload audio file failed");
+        dispatch(QuestionActions.changeIsSubmitting(false));
+        return;
+      }
+      if (actionModal === "create") {
+        dispatch<any>(QuestionActions.createNewQuestion([dataSave]));
+      } else {
+        dispatch<any>(QuestionActions.updateQuestion(dataSave));
+      }
+      setAudioFile(undefined);
     }
   };
   return (
@@ -167,7 +207,7 @@ const ModalSaveQuestion = () => {
             placeholder='Enter question description...'
           />
         </div>
-        {skillId === "listening" && (
+        {skillId === "listening" && openModalSaveQuestion && (
           <div className={cx("form-item")}>
             <span className={cx("form-label")}>File Attach</span>
             <UploadFileAudio defaultAudio={selectedQuestion?.attachedFile} onChangeAudio={handleChangeAudioFile} />
@@ -221,6 +261,11 @@ const ModalSaveQuestion = () => {
                       ))}
                     </div>
                   </Radio.Group>
+                  <div className='d-flex justify-content-end'>
+                    <Button onClick={() => handleDeleteSubQuestion(subQuestion.id)} danger type='primary'>
+                      Delete
+                    </Button>
+                  </div>
                 </div>
               ))}
             </div>

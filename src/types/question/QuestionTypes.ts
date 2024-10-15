@@ -32,6 +32,7 @@ export interface IQuestion {
     id: string;
     displayName: string;
   };
+  error?: string;
   questionNote?: string;
   attachedFile?: string;
   isDeleted: boolean;
@@ -39,5 +40,13 @@ export interface IQuestion {
 }
 
 export interface IQuestionDetail extends IQuestion {
+  subQuestions?: ISubQuestion[];
+}
+export interface IQuestionImport {
+  id?: string;
+  questionContent: string;
+  description?: string;
+  questionNote?: string;
+  attachedFile?: string;
   subQuestions?: ISubQuestion[];
 }
