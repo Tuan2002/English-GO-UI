@@ -13,20 +13,20 @@ const adminMenu: MenuItem[] = [
   {
     key: "3",
     icon: <DesktopOutlined />,
-    label: "Quản lý người dùng",
+    label: "Manage User",
     children: [
-      { key: "3.1", label: <Link to={ROUTE_PATH.ADMIN_ROLES}>Phân quyền người dùng</Link> },
-      { key: "3.2", label: <Link to={ROUTE_PATH.ADMIN_USERS}>Quản lý người dùng</Link> },
+      { key: "3.1", label: <Link to={ROUTE_PATH.ADMIN_ROLES}>User Roles</Link> },
+      { key: "3.2", label: <Link to={ROUTE_PATH.ADMIN_USERS}>List Users</Link> },
     ],
   },
   {
     key: "8",
-    label: <Link to={ROUTE_PATH.ADMIN_QUESTION_BANK}>Ngân hàng câu hỏi</Link>,
+    label: <Link to={ROUTE_PATH.ADMIN_QUESTION_BANK}>Question Bank</Link>,
     icon: <AppstoreOutlined />,
   },
   {
     key: "4",
-    label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Danh sách bài thi</Link>,
+    label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Manage Exams</Link>,
     icon: <MailOutlined />,
   },
 ];

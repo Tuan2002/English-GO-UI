@@ -16,7 +16,7 @@ const HeaderMenu = () => {
     {
       title: "Thi thử",
       children: null,
-      link: ROUTE_PATH.HOME,
+      link: ROUTE_PATH.EXAM,
     },
     {
       title: "Lịch thi",

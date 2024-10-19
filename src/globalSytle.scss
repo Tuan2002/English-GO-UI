@@ -128,6 +128,13 @@
   vertical-align: middle;
 }
 
+.primary-color {
+  color: var(--primary-color);
+}
+.secondary-color {
+  color: var(--secondary-color);
+}
+
 // custom antd theme
 .ant-modal-content {
   padding: 0 !important;
@@ -141,4 +148,20 @@
 }
 .ant-upload.ant-upload-drag {
   height: auto !important;
+}
+.custom-ant-carousel {
+  .ant-carousel {
+    height: 100%;
+    .slick-list {
+      height: 100%;
+      .slick-track {
+        height: 100%;
+        .slick-slide {
+          > div {
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
 }

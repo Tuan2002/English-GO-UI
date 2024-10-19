@@ -23,6 +23,7 @@ enum ROUTE_PATH {
   EXAMINER_QUESTION_BANK = "/examiner/question-bank",
   EXAMINER_LIST_EXAM = "/examiner/list-exam",
 
-  REGISTER_RECRUITMENT = "/company/register-recruitment",
+  EXAM = "/exam",
+  EXAM_ROOM = "/exam/room",
 }
 export default ROUTE_PATH;

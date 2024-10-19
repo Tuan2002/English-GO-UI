@@ -1,0 +1,97 @@
+.carousel-item-wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #ffffff54;
+
+  .carousel-item-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+
+    .number {
+      font-size: 1.8rem;
+      font-weight: 600;
+      line-height: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background-color: var(--secondary-color);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      color: white;
+    }
+    .title {
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+  }
+
+  .carousel-content {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    .content-box {
+      max-width: 450px;
+      text-align: justify;
+      width: 100%;
+      .content-item {
+        width: 100%;
+        .title {
+          font-size: 1.5rem;
+          font-weight: 600;
+          margin-bottom: 5px;
+        }
+        .content {
+          margin-left: 10px;
+          font-size: 15px;
+        }
+      }
+    }
+
+    .contestant-info-box {
+      gap: 10px;
+      .camera {
+        display: block;
+        border: 1px solid var(--secondary-color);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+
+        .camera-screen {
+          max-height: 150px;
+        }
+
+        .camera-icon {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          bottom: 3px;
+          font-size: 2rem;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: red;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          cursor: pointer;
+
+          &:active {
+            transform: translateX(-50%) scale(0.95);
+          }
+        }
+      }
+    }
+  }
+}

@@ -22,6 +22,8 @@ import AdminSkillDetailPage from "@/pages/admin/admin-question-bank/AdminSkillDe
 import AdminLevelDetailPage from "@/pages/admin/admin-question-bank/AdminLevelDetailPage";
 import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCategoryDetailPage";
 import AdminCreateQuestionPage from "@/pages/admin/admin-question-bank/AdminCreateQuestionPage";
+import ExamPage from "@/pages/exam/ExamPage";
+import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -51,7 +53,7 @@ const AppRoute = () => {
             </Route>
           </Route>
 
-          <Route element={<ContestantLayout />}></Route>
+          <Route path={ROUTE_PATH.EXAM_ROOM} element={<ExamRoomPage />} />
         </Route>
         <Route element={<AuthRoute />}>
           <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
@@ -60,6 +62,7 @@ const AppRoute = () => {
         <Route element={<ContestantLayout />}>
           <Route path={ROUTE_PATH.HOME} element={<HomePage />} />
           <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
+          <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
