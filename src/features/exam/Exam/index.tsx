@@ -4,11 +4,21 @@ import classNames from "classnames/bind";
 import { BiHeadphone } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import ROUTE_PATH from "@/routes/routePath";
+import { useDispatch, useSelector } from "react-redux";
+import { ExamActions } from "@/stores/examStore/examReducer";
+import { RootState } from "@/stores";
 const cx = classNames.bind(style);
 const Exam = () => {
   const navigate = useNavigate();
-  const gotoExamRoom = () => {
-    navigate(ROUTE_PATH.EXAM_ROOM);
+  const dispatch = useDispatch();
+  const { isSubmitting } = useSelector((state: RootState) => state.examStore);
+  const gotoExamRoom = async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dispatch<any>(ExamActions.participateExam()).then((res: any) => {
+      if (res.payload.success) {
+        navigate(ROUTE_PATH.EXAM_ROOM);
+      }
+    });
   };
   return (
     <div className={cx("exam-page-wrapper")}>
@@ -25,7 +35,7 @@ const Exam = () => {
             </h5>
           </div>
           <div className={cx("actions")}>
-            <Button onClick={gotoExamRoom} size='large' type='primary' className={cx("btn-start")}>
+            <Button loading={isSubmitting} onClick={gotoExamRoom} size='large' type='primary' className={cx("btn-start")}>
               Vào thi ngay
               <span className={cx("icon")}>
                 <BiHeadphone />

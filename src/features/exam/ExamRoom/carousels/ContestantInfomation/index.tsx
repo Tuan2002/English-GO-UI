@@ -10,12 +10,16 @@ import ROUTE_PATH from "@/routes/routePath";
 const cx = classNames.bind(style);
 const ContestantInfomation = () => {
   const { currentUser } = useSelector((state: RootState) => state.authStore);
+  const { currentExam } = useSelector((state: RootState) => state.examStore);
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const navigate = useNavigate();
   const handleCancel = () => {
     // Xử lý khi click vào nút "Thoát khỏi phòng"
     navigate(ROUTE_PATH.EXAM);
+  };
+  const handleGetExam = async () => {
+    // Xử lý khi click vào nút "Nhận đề"
   };
 
   // Hàm mở camera
@@ -33,7 +37,6 @@ const ContestantInfomation = () => {
   };
   useEffect(() => {
     openCamera(); // Mở camera khi component được mount
-
     return () => {
       // Cleanup khi component unmount
       if (streamRef.current) {
@@ -71,12 +74,12 @@ const ContestantInfomation = () => {
                 <span className='secondary-color'>Loại tài khoản:</span> Miễn phí
               </h5>
               <h5 className={cx("title")}>
-                <span className='secondary-color'>Mã lượt thi:</span> 250X410N3
+                <span className='secondary-color'>Mã lượt thi:</span> {currentExam?.examCode ?? "EXAMPRO"}
               </h5>
             </div>
           </div>
           <div className='mt-10'>
-            <Button type='primary' className='full-width'>
+            <Button onClick={handleGetExam} type='primary' className='full-width'>
               Nhận đề
             </Button>
             <Button onClick={handleCancel} danger type='primary' className='full-width mt-10'>
