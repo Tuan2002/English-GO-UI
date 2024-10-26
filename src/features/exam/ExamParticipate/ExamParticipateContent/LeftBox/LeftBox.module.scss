@@ -1,0 +1,44 @@
+.left-box-wrapper {
+  padding: 10px;
+  height: 100%;
+  border-right: 1px solid #e0e0e0;
+  font-size: 16px;
+
+  .level-info {
+    margin-bottom: 10px;
+
+    .level-name {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    .level-desc {
+      margin-left: 10px;
+    }
+  }
+
+  .question-info {
+    .question-description {
+      font-size: 17px;
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+    .question-content {
+      padding: 10px;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      user-select: none;
+
+      span,
+      p {
+        font-size: 17px !important;
+        font-family: inherit !important;
+        line-height: 1.5 !important;
+      }
+    }
+    .question-note {
+      font-size: 15px;
+      font-style: italic;
+      margin-top: 10px;
+    }
+  }
+}

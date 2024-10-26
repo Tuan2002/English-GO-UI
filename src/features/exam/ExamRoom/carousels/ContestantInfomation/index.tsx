@@ -19,7 +19,7 @@ const ContestantInfomation = () => {
     navigate(ROUTE_PATH.EXAM);
   };
   const handleGetExam = async () => {
-    // Xử lý khi click vào nút "Nhận đề"
+    navigate(ROUTE_PATH.EXAM_PARTICIPATE);
   };
 
   // Hàm mở camera

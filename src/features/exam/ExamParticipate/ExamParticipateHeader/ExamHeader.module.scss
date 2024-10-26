@@ -1,0 +1,93 @@
+.exam-header-wrapper {
+  height: 80px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+
+  .skill-info {
+    padding: 4px 10px;
+    .item {
+      font-size: 16px;
+      .name {
+        font-weight: 600;
+      }
+      .desc {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .time-box {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    position: relative;
+
+    .panda-img {
+      width: 50px;
+      position: absolute;
+      right: 5px;
+      bottom: 3px;
+    }
+    .time {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+      z-index: 2;
+      margin-right: 4rem;
+      padding-right: 1.3rem;
+      -webkit-mask-image: url("/src/assets/hotline-mask.png");
+      mask-image: url("/src/assets/hotline-mask.png");
+      -webkit-mask-size: 100% 100%;
+      mask-size: 100% 100%;
+      transition: 0.3s;
+      // background: linear-gradient(151deg, #208cff 2.08%, #6dddff 100%);
+      width: 170px;
+      height: 45px;
+      .wrapper {
+        align-items: center;
+        display: flex;
+        padding: 0.4rem;
+        background-position-x: 0;
+        animation: hotline-movement 10s infinite linear;
+        background-image: url("/src/assets/hotline-sky.png"), linear-gradient(151deg, #208cff 2.08%, #6dddff 100%);
+        background-repeat: no-repeat;
+        position: relative;
+      }
+    }
+    .clock-icon {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 40px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+@keyframes hotline-movement {
+  to {
+    background-position-x: 100%;
+  }
+}
+
+.time {
+  border: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 25px;
+  font-weight: 600;
+  margin-left: 10px;
+
+  .time-countdown {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+  }
+}

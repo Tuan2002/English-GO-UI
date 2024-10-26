@@ -24,6 +24,7 @@ import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCate
 import AdminCreateQuestionPage from "@/pages/admin/admin-question-bank/AdminCreateQuestionPage";
 import ExamPage from "@/pages/exam/ExamPage";
 import ExamRoomPage from "@/pages/exam/ExamRoomPage";
+import ExamParticipatePage from "@/pages/exam/ExamParticipatePage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -54,6 +55,7 @@ const AppRoute = () => {
           </Route>
 
           <Route path={ROUTE_PATH.EXAM_ROOM} element={<ExamRoomPage />} />
+          <Route path={ROUTE_PATH.EXAM_PARTICIPATE} element={<ExamParticipatePage />} />
         </Route>
         <Route element={<AuthRoute />}>
           <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />

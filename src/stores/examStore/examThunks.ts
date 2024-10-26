@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
-import { IExam } from "@/types/exam/ExamTypes";
+import { IContinueExamResponse, IExam, ISubmitSkillRequest } from "@/types/exam/ExamTypes";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -26,8 +26,32 @@ const getCurrentExam = createAsyncThunk(
     }
   }
 );
+const continueExam = createAsyncThunk(
+  "exams/continueExam",
+  async (_, { rejectWithValue }): Promise<IAppResposeBase<IContinueExamResponse | null>> => {
+    try {
+      const exam: IAppResposeBase<IContinueExamResponse> = await http.post("/api/exams/continue-exam");
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+const submitSkill = createAsyncThunk(
+  "exams/submitSkill",
+  async (data: ISubmitSkillRequest, { rejectWithValue }): Promise<IAppResposeBase<IContinueExamResponse | null>> => {
+    try {
+      const exam: IAppResposeBase<IContinueExamResponse> = await http.post("/api/exams/submit-skill", data);
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
 
 export const examThunks = {
   participateExam,
   getCurrentExam,
+  continueExam,
+  submitSkill,
 };

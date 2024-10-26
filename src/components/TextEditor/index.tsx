@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { memo, useMemo } from "react";
 import JoditEditor from "jodit-react";
 
@@ -118,17 +119,21 @@ const TextEditor = ({
   onChange,
   disabled = false,
   height = 500,
+  showToolbar = true,
+  placeholder = "",
 }: {
   value: string;
   disabled?: boolean;
   onChange: (htmlString: string) => void;
   height?: number;
+  showToolbar?: boolean;
+  placeholder?: string;
 }): JSX.Element => {
   // Cấu hình cho JoditEditor
   const config = useMemo(() => {
     return {
       readonly: disabled,
-      toolbar: true,
+      toolbar: showToolbar,
       spellcheck: true,
       toolbarAdaptive: false,
       showCharsCounter: false,
@@ -137,13 +142,14 @@ const TextEditor = ({
       askBeforePasteHTML: false,
       askBeforePasteFromWord: false,
       buttons: buttons,
-      placeholder: "",
+      placeholder,
+      toolbarHover: false,
       uploader: {
         insertImageAsBase64URI: true,
       },
       height,
     };
-  }, [disabled, height]);
+  }, [disabled, height, showToolbar]);
   const [data, setData] = React.useState(value);
   const handeChangeData = (htmlString: string) => {
     setData(htmlString);

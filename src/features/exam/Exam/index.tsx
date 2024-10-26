@@ -7,6 +7,7 @@ import ROUTE_PATH from "@/routes/routePath";
 import { useDispatch, useSelector } from "react-redux";
 import { ExamActions } from "@/stores/examStore/examReducer";
 import { RootState } from "@/stores";
+import { toast } from "react-toastify";
 const cx = classNames.bind(style);
 const Exam = () => {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ const Exam = () => {
     dispatch<any>(ExamActions.participateExam()).then((res: any) => {
       if (res.payload.success) {
         navigate(ROUTE_PATH.EXAM_ROOM);
+      }
+      if (res.payload.status === 401) {
+        toast.error("Vui lòng đăng nhập trước khi tham gia thi!");
+        navigate(ROUTE_PATH.LOGIN);
       }
     });
   };

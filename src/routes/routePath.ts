@@ -25,5 +25,6 @@ enum ROUTE_PATH {
 
   EXAM = "/exam",
   EXAM_ROOM = "/exam/room",
+  EXAM_PARTICIPATE = "/exam/participate",
 }
 export default ROUTE_PATH;

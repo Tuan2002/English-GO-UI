@@ -27,6 +27,7 @@ export interface IQuestion {
   level?: {
     id: string;
     displayName: string;
+    description?: string;
   };
   skill?: {
     id: string;
