@@ -86,7 +86,7 @@ export const UserSlice = createSlice({
       })
       .addCase(userThunks.getAllUsers.rejected, (state, action) => {
         state.loading = false;
-        toast.error((action.payload as { message: string }).errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
     builder
       .addCase(userThunks.createNewUser.pending, (state) => {
@@ -100,7 +100,7 @@ export const UserSlice = createSlice({
       })
       .addCase(userThunks.createNewUser.rejected, (state, action) => {
         state.isSubmitting = false;
-        toast.error((action.payload as { message: string }).errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
     builder
       .addCase(userThunks.updateUser.pending, (state) => {
@@ -114,7 +114,7 @@ export const UserSlice = createSlice({
       })
       .addCase(userThunks.updateUser.rejected, (state, action) => {
         state.isSubmitting = false;
-        toast.error((action.payload as { message: string }).errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
     builder
       .addCase(userThunks.deleteUser.pending, (state) => {
@@ -127,7 +127,7 @@ export const UserSlice = createSlice({
       })
       .addCase(userThunks.deleteUser.rejected, (state, action) => {
         state.isDeleting = false;
-        toast.error((action.payload as { message: string }).errorMessage);
+        toast.error((action.payload as { errorMessage: string }).errorMessage);
       });
   },
 });

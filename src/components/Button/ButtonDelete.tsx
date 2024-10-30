@@ -6,11 +6,13 @@ interface ButtonDeleteProps {
   onClick: () => void;
   onConfirmDelete: () => void;
   confirmTitle?: string;
+  isLoading?: boolean;
 }
 
 const ButtonDelete = ({
   onClick,
   onConfirmDelete,
+  isLoading = false,
   confirmTitle = "Bạn có chắc chắn muốn xoá bản ghi này không",
 }: ButtonDeleteProps) => {
   return (
@@ -21,6 +23,7 @@ const ButtonDelete = ({
       okText='Confirm'
       cancelText='Cancel'
       placement='topRight'
+      disabled={isLoading}
     >
       <Tooltip title='prompt text' trigger={"hover"} color='green'>
         <TableRowButton onClick={onClick} type='danger' icon={<BiTrash />} />

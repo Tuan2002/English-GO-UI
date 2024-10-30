@@ -29,5 +29,10 @@ const adminMenu: MenuItem[] = [
     label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Manage Exams</Link>,
     icon: <MailOutlined />,
   },
+  {
+    key: "5",
+    label: <Link to={ROUTE_PATH.ADMIN_MANAGE_ORGANIZATION}>Manage Organization</Link>,
+    icon: <MailOutlined />,
+  },
 ];
 export default adminMenu;

@@ -73,70 +73,68 @@ const ModalCreateUser = () => {
   };
 
   return (
-    <div>
-      <ModalCustom
-        onOK={onOke}
-        width={500}
-        modalTitle='Thêm mới người dùng'
-        scrollBody
-        open={openModalCreateUser}
-        onCancel={onCancel}
-        isLoading={isSubmitting}
-      >
-        <div className={cx("modal-content")}>
-          <div className={cx("avatar")}>
-            <Uploadimage onChangeImage={setAvatarFile} type='avatar' />
-          </div>
-          <Form
-            form={form}
-            name='saveUserForm'
-            layout='vertical'
-            onFinish={onFinish}
-            autoComplete='off'
-            initialValues={initialValues}
-          >
-            <Form.Item<FieldType> name='avatar' hidden>
-              <Input type='file' id='chooseAvatar' />
-            </Form.Item>
-            <Form.Item<FieldType>
-              name='username'
-              label='Username'
-              rules={[
-                { required: true, message: "Vui lòng nhập tài khoản của người dùng" },
-                { type: "string", min: 6, message: "Tài khoản của người dùng không được dưới 6 kí tự" },
-              ]}
-            >
-              <Input size='large' placeholder='Tài khoản của người dùng' />
-            </Form.Item>
-            <Form.Item<FieldType>
-              name='fullName'
-              label='Họ và tên'
-              rules={[{ required: true, message: "Vui lòng nhập họ tên đầy đủ của người dùng" }]}
-            >
-              <Input size='large' placeholder='Họ và tên người dùng' />
-            </Form.Item>
-            <Form.Item<FieldType>
-              name='groupRoleId'
-              label='Nhóm quyền người dùng'
-              rules={[{ required: true, message: "Vui lòng phân quyền sử dụng cho người dùng" }]}
-            >
-              <Select size='large' placeholder='Chọn nhóm quyền cho người dùng'>
-                {groupRoles?.map((groupRole) => (
-                  <Select.Option key={groupRole.id} value={groupRole.id}>
-                    {groupRole.displayName}
-                  </Select.Option>
-                ))}
-              </Select>
-            </Form.Item>
-            <Form.Item hidden>
-              <Button ref={saveBtnRef} type='primary' htmlType='submit'>
-                Submit
-              </Button>
-            </Form.Item>
-          </Form>
+    <ModalCustom
+      onOK={onOke}
+      width={500}
+      modalTitle='Thêm mới người dùng'
+      scrollBody
+      open={openModalCreateUser}
+      onCancel={onCancel}
+      isLoading={isSubmitting}
+    >
+      <div className={cx("modal-content")}>
+        <div className={cx("avatar")}>
+          <Uploadimage onChangeImage={setAvatarFile} type='avatar' />
         </div>
-      </ModalCustom>
-    </div>
+        <Form
+          form={form}
+          name='saveUserForm'
+          layout='vertical'
+          onFinish={onFinish}
+          autoComplete='off'
+          initialValues={initialValues}
+        >
+          <Form.Item<FieldType> name='avatar' hidden>
+            <Input type='file' id='chooseAvatar' />
+          </Form.Item>
+          <Form.Item<FieldType>
+            name='username'
+            label='Username'
+            rules={[
+              { required: true, message: "Vui lòng nhập tài khoản của người dùng" },
+              { type: "string", min: 6, message: "Tài khoản của người dùng không được dưới 6 kí tự" },
+            ]}
+          >
+            <Input size='large' placeholder='Tài khoản của người dùng' />
+          </Form.Item>
+          <Form.Item<FieldType>
+            name='fullName'
+            label='Họ và tên'
+            rules={[{ required: true, message: "Vui lòng nhập họ tên đầy đủ của người dùng" }]}
+          >
+            <Input size='large' placeholder='Họ và tên người dùng' />
+          </Form.Item>
+          <Form.Item<FieldType>
+            name='groupRoleId'
+            label='Nhóm quyền người dùng'
+            rules={[{ required: true, message: "Vui lòng phân quyền sử dụng cho người dùng" }]}
+          >
+            <Select size='large' placeholder='Chọn nhóm quyền cho người dùng'>
+              {groupRoles?.map((groupRole) => (
+                <Select.Option key={groupRole.id} value={groupRole.id}>
+                  {groupRole.displayName}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item hidden>
+            <Button ref={saveBtnRef} type='primary' htmlType='submit'>
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </ModalCustom>
   );
 };
 export default ModalCreateUser;
