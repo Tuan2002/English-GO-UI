@@ -26,6 +26,7 @@ import ExamPage from "@/pages/exam/ExamPage";
 import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 import ExamParticipatePage from "@/pages/exam/ExamParticipatePage";
 import AdminManageOrganizationPage from "@/pages/admin/admin-manage-organization/AdminManageOrganizationPage";
+import AdminManageSchedulePage from "@/pages/admin/admin-manage-schedule/AdminManageSchedulePage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -44,6 +45,7 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_QUESTION_CREATE} element={<AdminCreateQuestionPage />} />
               <Route path={ROUTE_PATH.ADMIN_LIST_EXAM} element={<AdminListExamPage />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_ORGANIZATION} element={<AdminManageOrganizationPage />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SCHEDULE} element={<AdminManageSchedulePage />} />
             </Route>
           </Route>
 

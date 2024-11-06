@@ -49,3 +49,11 @@ export interface ISubmitSkillRequest {
   skillId: string;
   questions: IExamQuestion[];
 }
+
+export interface ITargetQuestionOfSkill {
+  index: number;
+  skillId: string;
+  levelId: string;
+  questionId: string;
+  isDone?: boolean;
+}

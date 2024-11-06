@@ -7,7 +7,7 @@ const cx = classNames.bind(style);
 
 const ExamParticipateContent = () => {
   return (
-    <div className={cx("content-wrapper")}>
+    <div className={cx("content-wrapper", "scrollbar")}>
       <Row className='full-height'>
         <Col className='full-height' lg={12}>
           <LeftBox />

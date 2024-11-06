@@ -7,7 +7,7 @@ interface IExpiredTimeProps {
   initTime?: number;
   handleSubmit: () => void;
 }
-const ExpiredTime = ({ initTime = 60, handleSubmit }: IExpiredTimeProps) => {
+const ExpiredTime = ({ initTime, handleSubmit }: IExpiredTimeProps) => {
   const [timeCountDown, setTimeCountDown] = useState(initTime);
 
   useEffect(() => {
@@ -15,7 +15,9 @@ const ExpiredTime = ({ initTime = 60, handleSubmit }: IExpiredTimeProps) => {
   }, [initTime]);
   useEffect(() => {
     const interval = setTimeout(() => {
-      setTimeCountDown(timeCountDown - 1);
+      if (timeCountDown) {
+        setTimeCountDown(timeCountDown - 1);
+      }
     }, 1000);
     if (timeCountDown == 0) {
       // Call api to submit skill
@@ -30,16 +32,18 @@ const ExpiredTime = ({ initTime = 60, handleSubmit }: IExpiredTimeProps) => {
       message.warning("Hệ thống sẽ tự nạp bài sau 5 giây nữa!");
     }
     return () => clearTimeout(interval);
-  }, [timeCountDown]);
+  }, [handleSubmit, timeCountDown]);
   return (
     <div className={cx("time")}>
-      <div className={cx("time-countdown")}>
-        <span className={cx("minutes")}>
-          {Math.floor(timeCountDown / 60) >= 0 ? `0${Math.floor(timeCountDown / 60)}`.slice(-2) : "00"}
-        </span>
-        <span className={cx("space")}>:</span>
-        <span className={cx("seconds")}>{timeCountDown % 60 >= 0 ? `0${timeCountDown % 60}`.slice(-2) : "00"}</span>
-      </div>
+      {timeCountDown && (
+        <div className={cx("time-countdown")}>
+          <span className={cx("minutes")}>
+            {Math.floor(timeCountDown / 60) >= 0 ? `0${Math.floor(timeCountDown / 60)}`.slice(-2) : "00"}
+          </span>
+          <span className={cx("space")}>:</span>
+          <span className={cx("seconds")}>{timeCountDown % 60 >= 0 ? `0${timeCountDown % 60}`.slice(-2) : "00"}</span>
+        </div>
+      )}
     </div>
   );
 };

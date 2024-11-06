@@ -1,0 +1,33 @@
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.play-pause-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.progress-bar {
+  flex: 1;
+  cursor: pointer;
+}
+.time-display {
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-weight: 500;
+  span {
+    font-size: 10px !important;
+  }
+}

@@ -34,5 +34,10 @@ const adminMenu: MenuItem[] = [
     label: <Link to={ROUTE_PATH.ADMIN_MANAGE_ORGANIZATION}>Manage Organization</Link>,
     icon: <MailOutlined />,
   },
+  {
+    key: "7",
+    label: <Link to={ROUTE_PATH.ADMIN_MANAGE_SCHEDULE}>Manage Schedule</Link>,
+    icon: <AppstoreOutlined />,
+  },
 ];
 export default adminMenu;

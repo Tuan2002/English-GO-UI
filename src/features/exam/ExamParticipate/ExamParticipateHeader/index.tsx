@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Col, Row } from "antd";
+import { Col, Row, Skeleton } from "antd";
 import style from "./ExamHeader.module.scss";
 import classNames from "classnames/bind";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,21 +47,33 @@ const ExamParticipateHeader = () => {
       <Row className='full-height full-width'>
         <Col className='full-height' lg={12}>
           <div className={cx("skill-info")}>
-            <div className={cx("item")}>
-              <span className={cx("name")}>Skill: </span>
-              <span className={cx("desc")}>{selectedSkillInfo?.displayName}</span>
-            </div>
-            <div className={cx("item")}>
-              <span className={cx("name")}>Directions: </span>
-              <span className={cx("desc")}>{selectedSkillInfo?.description}</span>
-            </div>
+            {selectedSkillInfo?.id ? (
+              <div className={cx("item")}>
+                <span className={cx("name")}>Skill: </span>
+                <span className={cx("desc")}>{selectedSkillInfo?.displayName}</span>
+              </div>
+            ) : (
+              <div className={cx("item")}>
+                <Skeleton.Input block active size='large' style={{ height: "24px" }} />
+              </div>
+            )}
+            {selectedSkillInfo?.id ? (
+              <div className={cx("item")}>
+                <span className={cx("name")}>Directions: </span>
+                <span className={cx("desc")}>{selectedSkillInfo?.description}</span>
+              </div>
+            ) : (
+              <div className={cx("item")}>
+                <Skeleton.Input block active size='large' style={{ height: "36px", marginTop: "3px" }} />
+              </div>
+            )}
           </div>
         </Col>
         <Col className='full-height' lg={12}>
           <div className={cx("time-box")}>
             <div className={cx("time")}>
               <div className={cx("wrapper")}>
-                {timeCountDown && <ExpiredTime handleSubmit={handleSubmitSkill} initTime={timeCountDown} />}
+                {<ExpiredTime handleSubmit={handleSubmitSkill} initTime={timeCountDown} />}
                 <img src='/src/assets/clock.svg' alt='' className={cx("clock-icon")} />
               </div>
             </div>

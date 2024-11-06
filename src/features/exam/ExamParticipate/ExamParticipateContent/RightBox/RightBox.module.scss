@@ -40,3 +40,102 @@
     padding: 10px;
   }
 }
+
+.question-skelton {
+  display: flex;
+  gap: 10px;
+  .question-number {
+    width: 60px;
+  }
+  .question-content {
+    flex: 1;
+  }
+  .answer-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .answer-content {
+      flex: 1;
+    }
+  }
+}
+.speaking-wrapper {
+  .content-box {
+    height: 200px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .note-box {
+    margin-top: 10px;
+    font-size: 14px;
+    border: 1px dashed #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    .note-header {
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+    .note-list {
+      .note-item {
+        color: #666;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+.prepare-record {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  .prepare-header {
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .prepare-countdown {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 25px;
+    font-weight: 500;
+    background: rgb(230, 49, 138);
+    color: white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    background: radial-gradient(
+      circle,
+      rgba(230, 49, 138, 0.8800770308123249) 0%,
+      rgba(162, 91, 120, 0.7176120448179272) 36%,
+      rgba(151, 103, 147, 0.9108893557422969) 74%,
+      rgba(149, 57, 219, 0.6980042016806722) 100%
+    );
+  }
+}
+.recording-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: column;
+  font-size: 15px;
+  .time-countdown {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+    font-size: 20px;
+  }
+}

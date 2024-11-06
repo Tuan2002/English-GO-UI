@@ -1,0 +1,51 @@
+.audio-button {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgb(230, 49, 138);
+  background: radial-gradient(
+    circle,
+    rgba(230, 49, 138, 0.8800770308123249) 0%,
+    rgba(162, 91, 120, 0.7176120448179272) 36%,
+    rgba(151, 103, 147, 0.9108893557422969) 74%,
+    rgba(149, 57, 219, 0.6980042016806722) 100%
+  );
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  outline: none;
+  border: none;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  font-size: 40px;
+  &:hover {
+    background: rgb(230, 49, 138);
+    background: radial-gradient(
+      circle,
+      rgba(230, 49, 138, 0.8800770308123249) 0%,
+      rgba(162, 91, 120, 1) 36%,
+      rgba(151, 103, 147, 1) 74%,
+      rgba(149, 57, 219, 0.6980042016806722) 100%
+    );
+  }
+  .icon {
+    font-size: 40px;
+  }
+}
+
+.timer,
+.start-save,
+.pause-resume,
+.discard,
+.audio-recorder {
+  display: none !important;
+}
+.status {
+  padding: 10px;
+  margin: 0 !important;
+  background-color: #fff;
+  border-radius: 10px;
+  width: 150px;
+}

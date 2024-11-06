@@ -18,6 +18,7 @@ enum ROUTE_PATH {
   ADMIN_QUESTION_CREATE = "/admin/question-bank/:skillId/:levelId/:categoryId/create-question",
   ADMIN_LIST_EXAM = "/admin/list-exam",
   ADMIN_MANAGE_ORGANIZATION = "/admin/manage-organization",
+  ADMIN_MANAGE_SCHEDULE = "/admin/manage-schedule",
 
   // recruiter routes
   EXAMINER_DASHBOARD = "/examiner/dashboard",

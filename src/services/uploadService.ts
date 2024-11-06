@@ -23,7 +23,7 @@ const uploadAnImage = async (image: File, CloudPreset?: CloudPresets): Promise<I
   }
 };
 
-const uploadAnAudio = async (audio: File, CloudPreset?: CloudPresets): Promise<IAppResposeBase<IUploadImageResponse>> => {
+const uploadAnAudio = async (audio: File | Blob, CloudPreset?: CloudPresets): Promise<IAppResposeBase<IUploadImageResponse>> => {
   try {
     const formData = new FormData();
     formData.append("file", audio);
