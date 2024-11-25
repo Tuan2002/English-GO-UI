@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import style from "./AudioPlayer.module.scss";
 import classNames from "classnames/bind";
+
 const cx = classNames.bind(style);
 
 // Định nghĩa kiểu cho các props của component
@@ -10,6 +11,7 @@ interface AudioPlayerProps {
   disabledChangeProgress?: boolean;
   disabledRepeat?: boolean;
   currentAudioTime?: number;
+  changeCurrentAudioTime?: (time: number) => void;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -17,22 +19,24 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   disabledPause = false,
   disabledChangeProgress = false,
   disabledRepeat = false,
-  currentAudioTime = 15,
+  currentAudioTime = 0,
+  changeCurrentAudioTime,
 }) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null); // Tham chiếu đến phần tử audio
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const currentAudioTimeRef = useRef<number>(currentAudioTime); // Ref để lưu currentTime chính xác khi unmount
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [progress, setProgress] = useState<number>(0);
-  const [currentTime, setCurrentTime] = useState<number>(currentAudioTime); // Thời gian hiện tại
-  const [duration, setDuration] = useState<number>(0); // Thời lượng audio
+  const [currentTime, setCurrentTime] = useState<number>(currentAudioTime);
+  const [duration, setDuration] = useState<number>(0);
 
-  // Chuyển đổi thời gian (giây) thành chuỗi mm:ss
+  // Hàm định dạng thời gian
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = Math.floor(time % 60);
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  // Bắt đầu hoặc dừng phát audio
+  // Hàm điều khiển play/pause
   const togglePlayPause = () => {
     const audio = audioRef.current;
     if (audio) {
@@ -46,25 +50,27 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     }
   };
 
-  // Xử lý cập nhật tiến trình phát và thời gian hiện tại
+  // Hàm cập nhật thời gian khi audio đang phát
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
     if (audio) {
       const currentProgress = (audio.currentTime / audio.duration) * 100;
-      setProgress(currentProgress);
+      setProgress(isNaN(currentProgress) ? 0 : currentProgress); // Kiểm tra giá trị NaN cho progress
       setCurrentTime(audio.currentTime);
+      currentAudioTimeRef.current = audio.currentTime; // Cập nhật currentAudioTimeRef
     }
   };
 
-  // Thiết lập thời lượng khi audio đã tải metadata
+  // Hàm khi metadata của audio được tải xong
   const handleLoadedMetadata = () => {
     const audio = audioRef.current;
     if (audio) {
-      setDuration(audio.duration);
+      const audioDuration = audio.duration;
+      setDuration(isNaN(audioDuration) || audioDuration === 0 ? 1 : audioDuration); // Kiểm tra giá trị NaN hoặc 0 cho duration
     }
   };
 
-  // Xử lý khi người dùng kéo thanh tiến trình
+  // Hàm thay đổi tiến độ khi người dùng kéo thanh tiến độ
   const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     const newProgress = Number(e.target.value);
@@ -75,15 +81,35 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
     }
   };
 
-  // Cập nhật currentTime khi externalCurrentTime thay đổi
+  // Hàm cập nhật currentAudioTime khi prop currentAudioTime thay đổi
   useEffect(() => {
     const audio = audioRef.current;
-    if (audio && currentAudioTime !== undefined && currentAudioTime !== currentTime) {
+    if (audio && currentAudioTime !== undefined) {
       audio.currentTime = currentAudioTime;
       setCurrentTime(currentAudioTime);
       setProgress((currentAudioTime / duration) * 100);
     }
-  }, [currentAudioTime, duration]);
+  }, [currentAudioTime, duration, audioSrc, changeCurrentAudioTime]);
+
+  // Hàm xử lý sự kiện khi audioSrc thay đổi
+  useEffect(() => {
+    setIsPlaying(false);
+    const audio = audioRef.current;
+
+    if (audio) {
+      audio.addEventListener("timeupdate", handleTimeUpdate);
+    }
+
+    // Cleanup khi component bị unmount hoặc audioSrc thay đổi
+    return () => {
+      if (audio) {
+        audio.removeEventListener("timeupdate", handleTimeUpdate);
+      }
+      if (changeCurrentAudioTime) {
+        changeCurrentAudioTime(currentAudioTimeRef.current);
+      }
+    };
+  }, [audioSrc]);
 
   return (
     <div className={cx("audio-player")}>
@@ -92,7 +118,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
         src={audioSrc}
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleLoadedMetadata}
-        onEnded={() => setIsPlaying(disabledRepeat)}
+        onEnded={() => {
+          setIsPlaying(disabledRepeat);
+          if (changeCurrentAudioTime) changeCurrentAudioTime(duration);
+        }}
       ></audio>
 
       <button onClick={togglePlayPause} className={cx("play-pause-btn")}>
@@ -101,9 +130,16 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       <div className={cx("time-display")}>
         <span>{formatTime(currentTime)}</span> <span> /</span> <span>{formatTime(duration)}</span>
       </div>
-      <input type='range' min='0' max='100' value={progress} onChange={handleProgressChange} className={cx("progress-bar")} />
+      <input
+        type='range'
+        min='0'
+        max='100'
+        value={isNaN(progress) ? 0 : progress} // Kiểm tra giá trị NaN cho progress
+        onChange={handleProgressChange}
+        className={cx("progress-bar")}
+      />
     </div>
   );
 };
 
-export default AudioPlayer;
+export default memo(AudioPlayer);

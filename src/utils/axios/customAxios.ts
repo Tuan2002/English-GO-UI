@@ -5,7 +5,6 @@ import Environment from "@/constants/env";
 const baseURL = String(Environment.BACKEND_URL);
 const http = axios.create({
   baseURL,
-  timeout: 5000,
   headers: {
     "Content-Type": "application/json",
   },

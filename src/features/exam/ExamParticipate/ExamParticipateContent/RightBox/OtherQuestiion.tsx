@@ -41,6 +41,7 @@ const OtherQuestion = () => {
   const { selectedQuestion, listQuestionOfSkill, targetQuestionOfSkill, currentTargetQuestion } = useSelector(
     (state: RootState) => state.examStore
   );
+  console.log("selectedQuestion", selectedQuestion);
   const dispatch = useDispatch();
   const handleChangeAnswer = (e: RadioChangeEvent, subquestionId: string) => {
     if (!selectedQuestion) return;

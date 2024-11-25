@@ -23,10 +23,11 @@ import AdminLevelDetailPage from "@/pages/admin/admin-question-bank/AdminLevelDe
 import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCategoryDetailPage";
 import AdminCreateQuestionPage from "@/pages/admin/admin-question-bank/AdminCreateQuestionPage";
 import ExamPage from "@/pages/exam/ExamPage";
-import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 import ExamParticipatePage from "@/pages/exam/ExamParticipatePage";
 import AdminManageOrganizationPage from "@/pages/admin/admin-manage-organization/AdminManageOrganizationPage";
 import AdminManageSchedulePage from "@/pages/admin/admin-manage-schedule/AdminManageSchedulePage";
+import ExamScorePage from "@/pages/exam/ExamScorePage";
+import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -69,6 +70,7 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.HOME} element={<HomePage />} />
           <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
           <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
+          <Route path={ROUTE_PATH.EXAM_SCORE} element={<ExamScorePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

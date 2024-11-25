@@ -2,7 +2,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { examThunks } from "./examThunks";
 import { toast } from "react-toastify";
-import { IExam, IExamQuestion, IExamSkillStatus, IExamSubQuestion, ITargetQuestionOfSkill } from "../../types/exam/ExamTypes";
+import {
+  IExam,
+  IExamQuestion,
+  IExamSkillStatus,
+  IExamSubQuestion,
+  IListeningSkillAudioStatus,
+  ITargetQuestionOfSkill,
+} from "../../types/exam/ExamTypes";
 import { ILevel } from "@/types/level/LevelTypes";
 
 export interface ExamState {
@@ -15,6 +22,7 @@ export interface ExamState {
   openModalSubmitSkill: boolean;
   targetQuestionOfSkill: ITargetQuestionOfSkill[];
   currentTargetQuestion?: ITargetQuestionOfSkill;
+  listeningAudioStatus?: IListeningSkillAudioStatus[];
   isSubmitting: boolean;
   isLoading: boolean;
 }
@@ -55,6 +63,9 @@ export const ExamSlice = createSlice({
     changeCurrentTargetQuestion: (state, action) => {
       state.currentTargetQuestion = action.payload;
     },
+    changeListeningAudioStatus: (state, action) => {
+      state.listeningAudioStatus = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,6 +100,7 @@ export const ExamSlice = createSlice({
         const listQuestionOfSkillFromResponse: IExamQuestion[] = [];
         const listLevelOfSkillFromResponse: ILevel[] = [];
         const targetQuestion: ITargetQuestionOfSkill[] = [];
+        const listeningAudioStatus: IListeningSkillAudioStatus[] = [];
         let index = 0;
         action.payload.data?.questions?.map((q) => {
           const listSubQuestions: IExamSubQuestion[] = [];
@@ -98,6 +110,14 @@ export const ExamSlice = createSlice({
           q.question.subQuestions = listSubQuestions;
           listQuestionOfSkillFromResponse.push(q.question);
           listLevelOfSkillFromResponse.push(q.question.level as ILevel);
+          if (q.question.skill?.id === "listening") {
+            listeningAudioStatus.push({
+              questionId: q.questionId,
+              isPlaying: false,
+              audioSrc: q.question.attachedFile ?? "",
+              currentTime: 0,
+            });
+          }
           if (q.question.subQuestions?.length === 0) {
             index++;
             targetQuestion.push({
@@ -126,6 +146,7 @@ export const ExamSlice = createSlice({
         state.listQuestionOfSkill = listQuestionOfSkillFromResponse;
         state.selectedLevel = listLevelOfSkillFromResponse[0].id;
         state.selectedQuestion = listQuestionOfSkillFromResponse[0];
+        state.listeningAudioStatus = listeningAudioStatus;
       })
       .addCase(examThunks.continueExam.rejected, (state) => {
         state.isLoading = false;
@@ -141,6 +162,33 @@ export const ExamSlice = createSlice({
       })
       .addCase(examThunks.submitSkill.rejected, (state, action: PayloadAction<any>) => {
         state.isSubmitting = false;
+        toast.error(action.payload.errorMessage);
+      });
+    builder
+      .addCase(examThunks.getCurrentSpeakingQuestion.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(examThunks.getCurrentSpeakingQuestion.fulfilled, (state, action) => {
+        state.isLoading = false;
+        if (action.payload.data !== null) {
+          state.selectedQuestion = state.listQuestionOfSkill?.find((q) => q.id === action.payload.data);
+          state.selectedLevel = state.selectedQuestion?.levelId;
+        }
+      })
+      .addCase(examThunks.getCurrentSpeakingQuestion.rejected, (state) => {
+        state.isLoading = false;
+      });
+    builder
+      .addCase(examThunks.submitSpeakingSkill.pending, (state) => {
+        state.isSubmitting = true;
+      })
+      .addCase(examThunks.submitSpeakingSkill.fulfilled, (state) => {
+        state.isSubmitting = false;
+        state.selectedLevel =
+          state.listLevelOfSkill?.[state.listLevelOfSkill?.findIndex((l) => l.id === state.selectedLevel) + 1]?.id;
+        state.selectedQuestion = state.listQuestionOfSkill?.find((q) => q.levelId === state.selectedLevel);
+      })
+      .addCase(examThunks.submitSpeakingSkill.rejected, (state, action: PayloadAction<any>) => {
         toast.error(action.payload.errorMessage);
       });
   },

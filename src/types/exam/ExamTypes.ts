@@ -49,6 +49,12 @@ export interface ISubmitSkillRequest {
   skillId: string;
   questions: IExamQuestion[];
 }
+export interface ISpeakingQuestionSubmit {
+  questionId: string;
+  answer: string;
+  skillId: string;
+  levelId: string;
+}
 
 export interface ITargetQuestionOfSkill {
   index: number;
@@ -56,4 +62,12 @@ export interface ITargetQuestionOfSkill {
   levelId: string;
   questionId: string;
   isDone?: boolean;
+}
+
+export interface IListeningSkillAudioStatus {
+  questionId: string;
+  audioSrc: string;
+  isPlaying?: boolean;
+  progress?: number;
+  currentTime: number;
 }

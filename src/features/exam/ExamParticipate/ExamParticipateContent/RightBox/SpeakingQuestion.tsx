@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import SpeakingRecord from "@/components/SpeakingRecord";
+import { LoadingOutlined } from "@ant-design/icons";
 import style from "./RightBox.module.scss";
 import classNames from "classnames/bind";
-import { useEffect, useRef, useState } from "react";
-import { message } from "antd";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { message, Spin } from "antd";
 import uploadService from "@/services/uploadService";
 import { CloudPresets } from "@/constants/CloudPreset";
 import { toast } from "react-toastify";
+import { AppDispatch, RootState } from "@/stores";
+import { useDispatch, useSelector } from "react-redux";
+import { ExamActions } from "@/stores/examStore/examReducer";
+import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(style);
 
 interface IPrepareRecordProps {
@@ -33,8 +38,16 @@ const PrepareRecord = ({ startRecord }: IPrepareRecordProps) => {
     if (timeCountDown <= 5) {
       message.warning(`Hệ thống sẽ tự động ghi âm sau ${timeCountDown} giây nữa!`);
     }
-    return () => clearTimeout(interval);
+    return () => {
+      clearTimeout(interval);
+    };
   }, [timeCountDown]);
+  useEffect(() => {
+    return () => {
+      setTimeCountDown(60);
+    };
+  }, []);
+
   return (
     <div className={cx("prepare-record")}>
       <h5 className={cx("prepare-header")}>Đang trong thời gian chuẩn bị</h5>
@@ -46,6 +59,8 @@ const PrepareRecord = ({ startRecord }: IPrepareRecordProps) => {
 const RecordingQuestion = ({ stopRecord, totalTime = 60 }: IRecordingQuestionProps) => {
   const [timeCountDown, setTimeCountDown] = useState(totalTime);
   const speakingRecordRef = useRef<any>(null);
+  const dispatch: AppDispatch = useDispatch();
+  const { isSubmitting } = useSelector((state: RootState) => state.examStore);
   useEffect(() => {
     const interval = setTimeout(() => {
       if (timeCountDown) {
@@ -68,12 +83,15 @@ const RecordingQuestion = ({ stopRecord, totalTime = 60 }: IRecordingQuestionPro
 
   const handleEndRecording = async (blob: Blob) => {
     try {
-      // const audioUpload = await uploadService.uploadAnAudio(blob, CloudPresets.AUDIO);
-      // if (audioUpload.success) {
-      //   stopRecord(audioUpload.data.secure_url);
-      // } else {
-      //   toast.error("Có lỗi xảy ra khi tải file lên server");
-      // }
+      dispatch(ExamActions.changeIsSubmitting(true));
+      const audioUpload = await uploadService.uploadAnAudio(blob, CloudPresets.AUDIO);
+      if (audioUpload.success) {
+        stopRecord(audioUpload.data.secure_url);
+        toast.success("Tải file lên server thành công");
+      } else {
+        toast.error("Có lỗi xảy ra khi tải file lên server");
+        dispatch(ExamActions.changeIsSubmitting(false));
+      }
     } catch {
       // handle error
       toast.error("Có lỗi xảy ra khi tải file lên server");
@@ -87,6 +105,11 @@ const RecordingQuestion = ({ stopRecord, totalTime = 60 }: IRecordingQuestionPro
   return (
     <div className={cx("recording-box")}>
       <SpeakingRecord ref={speakingRecordRef} handleEndRecording={handleEndRecording} />
+      {isSubmitting && (
+        <div className={cx("loading")}>
+          <Spin indicator={<LoadingOutlined spin />} size='large' />
+        </div>
+      )}
       <div className={cx("time-countdown")}>
         <span className={cx("minutes")}>
           {Math.floor(timeCountDown / 60) >= 0 ? `0${Math.floor(timeCountDown / 60)}`.slice(-2) : "00"}
@@ -100,24 +123,55 @@ const RecordingQuestion = ({ stopRecord, totalTime = 60 }: IRecordingQuestionPro
 };
 
 const SpeakingQuestion = () => {
-  const [isPreparing, setIsPreparing] = useState(false);
+  const [isPreparing, setIsPreparing] = useState(true);
+  const navigation = useNavigate();
+  const { selectedQuestion, selectedLevel, listQuestionOfSkill, selectedSkill, currentExam } = useSelector(
+    (state: RootState) => state.examStore
+  );
+  const dispatch: AppDispatch = useDispatch();
   const startRecord = () => {
     setIsPreparing(false);
   };
+  useEffect(() => {
+    if (selectedSkill && (listQuestionOfSkill?.length ?? 0) > 0) {
+      dispatch(ExamActions.getCurrentSpeakingQuestion());
+    }
+  }, [selectedSkill, listQuestionOfSkill, dispatch]);
+  useEffect(() => {
+    setIsPreparing(true);
+    console.log("change level");
+  }, [selectedLevel]);
   const stopRecord = (url: string) => {
-    console.log("url", url);
-
+    dispatch(
+      ExamActions.submitSpeakingSkill({
+        questionId: selectedQuestion?.id || "",
+        answer: url,
+        skillId: selectedQuestion?.skillId || "speaking",
+        levelId: selectedQuestion?.levelId || "",
+      })
+    );
+    if (selectedQuestion?.skill?.id === "speaking" && selectedQuestion?.levelId === "speaking-part-3") {
+      navigation(`/exam/score/${currentExam?.id}`);
+    }
     // upload file ở đây, dùng url để upload
   };
+  const timeExpired = useMemo(() => {
+    if (selectedLevel === "speaking-part-1") {
+      return 180;
+    }
+    if (selectedLevel === "speaking-part-2") {
+      return 240;
+    }
+    return 300;
+  }, [selectedLevel]);
   // hết 1 level => lưu bài làm => chuyển sang bài tiếp theo
-
   return (
     <div className={cx("speaking-wrapper")}>
       <div className={cx("content-box")}>
         {isPreparing ? (
           <PrepareRecord startRecord={startRecord} />
         ) : (
-          <RecordingQuestion totalTime={180} stopRecord={stopRecord} />
+          <RecordingQuestion totalTime={timeExpired} stopRecord={stopRecord} />
         )}
       </div>
       <div className={cx("note-box")}>

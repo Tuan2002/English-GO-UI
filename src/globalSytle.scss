@@ -50,11 +50,20 @@
 .mt-10 {
   margin-top: 10px;
 }
+.pt-10 {
+  padding-top: 10px;
+}
 .mt-20 {
   margin-top: 20px;
 }
+.pt-20 {
+  padding-top: 20px;
+}
 .mt-30 {
   margin-top: 30px;
+}
+.pt-30 {
+  padding-top: 30px;
 }
 
 .ml-10 {
@@ -73,6 +82,7 @@
 .mb-10 {
   margin-bottom: 10px;
 }
+
 .mb-20 {
   margin-bottom: 20px;
 }
@@ -92,6 +102,9 @@
 
 .d-flex {
   display: flex !important;
+}
+.flex-1 {
+  flex: 1;
 }
 .flex-column {
   flex-direction: column;

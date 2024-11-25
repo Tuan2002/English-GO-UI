@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
-import { IContinueExamResponse, IExam, ISubmitSkillRequest } from "@/types/exam/ExamTypes";
+import { IContinueExamResponse, IExam, ISpeakingQuestionSubmit, ISubmitSkillRequest } from "@/types/exam/ExamTypes";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -48,10 +48,34 @@ const submitSkill = createAsyncThunk(
     }
   }
 );
+const submitSpeakingSkill = createAsyncThunk(
+  "exams/submitSpeakingSkill",
+  async (data: ISpeakingQuestionSubmit, { rejectWithValue }): Promise<IAppResposeBase<IContinueExamResponse | null>> => {
+    try {
+      const exam: IAppResposeBase<IContinueExamResponse> = await http.post("/api/exams/submit-speaking-skill", data);
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+const getCurrentSpeakingQuestion = createAsyncThunk(
+  "exams/getCurrentSpeakingQuestion",
+  async (_, { rejectWithValue }): Promise<IAppResposeBase<string | null>> => {
+    try {
+      const exam: IAppResposeBase<string> = await http.get("/api/exams/current-speaking-question");
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
 
 export const examThunks = {
   participateExam,
   getCurrentExam,
   continueExam,
   submitSkill,
+  submitSpeakingSkill,
+  getCurrentSpeakingQuestion,
 };
