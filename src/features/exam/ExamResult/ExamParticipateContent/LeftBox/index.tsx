@@ -42,10 +42,6 @@ const LeftBox = () => {
     dispatch(ExamActions.changeListeningAudioStatus(newListeningAudioStatus));
   };
 
-  const changeTimeWhenCountdown = (time: number) => {
-    audioCurrentTimeRef.current = time;
-  };
-
   return (
     <div className={cx("left-box-wrapper", "scrollbar")}>
       {selectedQuestion?.id ? (
@@ -70,13 +66,12 @@ const LeftBox = () => {
           {selectedQuestion?.attachedFile &&
             (selectedQuestion?.id ? (
               <AudioPlayer
-                disabledPause
-                disabledChangeProgress
-                disabledRepeat
+                // disabledPause
+                // disabledChangeProgress
+                // disabledRepeat
                 audioSrc={selectedQuestion?.attachedFile}
                 currentAudioTime={audioCurrentTimeRef.current} // Lấy từ useRef
                 changeCurrentAudioTime={(time) => changeCurrentAudioTime(time, selectedQuestion.id)}
-                changeTimeWhenCountdown={changeTimeWhenCountdown}
               />
             ) : (
               <Skeleton.Input active block size='large' style={{ height: "40px" }} />

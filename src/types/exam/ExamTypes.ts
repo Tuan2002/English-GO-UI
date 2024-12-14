@@ -22,6 +22,8 @@ export interface IExamSkillStatus {
   startTime: string;
   endTime: string;
   order: number;
+  score?: number;
+  totalQuestion?: number;
   status: "IN_PROGRESS" | "COMPLETED" | "NOT_STARTED";
 }
 
@@ -41,6 +43,34 @@ export interface IContinueExamResponse {
     questionId: string;
     id: string;
     question: IExamQuestion;
+  }>;
+  skill: IExamSkillStatus;
+}
+
+export interface IQuestionResult {
+  id: string;
+  question: string;
+  answer: string;
+  feedback: string;
+  point?: number;
+  isRated: boolean;
+}
+
+export interface IResultOfQuestion {
+  questionId: string;
+  skillId: string;
+  levelId: string;
+  results: IQuestionResult[];
+}
+
+export interface IQuestionResultResponse {
+  exam: IExam;
+  questions: Array<{
+    examId: string;
+    questionId: string;
+    id: string;
+    question: IExamQuestion;
+    results: IQuestionResult[];
   }>;
   skill: IExamSkillStatus;
 }
@@ -70,4 +100,17 @@ export interface IListeningSkillAudioStatus {
   isPlaying?: boolean;
   progress?: number;
   currentTime: number;
+}
+
+export interface IExamScore {
+  id: string;
+  examCode: string;
+  startTime: string;
+  endTime: string;
+  examSkillStatuses: IExamSkillStatus[];
+}
+
+export interface ICurrentExamResponse {
+  exam: IExam;
+  currentSkill: IExamSkillStatus;
 }

@@ -8,35 +8,35 @@ const adminMenu: MenuItem[] = [
   {
     key: "1",
     icon: <PieChartOutlined />,
-    label: "Dashboard",
+    label: "Bảng tin",
   },
   {
     key: "3",
     icon: <DesktopOutlined />,
-    label: "Manage User",
+    label: "Quản lý người dùng",
     children: [
-      { key: "3.1", label: <Link to={ROUTE_PATH.ADMIN_ROLES}>User Roles</Link> },
-      { key: "3.2", label: <Link to={ROUTE_PATH.ADMIN_USERS}>List Users</Link> },
+      { key: "3.1", label: <Link to={ROUTE_PATH.ADMIN_ROLES}>Phân quyền</Link> },
+      { key: "3.2", label: <Link to={ROUTE_PATH.ADMIN_USERS}>Danh sách người dùng</Link> },
     ],
   },
   {
     key: "8",
-    label: <Link to={ROUTE_PATH.ADMIN_QUESTION_BANK}>Question Bank</Link>,
+    label: <Link to={ROUTE_PATH.ADMIN_QUESTION_BANK}>Ngân hàng câu hỏi</Link>,
     icon: <AppstoreOutlined />,
   },
-  {
-    key: "4",
-    label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Manage Exams</Link>,
-    icon: <MailOutlined />,
-  },
+  // {
+  //   key: "4",
+  //   label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Quản lý bài thi</Link>,
+  //   icon: <MailOutlined />,
+  // },
   {
     key: "5",
-    label: <Link to={ROUTE_PATH.ADMIN_MANAGE_ORGANIZATION}>Manage Organization</Link>,
+    label: <Link to={ROUTE_PATH.ADMIN_MANAGE_ORGANIZATION}>Đơn vị tổ chức thi</Link>,
     icon: <MailOutlined />,
   },
   {
     key: "7",
-    label: <Link to={ROUTE_PATH.ADMIN_MANAGE_SCHEDULE}>Manage Schedule</Link>,
+    label: <Link to={ROUTE_PATH.ADMIN_MANAGE_SCHEDULE}>Quản lý lịch thi</Link>,
     icon: <AppstoreOutlined />,
   },
 ];

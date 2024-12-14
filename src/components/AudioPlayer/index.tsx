@@ -12,6 +12,7 @@ interface AudioPlayerProps {
   disabledRepeat?: boolean;
   currentAudioTime?: number;
   changeCurrentAudioTime?: (time: number) => void;
+  changeTimeWhenCountdown?: (time: number) => void;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -21,6 +22,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   disabledRepeat = false,
   currentAudioTime = 0,
   changeCurrentAudioTime,
+  changeTimeWhenCountdown,
 }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentAudioTimeRef = useRef<number>(currentAudioTime); // Ref để lưu currentTime chính xác khi unmount
@@ -28,7 +30,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   const [progress, setProgress] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(currentAudioTime);
   const [duration, setDuration] = useState<number>(0);
-
   // Hàm định dạng thời gian
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -89,7 +90,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       setCurrentTime(currentAudioTime);
       setProgress((currentAudioTime / duration) * 100);
     }
-  }, [currentAudioTime, duration, audioSrc, changeCurrentAudioTime]);
+  }, [duration, audioSrc]);
+
+  useEffect(() => {
+    if (changeTimeWhenCountdown) {
+      changeTimeWhenCountdown(currentTime);
+    }
+  }, [currentTime, changeTimeWhenCountdown]);
 
   // Hàm xử lý sự kiện khi audioSrc thay đổi
   useEffect(() => {

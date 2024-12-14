@@ -139,7 +139,6 @@ const SpeakingQuestion = () => {
   }, [selectedSkill, listQuestionOfSkill, dispatch]);
   useEffect(() => {
     setIsPreparing(true);
-    console.log("change level");
   }, [selectedLevel]);
   const stopRecord = (url: string) => {
     dispatch(

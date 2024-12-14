@@ -28,6 +28,7 @@ import AdminManageOrganizationPage from "@/pages/admin/admin-manage-organization
 import AdminManageSchedulePage from "@/pages/admin/admin-manage-schedule/AdminManageSchedulePage";
 import ExamScorePage from "@/pages/exam/ExamScorePage";
 import ExamRoomPage from "@/pages/exam/ExamRoomPage";
+import ExamResultPage from "@/pages/exam/ExamResultPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -71,6 +72,7 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
           <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
           <Route path={ROUTE_PATH.EXAM_SCORE} element={<ExamScorePage />} />
+          <Route path={ROUTE_PATH.EXAM_RESULT} element={<ExamResultPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

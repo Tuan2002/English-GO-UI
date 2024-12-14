@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
-import { IContinueExamResponse, IExam, ISpeakingQuestionSubmit, ISubmitSkillRequest } from "@/types/exam/ExamTypes";
+import {
+  IContinueExamResponse,
+  ICurrentExamResponse,
+  IExam,
+  IExamScore,
+  IQuestionResultResponse,
+  ISpeakingQuestionSubmit,
+  ISubmitSkillRequest,
+} from "@/types/exam/ExamTypes";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -17,9 +25,9 @@ const participateExam = createAsyncThunk(
 );
 const getCurrentExam = createAsyncThunk(
   "exams/getCurrentExam",
-  async (_, { rejectWithValue }): Promise<IAppResposeBase<IExam | null>> => {
+  async (_, { rejectWithValue }): Promise<IAppResposeBase<ICurrentExamResponse | null>> => {
     try {
-      const user: IAppResposeBase<IExam> = await http.get("/api/exams/current-exam");
+      const user: IAppResposeBase<ICurrentExamResponse> = await http.get("/api/exams/current-exam");
       return user;
     } catch (error: any) {
       return rejectWithValue(error.response.data) as any;
@@ -37,6 +45,7 @@ const continueExam = createAsyncThunk(
     }
   }
 );
+
 const submitSkill = createAsyncThunk(
   "exams/submitSkill",
   async (data: ISubmitSkillRequest, { rejectWithValue }): Promise<IAppResposeBase<IContinueExamResponse | null>> => {
@@ -70,6 +79,32 @@ const getCurrentSpeakingQuestion = createAsyncThunk(
     }
   }
 );
+const getExamScore = createAsyncThunk(
+  "exams/getExamScore",
+  async (examId: string, { rejectWithValue }): Promise<IAppResposeBase<IExamScore | null>> => {
+    try {
+      const exam: IAppResposeBase<IExamScore> = await http.get(`/api/exams/get-score/${examId}`);
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+
+const getResultOfExam = createAsyncThunk(
+  "exams/getResultOfExam",
+  async (
+    { examId, skillId }: { examId: string; skillId: string },
+    { rejectWithValue }
+  ): Promise<IAppResposeBase<IQuestionResultResponse | null>> => {
+    try {
+      const exam: IAppResposeBase<IQuestionResultResponse> = await http.get(`/api/exams/get-result/${examId}?skillId=${skillId}`);
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
 
 export const examThunks = {
   participateExam,
@@ -78,4 +113,6 @@ export const examThunks = {
   submitSkill,
   submitSpeakingSkill,
   getCurrentSpeakingQuestion,
+  getExamScore,
+  getResultOfExam,
 };

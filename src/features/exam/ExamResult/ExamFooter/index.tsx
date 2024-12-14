@@ -6,26 +6,19 @@ import { RootState } from "@/stores";
 import { ExamActions } from "@/stores/examStore/examReducer";
 import { useEffect } from "react";
 import { AppDispatch } from "@/stores";
-import { ISubmitSkillRequest, ITargetQuestionOfSkill } from "@/types/exam/ExamTypes";
-import ModalConfirm from "@/components/Modal/ModalConfirm";
+import { ITargetQuestionOfSkill } from "@/types/exam/ExamTypes";
 import { Col, Row, Skeleton } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import ROUTE_PATH from "@/routes/routePath";
 const cx = classNames.bind(style);
-const ExamParticipateFooter = () => {
+const ExamScoreFooter = () => {
   const { listSkill } = useSelector((state: RootState) => state.skillStore);
-  const {
-    listLevelOfSkill,
-    listQuestionOfSkill,
-    selectedSkill,
-    selectedLevel,
-    openModalSubmitSkill,
-    targetQuestionOfSkill,
-    currentExam,
-  } = useSelector((state: RootState) => state.examStore);
+  const { examId } = useParams<{ examId: string }>();
+  const { listLevelOfSkill, listQuestionOfSkill, selectedSkill, selectedLevel, targetQuestionOfSkill, currentSkill } =
+    useSelector((state: RootState) => state.examStore);
   const dispatch: AppDispatch = useDispatch();
   const navigation = useNavigate();
   const handleChangeSelectedLevel = (levelId: string) => {
-    if (selectedSkill?.skillId === "speaking") return;
     dispatch(ExamActions.changeSelectedLevel(levelId));
   };
   useEffect(() => {
@@ -37,32 +30,13 @@ const ExamParticipateFooter = () => {
     }
   }, [dispatch, listQuestionOfSkill, selectedLevel, selectedSkill]);
 
-  const handleSendSkill = () => {
-    // Call api to send skill
-    const data: ISubmitSkillRequest = {
-      skillId: selectedSkill?.skillId || "",
-      questions: listQuestionOfSkill || [],
-    };
-    dispatch(ExamActions.submitSkill(data)).then((response: any) => {
-      if (data.skillId === "speaking") {
-        dispatch(ExamActions.changeOpenModalSubmitSkill(false));
-        navigation(`/exam/score/${currentExam?.id}`);
-        return;
-      }
-      if (response.payload.success) {
-        dispatch(ExamActions.continueExam());
-      }
-    });
-  };
-  const handleClickBtnSubmitSkill = () => {
-    dispatch(ExamActions.changeOpenModalSubmitSkill(true));
-  };
-  const handleCancel = () => {
-    dispatch(ExamActions.changeOpenModalSubmitSkill(false));
-  };
   const handleChangeTargetQuestion = (question: ITargetQuestionOfSkill) => {
     dispatch(ExamActions.changeCurrentTargetQuestion(question));
     handleChangeSelectedLevel(question.levelId);
+  };
+
+  const handleChangeCurrentSkill = (skillId: string) => {
+    navigation(`${ROUTE_PATH.EXAM_RESULT.replace(":examId", examId ?? "")}?skill=${skillId}`);
   };
   return (
     <div className={cx("footer-wrapper")}>
@@ -83,7 +57,7 @@ const ExamParticipateFooter = () => {
                   );
                 })
               ) : (
-                <div className='skeleton' style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                <div className='skeleton scrollbar' style={{ display: "flex", gap: "10px", flexWrap: "wrap", height: "80px" }}>
                   {Array.from({ length: 40 }).map((_, index) => (
                     <Skeleton.Button
                       key={index}
@@ -126,8 +100,9 @@ const ExamParticipateFooter = () => {
                   listSkill.map((skill, index) => (
                     <span
                       key={index}
+                      onClick={() => handleChangeCurrentSkill(skill.id)}
                       className={cx("skill-item", "constructor-item", {
-                        active: skill.id === selectedSkill?.skillId,
+                        active: skill.id === currentSkill,
                       })}
                     >
                       {skill.name}
@@ -143,22 +118,10 @@ const ExamParticipateFooter = () => {
                 )}
               </div>
             </div>
-            <div className={cx("send-box")}>
-              <button onClick={handleClickBtnSubmitSkill} className={cx("send-button")}>
-                NẠP <br /> KĨ NĂNG
-              </button>
-              <ModalConfirm
-                modalTitle={`Xác nhận hoàn thành kĩ năng ${selectedSkill?.skill.name}`}
-                confirmText='Bạn có chắc chắn muốn nạp kĩ năng này không? Sau khi chuyển qua kĩ năng tiếp theo, bạn không thể quay lại kĩ năng trước đó!'
-                open={openModalSubmitSkill}
-                onCancel={handleCancel}
-                onOK={handleSendSkill}
-              ></ModalConfirm>
-            </div>
           </div>
         </Col>
       </Row>
     </div>
   );
 };
-export default ExamParticipateFooter;
+export default ExamScoreFooter;
