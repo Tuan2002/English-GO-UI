@@ -29,6 +29,7 @@ import AdminManageSchedulePage from "@/pages/admin/admin-manage-schedule/AdminMa
 import ExamScorePage from "@/pages/exam/ExamScorePage";
 import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 import ExamResultPage from "@/pages/exam/ExamResultPage";
+import LoginSSO from "@/pages/auth/LoginSSO";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -74,6 +75,7 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.EXAM_SCORE} element={<ExamScorePage />} />
           <Route path={ROUTE_PATH.EXAM_RESULT} element={<ExamResultPage />} />
         </Route>
+        <Route path={ROUTE_PATH.LOGIN_SSO} element={<LoginSSO />} />
       </Routes>
     </BrowserRouter>
   );

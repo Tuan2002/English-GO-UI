@@ -8,10 +8,15 @@ import HeaderMessage from "../../HeaderMessage";
 import HeaderMenu from "./HeaderMenu";
 import { RootState } from "@/stores";
 import { useSelector } from "react-redux";
+import { useMemo } from "react";
+import getAccessToken from "@/utils/Functions/getAccessToken";
 const cx = classNames.bind(style);
 
 const ContestantHeader = () => {
   const { currentUser } = useSelector((state: RootState) => state.authStore);
+  const accessToken = useMemo(() => {
+    return getAccessToken();
+  }, []);
   return (
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
@@ -36,26 +41,36 @@ const ContestantHeader = () => {
           </div>
         </div>
         <div className={cx("header-rightbox")}>
-          <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>
-            <Badge count={5} size='small' offset={[-5, 5]}>
-              <span className={cx("header-icon")}>
-                <BiSolidBellRing className={cx("icon")} />
-              </span>
-            </Badge>
-          </Popover>
-          <Popover trigger={"click"} placement='bottom' content={<HeaderMessage />}>
-            <Badge count={5} size='small' offset={[-5, 5]}>
-              <span className={cx("header-icon")}>
-                <BiSolidMessage className={cx("icon")} />
-              </span>
-            </Badge>
-          </Popover>
+          {accessToken ? (
+            <>
+              <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>
+                <Badge count={5} size='small' offset={[-5, 5]}>
+                  <span className={cx("header-icon")}>
+                    <BiSolidBellRing className={cx("icon")} />
+                  </span>
+                </Badge>
+              </Popover>
+              <Popover trigger={"click"} placement='bottom' content={<HeaderMessage />}>
+                <Badge count={5} size='small' offset={[-5, 5]}>
+                  <span className={cx("header-icon")}>
+                    <BiSolidMessage className={cx("icon")} />
+                  </span>
+                </Badge>
+              </Popover>
 
-          <Popover trigger={"click"} placement='bottomRight' content={<AccountMenu />}>
-            <Avatar src={currentUser?.avatar ? currentUser.avatar : ""} className='cursor-pointer' size={"large"}>
-              U
-            </Avatar>
-          </Popover>
+              <Popover trigger={"click"} placement='bottomRight' content={<AccountMenu />}>
+                <Avatar src={currentUser?.avatar ? currentUser.avatar : ""} className='cursor-pointer' size={"large"}>
+                  U
+                </Avatar>
+              </Popover>
+            </>
+          ) : (
+            <Popover trigger={"click"} placement='bottomRight' content={<AccountMenu />}>
+              <Avatar className='cursor-pointer' size={"large"}>
+                U
+              </Avatar>
+            </Popover>
+          )}
         </div>
       </div>
     </div>

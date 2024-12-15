@@ -47,7 +47,7 @@ const Exam = () => {
               </span>
             </Button>
             <Button size='large' type='primary' className={cx("btn-schedule")}>
-              Lịch thi mới nhất
+              Lịch sử luyện thi
             </Button>
           </div>
         </div>

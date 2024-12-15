@@ -1,7 +1,6 @@
-import { getCookie } from "../cookies";
-
 const getAccessToken = (): string | undefined => {
-  const accessToken = getCookie("accessToken");
-  return accessToken;
+  // get access token from local storage
+  const accessToken = localStorage.getItem("accessToken");
+  return accessToken !== null ? accessToken : undefined;
 };
 export default getAccessToken;

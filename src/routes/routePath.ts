@@ -3,6 +3,7 @@ enum ROUTE_PATH {
   ABOUT = "/about",
   CONTACT = "/contact",
   LOGIN = "/account/login",
+  LOGIN_SSO = "/auth/callback",
   REGISTER = "/account/register",
   FORGET_PASSWORD = "/account/forget-password",
   RESET_PASSWORD = "/account/reset-password",

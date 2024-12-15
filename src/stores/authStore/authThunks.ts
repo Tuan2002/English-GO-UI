@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
 import { ICurrentUser } from "@/types/auth/AuthType";
 import http from "@/utils/axios/customAxios";

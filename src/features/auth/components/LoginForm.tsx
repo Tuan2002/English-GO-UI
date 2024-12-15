@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
 import { IoLogoGoogleplus } from "react-icons/io";
 import style from "../auth.module.scss";
@@ -36,7 +37,8 @@ const LoginForm = () => {
       const res = await authService.login(loginData);
       if (res.success) {
         toast.success("Đăng nhập thành công!");
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // set token to local storage
+        localStorage.setItem("accessToken", res.data.accessToken.token);
         dispatch<any>(authAction.getCurrentUser());
         navigate(ROUTE_PATH.HOME);
       }
@@ -47,6 +49,31 @@ const LoginForm = () => {
       setIsLoading(false);
       toast.error(error.message);
     }
+  };
+
+  const handleLoginSSO = () => {
+    const requestId = new Date().valueOf().toString();
+    const AUTH_URL = "https://login.vinhuni.edu.vn";
+    const response_type = "id_token token";
+    const client_id = "english-contest";
+    const state = requestId;
+    const redirect_uri = "http://localhost:5173/auth/callback";
+    const scope = "openid profile email";
+    const nonce = requestId;
+
+    // Tạo query string cho phần /connect/authorize/callback
+    const returnUrl = `/connect/authorize/callback?response_type=${encodeURIComponent(
+      response_type
+    )}&client_id=${encodeURIComponent(client_id)}&state=${encodeURIComponent(state)}&redirect_uri=${encodeURIComponent(
+      redirect_uri
+    )}&scope=${encodeURIComponent(scope)}&nonce=${encodeURIComponent(nonce)}`;
+
+    // Mã hóa URL ReturnUrl
+    const encodedReturnUrl = encodeURIComponent(returnUrl);
+
+    // Tạo URL login
+    const loginURL = `${AUTH_URL}/Account/Login?ReturnUrl=${encodedReturnUrl}`;
+    window.location.href = loginURL;
   };
 
   return (
@@ -86,8 +113,8 @@ const LoginForm = () => {
       <div className='mt-10'>
         <p className='text-center'>Hoặc</p>
         <div className={cx("social-login", "text-center", "mt-10")}>
-          <Button type='primary' danger size='large' icon={<IoLogoGoogleplus className={cx("icon")} />}>
-            Đăng nhập với Google
+          <Button onClick={handleLoginSSO} type='primary' danger size='large' icon={<IoLogoGoogleplus className={cx("icon")} />}>
+            Đăng nhập với SSO VinhUni
           </Button>
         </div>
         <div className='mt-20 text-center'>
