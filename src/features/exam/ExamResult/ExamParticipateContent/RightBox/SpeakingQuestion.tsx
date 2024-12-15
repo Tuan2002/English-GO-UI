@@ -10,14 +10,19 @@ const SpeakingQuestion = () => {
   console.log(questionResult);
   return (
     <div className={cx("speaking-wrapper")}>
-      {questionResult?.results?.map((result) => (
-        <div key={result.id} className='speaking-result'>
-          <audio controls className='full-width mt-10 mb-10'>
-            <source src={result.answer && result.answer.trim() && result.answer} type='audio/mpeg' />
-            Your browser does not support the audio element.
-          </audio>
-        </div>
-      ))}
+      <div className='speaking-result'>
+        <audio controls className='full-width mt-10 mb-10'>
+          <source
+            src={
+              questionResult?.results[0]?.answer &&
+              questionResult?.results[0]?.answer.trim() &&
+              questionResult?.results[0]?.answer
+            }
+            type='audio/mpeg'
+          />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
     </div>
   );
 };

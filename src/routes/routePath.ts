@@ -7,6 +7,9 @@ enum ROUTE_PATH {
   REGISTER = "/account/register",
   FORGET_PASSWORD = "/account/forget-password",
   RESET_PASSWORD = "/account/reset-password",
+  ACCOUNT_CHANGE_PASSWORD = "/account/change-password",
+  ACCOUNT_PROFILE = "/account/profile",
+  ACCOUNT_UPGRADE = "/account/upgrade-account",
 
   //admin routes
   ADMIN_DASHBOARD = "/admin/dashboard",
@@ -31,5 +34,8 @@ enum ROUTE_PATH {
   EXAM_PARTICIPATE = "/exam/participate",
   EXAM_SCORE = "/exam/score/:examId",
   EXAM_RESULT = "/exam/result/:examId",
+  EXAM_HISTORY_LIST = "/exam/history/list",
+  EXAM_HISTORY_SPEAKING = "/exam/history/speaking",
+  EXAM_HISTORY_WRITING = "/exam/history/writing",
 }
 export default ROUTE_PATH;

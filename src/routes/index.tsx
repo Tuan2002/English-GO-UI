@@ -30,6 +30,13 @@ import ExamScorePage from "@/pages/exam/ExamScorePage";
 import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 import ExamResultPage from "@/pages/exam/ExamResultPage";
 import LoginSSO from "@/pages/auth/LoginSSO";
+import ExamHistoryListPage from "@/pages/exam-history/ExamHistoryListPage";
+import ExamHistorySpeakingPage from "@/pages/exam-history/ExamHistorySpeakingPage";
+import ExamHistoryWritingPage from "@/pages/exam-history/ExamHistoryWritingPage";
+import ProfileLayout from "@/layouts/ProfileLayout";
+import MyProfilePage from "@/pages/account/MyProfilePage";
+import ChangePasswordPage from "@/pages/account/ChangePasswordPage";
+import UpgradeAcountPage from "@/pages/account/UpgradeAccountPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -54,15 +61,28 @@ const AppRoute = () => {
 
           <Route element={<ExaminerLayout />}>
             <Route element={<ExaminerProtectRoute />}>
-              {/* add other route of manager here */}
               <Route path={ROUTE_PATH.EXAMINER_DASHBOARD} element={<ExaminerDashboard />} />
               <Route path={ROUTE_PATH.EXAMINER_QUESTION_BANK} element={<ExaminerQuestionBankPage />} />
               <Route path={ROUTE_PATH.EXAMINER_LIST_EXAM} element={<ExaminerListExamPage />} />
             </Route>
           </Route>
 
-          <Route path={ROUTE_PATH.EXAM_ROOM} element={<ExamRoomPage />} />
-          <Route path={ROUTE_PATH.EXAM_PARTICIPATE} element={<ExamParticipatePage />} />
+          <Route element={<ContestantLayout />}>
+            <Route path={ROUTE_PATH.EXAM_ROOM} element={<ExamRoomPage />} />
+            <Route path={ROUTE_PATH.EXAM_PARTICIPATE} element={<ExamParticipatePage />} />
+            <Route path={ROUTE_PATH.EXAM_SCORE} element={<ExamScorePage />} />
+            <Route path={ROUTE_PATH.EXAM_RESULT} element={<ExamResultPage />} />
+            <Route element={<ProfileLayout pageName='exam' />}>
+              <Route path={ROUTE_PATH.EXAM_HISTORY_LIST} element={<ExamHistoryListPage />} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_SPEAKING} element={<ExamHistorySpeakingPage />} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_WRITING} element={<ExamHistoryWritingPage />} />
+            </Route>
+            <Route element={<ProfileLayout pageName='profile' />}>
+              <Route path={ROUTE_PATH.ACCOUNT_PROFILE} element={<MyProfilePage />} />
+              <Route path={ROUTE_PATH.ACCOUNT_CHANGE_PASSWORD} element={<ChangePasswordPage />} />
+              <Route path={ROUTE_PATH.ACCOUNT_UPGRADE} element={<UpgradeAcountPage />} />
+            </Route>
+          </Route>
         </Route>
         <Route element={<AuthRoute />}>
           <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
@@ -72,8 +92,6 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.HOME} element={<HomePage />} />
           <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
           <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
-          <Route path={ROUTE_PATH.EXAM_SCORE} element={<ExamScorePage />} />
-          <Route path={ROUTE_PATH.EXAM_RESULT} element={<ExamResultPage />} />
         </Route>
         <Route path={ROUTE_PATH.LOGIN_SSO} element={<LoginSSO />} />
       </Routes>

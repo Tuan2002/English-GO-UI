@@ -13,6 +13,14 @@
   background-color: #f5f5f5;
 }
 
+.menu-navlink {
+  .active {
+    background-color: var(--secondary-bg-color) !important;
+    color: #07bc0c;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  }
+}
+
 .text-clamp {
   display: -webkit-box;
   overflow: hidden;

@@ -13,7 +13,7 @@ const WritingQuestion = () => {
         <TextEditor
           placeholder='Enter your answer of your question here!'
           showToolbar={false}
-          value={questionResult?.results[0].answer ?? ""}
+          value={questionResult?.results[0]?.answer ?? ""}
           onChange={() => {}}
           disabled
         />

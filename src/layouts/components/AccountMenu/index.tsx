@@ -22,6 +22,15 @@ const AccountMenu = () => {
     navigate(ROUTE_PATH.LOGIN);
     toast.success("Đã đăng xuất khỏi hệ thống");
   };
+  const handleGoToExamHistory = () => {
+    navigate(ROUTE_PATH.EXAM_HISTORY_LIST);
+  };
+  const handleGoToMyProfile = () => {
+    navigate(ROUTE_PATH.ACCOUNT_PROFILE);
+  };
+  const handleGoToChangePassword = () => {
+    navigate(ROUTE_PATH.ACCOUNT_CHANGE_PASSWORD);
+  };
   const accessToken = useMemo(() => {
     return getAccessToken();
   }, []);
@@ -50,19 +59,19 @@ const AccountMenu = () => {
       )}
       {accessToken && (
         <div className={cx("menu-list")}>
-          <div className={cx("menu-item")}>
+          <div onClick={handleGoToMyProfile} className={cx("menu-item")}>
             <span className={cx("icon")}>
               <BiEdit />
             </span>
             <span className={cx("name")}>Cài đặt thông tin cá nhân</span>
           </div>
-          <div className={cx("menu-item")}>
+          <div onClick={handleGoToExamHistory} className={cx("menu-item")}>
             <span className={cx("icon")}>
               <BiEdit />
             </span>
             <span className={cx("name")}>Lịch sử luyện thi</span>
           </div>
-          <div className={cx("menu-item")}>
+          <div onClick={handleGoToChangePassword} className={cx("menu-item")}>
             <span className={cx("icon")}>
               <BiEdit />
             </span>

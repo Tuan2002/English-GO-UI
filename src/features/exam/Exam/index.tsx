@@ -25,6 +25,9 @@ const Exam = () => {
       }
     });
   };
+  const goToExamHistory = () => {
+    navigate(ROUTE_PATH.EXAM_HISTORY_LIST);
+  };
   return (
     <div className={cx("exam-page-wrapper")}>
       <div className={cx("bg-box")}>
@@ -46,7 +49,7 @@ const Exam = () => {
                 <BiHeadphone />
               </span>
             </Button>
-            <Button size='large' type='primary' className={cx("btn-schedule")}>
+            <Button onClick={goToExamHistory} size='large' type='primary' className={cx("btn-schedule")}>
               Lịch sử luyện thi
             </Button>
           </div>

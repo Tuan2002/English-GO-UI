@@ -106,6 +106,18 @@ const getResultOfExam = createAsyncThunk(
   }
 );
 
+const getMyExams = createAsyncThunk(
+  "exams/getMyExams",
+  async (_, { rejectWithValue }): Promise<IAppResposeBase<IExamScore[] | null>> => {
+    try {
+      const exam: IAppResposeBase<IExamScore[]> = await http.get("/api/exams/my-exams");
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+
 export const examThunks = {
   participateExam,
   getCurrentExam,
@@ -115,4 +127,5 @@ export const examThunks = {
   getCurrentSpeakingQuestion,
   getExamScore,
   getResultOfExam,
+  getMyExams,
 };

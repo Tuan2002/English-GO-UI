@@ -28,6 +28,7 @@ export interface ExamState {
   targetQuestionOfSkill: ITargetQuestionOfSkill[];
   currentTargetQuestion?: ITargetQuestionOfSkill;
   listeningAudioStatus?: IListeningSkillAudioStatus[];
+  listMyExam?: IExamScore[];
   currentExamScore?: IExamScore;
   isSubmitting: boolean;
   isLoading: boolean;
@@ -80,6 +81,9 @@ export const ExamSlice = createSlice({
     },
     changeQuestionResult: (state, action) => {
       state.questionResult = action.payload;
+    },
+    changeListMyExam: (state, action) => {
+      state.listMyExam = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -289,6 +293,17 @@ export const ExamSlice = createSlice({
         state.currentExamScore = action.payload.data as IExamScore;
       })
       .addCase(examThunks.getExamScore.rejected, (state) => {
+        state.isLoading = false;
+      });
+    builder
+      .addCase(examThunks.getMyExams.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(examThunks.getMyExams.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.listMyExam = action.payload.data as IExamScore[];
+      })
+      .addCase(examThunks.getMyExams.rejected, (state) => {
         state.isLoading = false;
       });
   },
