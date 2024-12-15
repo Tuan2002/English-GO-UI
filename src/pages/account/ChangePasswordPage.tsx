@@ -1,8 +1,6 @@
+import ChangePassword from "@/features/account/ChangePassword";
+
 const ChangePasswordPage = () => {
-  return (
-    <div>
-      <span>Đổi mật khẩu</span>
-    </div>
-  );
+  return <ChangePassword />;
 };
 export default ChangePasswordPage;

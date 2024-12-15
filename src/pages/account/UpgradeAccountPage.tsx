@@ -1,8 +1,6 @@
+import UpgradeAccount from "@/features/account/UpgradeAccount";
+
 const UpgradeAcountPage = () => {
-  return (
-    <div>
-      <span>Nâng cấp tài khoản</span>
-    </div>
-  );
+  return <UpgradeAccount />;
 };
 export default UpgradeAcountPage;

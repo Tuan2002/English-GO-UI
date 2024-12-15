@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ICurrentUser } from "@/types/auth/AuthType";
 import getAccessToken from "@/utils/Functions/getAccessToken";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
@@ -67,7 +68,7 @@ export const AuthSlice = createSlice({
         state.loading = false;
         state.isOpenModalFirstUpdate = false;
         state.isSubmitting = false;
-        toast.success("Update profile successfully");
+        toast.success(action.payload.message);
       })
       .addCase(authThunks.firstUpdateProfile.rejected, (state, action: PayloadAction<any>) => {
         state.loading = false;

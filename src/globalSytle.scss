@@ -164,8 +164,18 @@
   top: 5px !important;
   right: 5px !important;
 }
-.ant-input-disabled {
+.ant-input-disabled,
+.ant-picker-disabled,
+.ant-select-disabled {
   color: rgb(0 0 0 / 80%) !important;
+
+  input {
+    color: rgb(0 0 0 / 80%) !important;
+  }
+
+  .ant-select-selection-item {
+    color: rgb(0 0 0 / 80%) !important;
+  }
 }
 .ant-upload.ant-upload-drag {
   height: auto !important;

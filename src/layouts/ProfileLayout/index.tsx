@@ -2,11 +2,11 @@ import { NavLink, Outlet } from "react-router-dom";
 import style from "./ProfileLayout.module.scss";
 import classNames from "classnames/bind";
 import Container from "@/components/Container";
-import { Col, Row } from "antd";
+import { Col, Row, Skeleton } from "antd";
 import Uploadimage from "@/components/UploadImage";
 import { useSelector } from "react-redux";
 import { RootState } from "@/stores";
-import { BiEnvelope, BiHistory, BiMicrophone } from "react-icons/bi";
+import { BiEnvelope, BiHistory, BiKey, BiMicrophone, BiSortUp, BiUserCircle } from "react-icons/bi";
 import ROUTE_PATH from "@/routes/routePath";
 import { useMemo } from "react";
 const cx = classNames.bind(style);
@@ -44,17 +44,17 @@ const ProfileLayout = ({ pageName = "exam" }: ProfileLayoutProps) => {
       case "profile":
         return [
           {
-            icon: <BiHistory />,
+            icon: <BiUserCircle />,
             text: "Thông tin tài khoản",
             path: ROUTE_PATH.ACCOUNT_PROFILE,
           },
           {
-            icon: <BiEnvelope />,
+            icon: <BiKey />,
             text: "Đổi mật khẩu",
             path: ROUTE_PATH.ACCOUNT_CHANGE_PASSWORD,
           },
           {
-            icon: <BiMicrophone />,
+            icon: <BiSortUp />,
             text: "Nâng cấp tài khoản",
             path: ROUTE_PATH.ACCOUNT_UPGRADE,
           },
@@ -70,15 +70,23 @@ const ProfileLayout = ({ pageName = "exam" }: ProfileLayoutProps) => {
         <Row gutter={[20, 20]} className='full-height'>
           <Col span={6} xs={24} md={8} lg={6} className='full-height'>
             <div className={cx("left-box")}>
-              <div className={cx("user-box")}>
-                <div className={cx("user-avatar")}>
-                  <Uploadimage type='avatar' size={100} />
+              {currentUser?.id ? (
+                <div className={cx("user-box")}>
+                  <div className={cx("user-avatar")}>
+                    <Uploadimage defaultImage={currentUser?.avatar} type='avatar' size={100} />
+                  </div>
+                  <div className={cx("user-info")}>
+                    <div className={cx("username")}>{currentUser?.username}</div>
+                    <div className={cx("fullname")}>{currentUser?.fullName}</div>
+                  </div>
                 </div>
-                <div className={cx("user-info")}>
-                  <div className={cx("username")}>{currentUser?.username}</div>
-                  <div className={cx("fullname")}>{currentUser?.fullName}</div>
+              ) : (
+                <div className='text-center'>
+                  <Skeleton.Avatar active size={100} shape='circle' style={{ marginBottom: "10px" }} />
+                  <Skeleton.Input active block size='large' style={{ height: "25px", margin: "5px 0" }} />
+                  <Skeleton.Input active block size='large' style={{ height: "30px", margin: "5px 0" }} />
                 </div>
-              </div>
+              )}
               <div className={cx("menu-box", "menu-navlink")}>
                 {listMenu?.length > 0 &&
                   listMenu.map((item, index) => (

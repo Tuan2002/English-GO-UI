@@ -1,8 +1,6 @@
+import MyProfile from "@/features/account/MyProfile";
+
 const MyProfilePage = () => {
-  return (
-    <div>
-      <span>Thông tin cá nhân</span>
-    </div>
-  );
+  return <MyProfile />;
 };
 export default MyProfilePage;
