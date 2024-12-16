@@ -1,99 +1,35 @@
-.banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.header-box {
   text-align: center;
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 90%;
-    .text {
-      width: 60%;
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  .header-title {
+    text-align: center;
+    font-size: 24px;
+    color: #1a73e8;
+    font-weight: 500;
   }
 
-  .title {
-    font-size: 32px;
-    margin-bottom: 20px;
+  .uppercase {
+    text-transform: uppercase;
+  }
+
+  .trang-tri {
+    width: 250px;
   }
 
   .description {
     font-size: 16px;
-    margin-bottom: 30px;
-  }
-
-  .button-container {
-    display: flex;
-    gap: 10px;
-  }
-
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-family: Arial, sans-serif;
-    border-radius: 5px;
-    border: 2px solid transparent;
-    cursor: pointer;
-    text-decoration: none;
-  }
-
-  .button-primary {
-    background-color: #2979ff;
-    color: white;
-  }
-
-  .button-primary:hover {
-    background-color: #1c54b2;
-  }
-
-  .button-secondary {
-    background-color: white;
-    color: #2979ff;
-    border-color: #2979ff;
-  }
-
-  .button-secondary:hover {
-    background-color: #e3f2fd;
-  }
-
-  .button i {
-    margin-left: 10px;
-  }
-  .button svg {
-    margin-left: 8px;
   }
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: center;
-  width: 90%;
-
-  .header {
-    margin-bottom: 20px;
-  }
-
-  .header h1 {
-    font-size: 24px;
-    color: #1a73e8;
-    text-align: left;
-  }
-
-  .header p {
-    font-size: 16px;
-    color: #666;
-    text-align: left;
-    margin-bottom: 107px;
-  }
-
+.service-wrapper {
+  padding-top: 50px;
+  padding-bottom: 50px;
   .services {
     display: flex;
     flex-wrap: wrap;
@@ -105,15 +41,21 @@
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    padding: 20px;
-    flex: 1 1 40%;
+    padding: 10px;
+    height: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .service-box h3 {
     font-size: 18px;
     color: #1a73e8;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-icon {
+    width: 40px;
   }
 
   .service-box ul {
@@ -126,57 +68,25 @@
   .service-box ul li {
     font-size: 14px;
     color: #333;
-    margin-bottom: 10px;
-  }
-
-  .service-box ul li i {
-    color: #1a73e8;
-    margin-right: 10px;
-  }
-
-  .cta-button {
-    display: inline-block;
-    background-color: #1a73e8;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 20px;
-  }
-
-  .cta-button i {
-    margin-left: 10px;
-  }
-
-  .illustration {
-    text-align: right;
-    margin-top: 20px;
-  }
-}
-.container-status {
-  text-align: center;
-  width: 100%;
-  h2 {
-    text-align: left;
-  }
-  .title {
-    margin-left: 6%;
-  }
-  .container-status-wrap {
+    margin-bottom: 6px;
     display: flex;
-    
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+  }
+
+  .icon {
+    font-size: 20px;
+    width: 25px;
+    height: 25px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
   }
-
-  .stats {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 90%;
-  }
-
+}
+.achievement-wrapper {
+  padding-top: 20px;
+  padding-bottom: 50px;
   .stat {
     background-color: #fff;
     border-radius: 8px;
@@ -186,27 +96,17 @@
     margin: 10px;
     text-align: center;
   }
-
-  .stat h3 {
-    font-size: 1rem;
-    color: #6c757d;
-    margin-bottom: 10px;
+  .icon {
+    font-size: 60px;
   }
-
-  .stat p {
-    font-size: 1.5rem;
-    color: #333;
-    margin: 0;
+  .quantity {
+    font-size: 20px;
+    font-weight: 600;
+    color: #007bff;
   }
-
-  .stat i {
-    font-size: 1.5rem;
-    color: #6c757d;
+  .description {
     margin-top: 10px;
-  }
-  .container-des {
-    display: flex;
-    justify-content: center;
+    display: block;
   }
 }
 
@@ -312,7 +212,7 @@
   }
 }
 
-.container-des{
+.container-des {
   display: flex;
   justify-content: center;
   width: 90%;

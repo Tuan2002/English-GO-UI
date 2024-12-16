@@ -24,7 +24,7 @@ const ContestantHeader = () => {
           <Row align='middle'>
             <Col xs={0} sm={24}>
               <div className={cx("logo-box")}>
-                <img className={cx("logo")} src='/src/assets/logo-full-exampro.png' alt='logo' />
+                <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
                 <div className={cx("arrow")}></div>
               </div>
             </Col>
