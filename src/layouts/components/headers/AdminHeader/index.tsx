@@ -23,7 +23,7 @@ const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
           <span className={cx("button")} onClick={toggleCollapsed}>
             <BsTextIndentLeft />
           </span>
-          <img className={cx("logo")} src='/src/assets/logo-full-exampro.png' alt='logo' />
+          <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
         </div>
         <div className={cx("header-rightbox")}>
           <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>

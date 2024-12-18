@@ -11,6 +11,7 @@ import { ILoginRequestData } from "@/types/auth/LoginType";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { authAction } from "@/stores/authStore/authReducer";
+import Environment from "@/constants/env";
 const cx = classNames.bind(style);
 
 type FieldType = {
@@ -53,7 +54,6 @@ const LoginForm = () => {
 
   const handleLoginSSO = () => {
     const requestId = new Date().valueOf().toString();
-    const AUTH_URL = "https://login.vinhuni.edu.vn";
     const response_type = "id_token token";
     const client_id = "english-contest";
     const state = requestId;
@@ -72,7 +72,7 @@ const LoginForm = () => {
     const encodedReturnUrl = encodeURIComponent(returnUrl);
 
     // Tạo URL login
-    const loginURL = `${AUTH_URL}/Account/Login?ReturnUrl=${encodedReturnUrl}`;
+    const loginURL = `${Environment.AUTH_SERVER_URL}/Account/Login?ReturnUrl=${encodedReturnUrl}`;
     window.location.href = loginURL;
   };
 

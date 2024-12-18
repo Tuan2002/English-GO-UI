@@ -67,9 +67,9 @@ const AppRoute = () => {
             </Route>
           </Route>
 
+          <Route path={ROUTE_PATH.EXAM_ROOM} element={<ExamRoomPage />} />
+          <Route path={ROUTE_PATH.EXAM_PARTICIPATE} element={<ExamParticipatePage />} />
           <Route element={<ContestantLayout />}>
-            <Route path={ROUTE_PATH.EXAM_ROOM} element={<ExamRoomPage />} />
-            <Route path={ROUTE_PATH.EXAM_PARTICIPATE} element={<ExamParticipatePage />} />
             <Route path={ROUTE_PATH.EXAM_SCORE} element={<ExamScorePage />} />
             <Route path={ROUTE_PATH.EXAM_RESULT} element={<ExamResultPage />} />
             <Route element={<ProfileLayout pageName='exam' />}>

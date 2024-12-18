@@ -32,7 +32,7 @@ const Exam = () => {
     <div className={cx("exam-page-wrapper")}>
       <div className={cx("bg-box")}>
         <div className={cx("content-box")}>
-          <img src='/src/assets/logo-full-exampro.png' className={cx("logo")} alt='exam' />
+          <img src='/src/assets/logo-full.png' className={cx("logo")} alt='exam' />
           <div className={cx("panda-2")}></div>
           <div className={cx("title")}>
             <h5 className={cx("text-title", "text-title-shadow")}>

@@ -1,7 +1,19 @@
+import SpeakingRecord from "@/components/SpeakingRecord";
 import style from "../Carousel.module.scss";
 import classNames from "classnames/bind";
+import React from "react";
+import { BiMicrophone, BiPlayCircle, BiRotateLeft } from "react-icons/bi";
 const cx = classNames.bind(style);
 const TestDevice = () => {
+  const speakerRef = React.useRef<any>(null);
+  const [isRecording, setIsRecording] = React.useState(false);
+  const handleEndRecord = (blob: any) => {
+    console.log(blob);
+  };
+  const handleStartRecord = () => {
+    setIsRecording(true);
+  };
+
   return (
     <div className={cx("carousel-item-wrapper")}>
       <div className={cx("carousel-item-header")}>
@@ -32,16 +44,26 @@ const TestDevice = () => {
                 <span>- Bước 4: </span> Nhấp vào nút "Nghe lại", nếu không nghe được giọng của mình, vui lòng kiểm tra lại cài đặt
                 hoặc thiết bị.
               </p>
-            </div>
-          </div>
-          <div className={cx("test-device-item", "content-item")}>
-            <h5 className={cx("title")}>
-              <span className='secondary-color'>Phần 2:</span> Kiểm tra camera
-            </h5>
-            <div className={cx("content")}>
-              <p>
-                <span>- Bước 1: </span> Để camera trước hướng mặt của bạn
-              </p>
+              <div className={cx("test-micro")}>
+                <div className={cx("button", "button-small")}>
+                  <BiPlayCircle />
+                </div>
+                {!isRecording ? (
+                  <div onClick={handleStartRecord} className={cx("button", "button-record")}>
+                    <BiMicrophone />
+                  </div>
+                ) : (
+                  <div onClick={handleEndRecord} className={cx("button", "button-record")}>
+                    <BiMicrophone />
+                  </div>
+                )}
+                <div className={cx("button", "button-small")}>
+                  <BiRotateLeft />
+                </div>
+              </div>
+              <div className='d-none'>
+                <SpeakingRecord ref={speakerRef} handleEndRecording={handleEndRecord} />
+              </div>
             </div>
           </div>
         </div>
