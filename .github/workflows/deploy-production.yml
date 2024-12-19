@@ -60,5 +60,5 @@ jobs:
           script: |
             cd /home/${{ vars.SERVER_USER }}/app/reactjs/english-go-ui
             docker-compose pull
-            docker-compose down
+            docker-compose down -v
             docker-compose up -d
