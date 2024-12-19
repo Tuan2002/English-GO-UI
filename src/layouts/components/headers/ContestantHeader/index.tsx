@@ -24,14 +24,14 @@ const ContestantHeader = () => {
           <Row align='middle'>
             <Col xs={0} sm={24}>
               <div className={cx("logo-box")}>
-                <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
+                <img className={cx("logo")} src='/logo-full.png' alt='logo' />
                 <div className={cx("arrow")}></div>
               </div>
             </Col>
             <Col xs={24} sm={0}>
               <div className={cx("logo-box")}>
                 <div className='d-flex align-items-center'>
-                  <img className={cx("logo-less")} src='/src/assets/logo-less.png' alt='logo' />
+                  <img className={cx("logo-less")} src='/logo-less.png' alt='logo' />
                 </div>
               </div>
             </Col>

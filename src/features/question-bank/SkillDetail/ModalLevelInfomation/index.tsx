@@ -101,7 +101,7 @@ const ModalLevelInfomation = () => {
         <div className={cx("d-flex justify-content-center")}>
           <Uploadimage
             defaultImage={
-              selectedLevel?.image !== null && selectedLevel?.image?.trim() ? selectedLevel?.image : "/src/assets/empty.webp"
+              selectedLevel?.image !== null && selectedLevel?.image?.trim() ? selectedLevel?.image : "/empty.webp"
             }
             onChangeImage={setAvatarFile}
             type='avatar'

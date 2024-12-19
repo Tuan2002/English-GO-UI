@@ -9,7 +9,7 @@ interface INodataProps {
 const NoData = ({ title = "No data", content }: INodataProps) => {
   return (
     <div className={cx("empty-box")}>
-      <img className={cx("empty-image")} src='/src/assets/empty.webp' alt='no-data' />
+      <img className={cx("empty-image")} src='/empty.webp' alt='no-data' />
       {content ? content : <div className={cx("empty-content")}>{title}</div>}
     </div>
   );

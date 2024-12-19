@@ -1,7 +1,7 @@
 .exam-page-wrapper {
   height: calc(100vh - 70px);
   background-color: #edf2f9;
-  background-image: url("/src/assets/bg-2.jpg");
+  background-image: url("/bg-2.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     background-repeat: no-repeat;
-    background-image: url("/src/assets/exam-banner-1.png"), url("/src/assets/exam-banner-2.png");
+    background-image: url("/exam-banner-1.png"), url("/exam-banner-2.png");
     background-size: 25%, 25%;
     background-position: 0% 5%, 100%;
     width: 100%;
@@ -25,7 +25,7 @@
     justify-content: center;
     width: 100%;
     max-width: 800px;
-    background-image: url("/src/assets/slider.png");
+    background-image: url("/slider.png");
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -41,7 +41,7 @@
       margin-bottom: 20px;
     }
     .panda-2 {
-      background-image: url("/src/assets/panda-2.png");
+      background-image: url("/panda-2.png");
       position: absolute;
       bottom: -80px;
       left: -80px;

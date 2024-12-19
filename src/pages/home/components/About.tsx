@@ -26,7 +26,7 @@ const Achievement = () => {
         </div>
         <div className={cx("image-des")}>
           <img
-            src='/src/assets/laptop.png'
+            src='/laptop.png'
             alt='Screenshot of the software on a mobile phone and a laptop'
             className={cx("screenshot")}
           />

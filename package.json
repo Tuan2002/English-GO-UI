@@ -5,12 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "-": "^0.0.1",
     "@cloudinary/react": "^1.13.0",
     "@cloudinary/url-gen": "^1.21.0",
     "@ffmpeg/ffmpeg": "^0.12.10",
@@ -45,6 +44,7 @@
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
+    "sass": "^1.83.0",
     "save": "^2.9.0",
     "styled-components": "^6.1.13",
     "swr": "^2.2.5",

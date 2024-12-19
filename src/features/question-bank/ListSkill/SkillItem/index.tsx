@@ -22,7 +22,7 @@ const SkillItem = ({ skill }: ISkillItemProps) => {
       <Link
         to={skill.id}
         className={cx("skill-item-box")}
-        style={{ backgroundImage: `url(${skill.image && skill.image.trim() ? skill.image : "/src/assets/empty.webp"})` }}
+        style={{ backgroundImage: `url(${skill.image && skill.image.trim() ? skill.image : "/empty.webp"})` }}
       >
         <span className={cx("icon-show")} onClick={(e) => handleShowSkill(e)}>
           <MdOutlineRemoveRedEye />

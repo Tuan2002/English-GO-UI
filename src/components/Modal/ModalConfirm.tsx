@@ -31,7 +31,7 @@ const ModalConfirm = ({
     >
       <div className={cx("modal-confirm")}>
         <div className={cx("warning-icon")}>
-          <img className={cx("warning-img")} src='/src/assets/warning.webp' alt='warning' />
+          <img className={cx("warning-img")} src='/warning.webp' alt='warning' />
         </div>
         <div className={cx("warning-text")}>{confirmText}</div>
       </div>

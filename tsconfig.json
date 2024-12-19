@@ -11,6 +11,7 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "jsx": "react",
+    "noEmit": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true

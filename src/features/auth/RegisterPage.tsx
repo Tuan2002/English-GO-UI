@@ -17,7 +17,7 @@ const RegisterPageComponent = () => {
         <Col span={9}>
           <div className={cx("register-right-box")}>
             <div className={cx("content")}>
-              <img className={cx("logo")} src='/src/assets/logo.png' />
+              <img className={cx("logo")} src='/logo.png' />
               <h5 className={cx("title")}>Tiếp lợi thế </h5>
               <h5 className={cx("title")}>Nối thành công </h5>
             </div>

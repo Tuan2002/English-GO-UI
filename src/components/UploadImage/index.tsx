@@ -43,7 +43,7 @@ const Uploadimage = ({ type = "cover", size = 100, defaultImage, onChangeImage, 
                 ? imagePreview
                 : defaultImage !== null && Number(defaultImage?.length) > 0
                 ? defaultImage
-                : "/src/assets/user.svg"
+                : "/user.svg"
             }
           />
           <label className={cx("camera-icon")} htmlFor={id}>

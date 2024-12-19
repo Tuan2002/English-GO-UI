@@ -1,13 +1,13 @@
-import { BsTextIndentLeft } from "react-icons/bs";
-import { BiSolidBellRing, BiSolidMessage } from "react-icons/bi";
-import style from "./AdminHeader.module.scss";
-import classNames from "classnames/bind";
-import { Avatar, Badge, Popover } from "antd";
-import HeaderNotify from "../../HeaderNotify";
-import HeaderMessage from "../../HeaderMessage";
-import AccountMenu from "../../AccountMenu";
-import { useSelector } from "react-redux";
 import { RootState } from "@/stores";
+import { Avatar, Badge, Popover } from "antd";
+import classNames from "classnames/bind";
+import { BiSolidBellRing, BiSolidMessage } from "react-icons/bi";
+import { BsTextIndentLeft } from "react-icons/bs";
+import { useSelector } from "react-redux";
+import AccountMenu from "../../AccountMenu";
+import HeaderMessage from "../../HeaderMessage";
+import HeaderNotify from "../../HeaderNotify";
+import style from "./AdminHeader.module.scss";
 const cx = classNames.bind(style);
 
 interface IAdminHeaderProps {
@@ -23,7 +23,7 @@ const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
           <span className={cx("button")} onClick={toggleCollapsed}>
             <BsTextIndentLeft />
           </span>
-          <img className={cx("logo")} src='/src/assets/logo-full.png' alt='logo' />
+          <img className={cx("logo")} src='/logo-full.png' alt='logo' />
         </div>
         <div className={cx("header-rightbox")}>
           <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>

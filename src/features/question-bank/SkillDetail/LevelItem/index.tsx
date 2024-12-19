@@ -24,7 +24,7 @@ const LevelItem = ({ level }: ILevelItemProps) => {
       <Link
         to={level.id}
         className={cx("level-item-box")}
-        style={{ backgroundImage: `url(${level.image && level.image.trim() ? level.image : "/src/assets/empty.webp"})` }}
+        style={{ backgroundImage: `url(${level.image && level.image.trim() ? level.image : "/empty.webp"})` }}
       >
         <span className={cx("icon-show")} onClick={(e) => handleShowLevel(e)}>
           <MdOutlineRemoveRedEye />

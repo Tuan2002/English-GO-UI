@@ -107,7 +107,7 @@ const CategoryItem = ({ category }: ICategoryItemProps) => {
       <div
         className={cx("category-image")}
         style={{
-          backgroundImage: `url(${category?.image && category.image.trim() ? category.image : "/src/assets/folder.png"})`,
+          backgroundImage: `url(${category?.image && category.image.trim() ? category.image : "/folder.png"})`,
         }}
       ></div>
     </Link>

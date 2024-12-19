@@ -1,7 +1,7 @@
 import { Button, Col, Row } from "antd";
-import style from "../HomePage.module.scss";
 import classNames from "classnames/bind";
 import { BiBadgeCheck } from "react-icons/bi";
+import style from "../HomePage.module.scss";
 import HeaderBox from "./HeaderBox";
 const cx = classNames.bind(style);
 const Service = () => {
@@ -18,7 +18,7 @@ const Service = () => {
           <Col span={12} xs={24} md={12}>
             <div className={cx("service-box")}>
               <h3>
-                <img className={cx("header-icon")} src='src/assets/logo-less.png' alt='' />
+                <img className={cx("header-icon")} src='/logo-less.png' alt='' />
                 PHẦN MỀM THI THỬ ENGLISHGO
               </h3>
               <ul>
@@ -52,7 +52,7 @@ const Service = () => {
           <Col span={12} xs={24} md={12}>
             <div className={cx("service-box")}>
               <h3>
-                <img className={cx("header-icon")} src='src/assets/logo-less.png' alt='' />
+                <img className={cx("header-icon")} src='/logo-less.png' alt='' />
                 LUYỆN ĐỀ
               </h3>
               <ul>
@@ -80,7 +80,7 @@ const Service = () => {
           <Col span={12} xs={24} md={12}>
             <div className={cx("service-box")}>
               <h3>
-                <img className={cx("header-icon")} src='src/assets/logo-less.png' alt='' />
+                <img className={cx("header-icon")} src='/logo-less.png' alt='' />
                 CHẤM THI ENGLISHGO
               </h3>
               <ul>
@@ -102,7 +102,7 @@ const Service = () => {
           <Col span={12} xs={24} md={12}>
             <div className={cx("service-box")}>
               <h3>
-                <img className={cx("header-icon")} src='src/assets/logo-less.png' alt='' />
+                <img className={cx("header-icon")} src='/logo-less.png' alt='' />
                 CÁC DỊCH VỤ KHÁC
               </h3>
               <ul>

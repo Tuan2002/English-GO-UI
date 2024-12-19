@@ -10,11 +10,11 @@ const LoginPageComponent = () => {
         <Col span={12}>
           <div className={cx("login-left-box")}>
             <div className={cx("login-title")}>
-              <img className={cx("logo")} src='/src/assets/logo.png' />
+              <img className={cx("logo")} src='/logo.png' />
               {/* <h5 className={cx("title")}>Việc ở quanh ta </h5> */}
             </div>
             <div className={cx("banner")}>
-              <Image width={"80%"} src='/src/assets/banner.png' preview={false} />
+              <Image width={"80%"} src='/banner.png' preview={false} />
             </div>
           </div>
         </Col>

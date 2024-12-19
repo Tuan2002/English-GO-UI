@@ -74,11 +74,11 @@ const ExamParticipateHeader = () => {
             <div className={cx("time")}>
               <div className={cx("wrapper")}>
                 {<ExpiredTime handleSubmit={handleSubmitSkill} initTime={timeCountDown} />}
-                <img src='/src/assets/clock.svg' alt='' className={cx("clock-icon")} />
+                <img src='/clock.svg' alt='' className={cx("clock-icon")} />
               </div>
             </div>
             <div>
-              <img src='/src/assets/panda.png' alt='panda' className={cx("panda-img")} />
+              <img src='/panda.png' alt='panda' className={cx("panda-img")} />
             </div>
           </div>
         </Col>

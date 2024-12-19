@@ -98,7 +98,7 @@ const ModalSkillInfomation = () => {
         <div className={cx("d-flex justify-content-center")}>
           <Uploadimage
             defaultImage={
-              selectedSkill?.image !== null && selectedSkill?.image?.trim() ? selectedSkill?.image : "/src/assets/empty.webp"
+              selectedSkill?.image !== null && selectedSkill?.image?.trim() ? selectedSkill?.image : "/empty.webp"
             }
             onChangeImage={setAvatarFile}
             type='avatar'

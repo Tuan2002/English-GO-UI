@@ -82,7 +82,7 @@ const ModalSaveCategory = () => {
           {openModalSaveCategory && (
             <Uploadimage
               defaultImage={
-                selectedCategory?.image && selectedCategory.image.trim() ? selectedCategory?.image : "/src/assets/folder.png"
+                selectedCategory?.image && selectedCategory.image.trim() ? selectedCategory?.image : "/folder.png"
               }
               onChangeImage={setImageFile}
               type='avatar'

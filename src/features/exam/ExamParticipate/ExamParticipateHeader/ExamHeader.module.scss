@@ -39,8 +39,8 @@
       z-index: 2;
       margin-right: 4rem;
       padding-right: 1.3rem;
-      -webkit-mask-image: url("/src/assets/hotline-mask.png");
-      mask-image: url("/src/assets/hotline-mask.png");
+      -webkit-mask-image: url("/hotline-mask.png");
+      mask-image: url("/hotline-mask.png");
       -webkit-mask-size: 100% 100%;
       mask-size: 100% 100%;
       transition: 0.3s;
@@ -53,7 +53,7 @@
         padding: 0.4rem;
         background-position-x: 0;
         animation: hotline-movement 10s infinite linear;
-        background-image: url("/src/assets/hotline-sky.png"), linear-gradient(151deg, #208cff 2.08%, #6dddff 100%);
+        background-image: url("/hotline-sky.png"), linear-gradient(151deg, #208cff 2.08%, #6dddff 100%);
         background-repeat: no-repeat;
         position: relative;
       }

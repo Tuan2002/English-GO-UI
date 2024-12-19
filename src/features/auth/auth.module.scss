@@ -50,11 +50,11 @@
     justify-content: center;
     height: 100%;
     position: relative;
-    background-image: url("/src/assets/auth_bg_desktop.png");
+    background-image: url("/auth_bg_desktop.png");
     box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
     .register-banner {
-      background-image: url("/src/assets/auth_arrow.webp");
+      background-image: url("/auth_arrow.webp");
       width: 250px;
       background-size: cover;
       background-repeat: no-repeat;
