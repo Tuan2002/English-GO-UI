@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
-import { IoLogoGoogleplus } from "react-icons/io";
-import style from "../auth.module.scss";
-import classNames from "classnames/bind";
-import { Link, useNavigate } from "react-router-dom";
-import ROUTE_PATH from "@/routes/routePath";
-import { toast } from "react-toastify";
-import authService from "@/services/authService";
-import { ILoginRequestData } from "@/types/auth/LoginType";
-import React from "react";
-import { useDispatch } from "react-redux";
-import { authAction } from "@/stores/authStore/authReducer";
 import Environment from "@/constants/env";
+import ROUTE_PATH from "@/routes/routePath";
+import authService from "@/services/authService";
+import { authAction } from "@/stores/authStore/authReducer";
+import { ILoginRequestData } from "@/types/auth/LoginType";
+import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
+import classNames from "classnames/bind";
+import React from "react";
+import { IoLogoGoogleplus } from "react-icons/io";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import style from "../auth.module.scss";
 const cx = classNames.bind(style);
 
 type FieldType = {
@@ -54,25 +54,16 @@ const LoginForm = () => {
 
   const handleLoginSSO = () => {
     const requestId = new Date().valueOf().toString();
-    const response_type = "id_token token";
-    const client_id = "english-contest";
-    const state = requestId;
-    const redirect_uri = "http://localhost:5173/auth/callback";
-    const scope = "openid profile email";
-    const nonce = requestId;
-
-    // Tạo query string cho phần /connect/authorize/callback
-    const returnUrl = `/connect/authorize/callback?response_type=${encodeURIComponent(
-      response_type
-    )}&client_id=${encodeURIComponent(client_id)}&state=${encodeURIComponent(state)}&redirect_uri=${encodeURIComponent(
-      redirect_uri
-    )}&scope=${encodeURIComponent(scope)}&nonce=${encodeURIComponent(nonce)}`;
-
-    // Mã hóa URL ReturnUrl
-    const encodedReturnUrl = encodeURIComponent(returnUrl);
-
-    // Tạo URL login
-    const loginURL = `${Environment.AUTH_SERVER_URL}/Account/Login?ReturnUrl=${encodedReturnUrl}`;
+    const BASE_URL = Environment.AUTH_SERVER_URL;
+    const urlSearchParams = new URLSearchParams({
+      response_type: "id_token token",
+      client_id: String(Environment.AUTH_CLIENT_ID),
+      state: requestId,
+      redirect_uri: String(Environment.REDIRECT_URL),
+      scope: "openid profile email",
+      nonce: requestId,
+    });
+    const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent("/connect/authorize/callback?" + urlSearchParams.toString())}`;
     window.location.href = loginURL;
   };
 
