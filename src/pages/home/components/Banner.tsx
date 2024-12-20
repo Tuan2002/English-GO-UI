@@ -7,13 +7,13 @@ const Banner = () => {
     <div className={cx("banner-wrapper", "user-select-none")}>
       <Carousel autoplay arrows>
         <div className={cx("banner-item")}>
-          <img className='full-width' src='/banner-3.svg' alt='' />
+          <img className='full-width' src='/banner_3.jpg' alt='' />
         </div>
         <div className={cx("banner-item")}>
-          <img className='full-width' src='/banner-1.svg' alt='' />
+          <img className='full-width' src='/banner_1.jpg' alt='' />
         </div>
         <div className={cx("banner-item")}>
-          <img className='full-width' src='/banner-2.svg' alt='' />
+          <img className='full-width' src='/banner_2.jpg' alt='' />
         </div>
       </Carousel>
     </div>
