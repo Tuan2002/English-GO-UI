@@ -37,6 +37,7 @@ import ProfileLayout from "@/layouts/ProfileLayout";
 import MyProfilePage from "@/pages/account/MyProfilePage";
 import ChangePasswordPage from "@/pages/account/ChangePasswordPage";
 import UpgradeAcountPage from "@/pages/account/UpgradeAccountPage";
+import NotFoundPage from "@/pages/error/NotFoundPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -94,6 +95,7 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
         </Route>
         <Route path={ROUTE_PATH.LOGIN_SSO} element={<LoginSSO />} />
+        <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

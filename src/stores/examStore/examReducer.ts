@@ -166,7 +166,7 @@ export const ExamSlice = createSlice({
         state.targetQuestionOfSkill = targetQuestion;
         state.listLevelOfSkill = listLevelOfSkillFromResponse;
         state.listQuestionOfSkill = listQuestionOfSkillFromResponse;
-        state.selectedLevel = listLevelOfSkillFromResponse[0].id;
+        state.selectedLevel = listLevelOfSkillFromResponse[0]?.id;
         state.selectedQuestion = listQuestionOfSkillFromResponse[0];
         state.listeningAudioStatus = listeningAudioStatus;
       })

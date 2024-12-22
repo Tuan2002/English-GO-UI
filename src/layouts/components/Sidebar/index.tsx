@@ -4,6 +4,7 @@ import style from "./Sidebar.module.scss";
 import classNames from "classnames/bind";
 import adminMenu from "./adminMenu";
 import examinerMenu from "./examinerMenu";
+import Version from "@/components/Version";
 const cx = classNames.bind(style);
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -25,6 +26,7 @@ const Sidebar = ({ collapsed, menuType = "admin" }: ISidebarProps): JSX.Element 
         inlineCollapsed={collapsed}
         items={items}
       />
+      <Version />
     </div>
   );
 };

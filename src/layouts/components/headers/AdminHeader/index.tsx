@@ -8,6 +8,7 @@ import AccountMenu from "../../AccountMenu";
 import HeaderMessage from "../../HeaderMessage";
 import HeaderNotify from "../../HeaderNotify";
 import style from "./AdminHeader.module.scss";
+import { useNavigate } from "react-router-dom";
 const cx = classNames.bind(style);
 
 interface IAdminHeaderProps {
@@ -16,6 +17,10 @@ interface IAdminHeaderProps {
 
 const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
   const { currentUser } = useSelector((state: RootState) => state.authStore);
+  const navigate = useNavigate();
+  const handleGoToHomePage = () => {
+    navigate("/");
+  };
   return (
     <div className={cx("header-wrapper")}>
       <div className={cx("header")}>
@@ -23,7 +28,7 @@ const AdminHeader = ({ toggleCollapsed }: IAdminHeaderProps) => {
           <span className={cx("button")} onClick={toggleCollapsed}>
             <BsTextIndentLeft />
           </span>
-          <img className={cx("logo")} src='/logo-full.png' alt='logo' />
+          <img onClick={handleGoToHomePage} className={cx("logo")} src='/logo-full.png' alt='logo' />
         </div>
         <div className={cx("header-rightbox")}>
           <Popover trigger={"click"} placement='bottom' content={<HeaderNotify />}>

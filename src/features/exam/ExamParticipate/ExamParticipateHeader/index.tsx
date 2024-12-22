@@ -9,12 +9,14 @@ import { ISkill } from "@/types/skill/SkillType";
 import ExpiredTime from "./ExpiredTime";
 import { ISubmitSkillRequest } from "@/types/exam/ExamTypes";
 import { ExamActions } from "@/stores/examStore/examReducer";
+import { BiCaretDown } from "react-icons/bi";
 const cx = classNames.bind(style);
 const ExamParticipateHeader = () => {
   const { selectedSkill, listQuestionOfSkill } = useSelector((state: RootState) => state.examStore);
   const { listSkill } = useSelector((state: RootState) => state.skillStore);
   const [selectedSkillInfo, setSelectedSkillInfo] = useState<ISkill | undefined>(undefined);
   const [timeCountDown, setTimeCountDown] = useState<number | undefined>(undefined);
+  const [isOpenDirection, setIsOpenDirection] = useState<boolean>(false);
   const dispatch: AppDispatch = useDispatch();
   const handleSubmitSkill = () => {
     const data: ISubmitSkillRequest = {
@@ -26,6 +28,9 @@ const ExamParticipateHeader = () => {
         dispatch(ExamActions.continueExam());
       }
     });
+  };
+  const handleToogleDirection = () => {
+    setIsOpenDirection(!isOpenDirection);
   };
 
   useEffect(() => {
@@ -58,7 +63,10 @@ const ExamParticipateHeader = () => {
               </div>
             )}
             {selectedSkillInfo?.id ? (
-              <div className={cx("item")}>
+              <div className={cx("item", "direction", "scrollbar", { open: isOpenDirection })}>
+                <span className={cx("icon-toogle", { down: isOpenDirection })} onClick={handleToogleDirection}>
+                  <BiCaretDown />
+                </span>
                 <span className={cx("name")}>Directions: </span>
                 <span className={cx("desc")}>{selectedSkillInfo?.description}</span>
               </div>

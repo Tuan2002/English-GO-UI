@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from "@/stores";
 import { ExamActions } from "@/stores/examStore/examReducer";
 import { IExamSkillStatus } from "@/types/exam/ExamTypes";
 import ROUTE_PATH from "@/routes/routePath";
+import { toast } from "react-toastify";
 const cx = classNames.bind(sytle);
 
 interface IScoreOfSkill {
@@ -35,6 +36,9 @@ const ExamScore = () => {
   };
   const hanleReviewExam = () => {
     navigation(ROUTE_PATH.EXAM_RESULT.replace(":examId", examId ?? ""));
+  };
+  const handleRegisterMark = () => {
+    toast.warning("Chức năng đang được phát triển");
   };
 
   useEffect(() => {
@@ -132,7 +136,7 @@ const ExamScore = () => {
                 <div className={cx("info-item")}>
                   <span className={cx("title")}>Điểm bài viết: </span>
                   <div className={cx("value-box")}>
-                    <Button type='default' danger size='small'>
+                    <Button onClick={handleRegisterMark} type='default' danger size='small'>
                       Đăng kí chấm
                     </Button>
                     <span className={cx("value")}>Chưa chấm</span>
@@ -141,7 +145,7 @@ const ExamScore = () => {
                 <div className={cx("info-item")}>
                   <span className={cx("title")}>Điểm bài nói: </span>
                   <div className={cx("value-box")}>
-                    <Button type='default' danger size='small'>
+                    <Button onClick={handleRegisterMark} type='default' danger size='small'>
                       Đăng kí chấm
                     </Button>
                     <span className={cx("value")}>Chưa chấm</span>
