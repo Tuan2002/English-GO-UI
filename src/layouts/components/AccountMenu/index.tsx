@@ -14,6 +14,7 @@ const cx = classNames.bind(style);
 
 const AccountMenu = () => {
   const { currentUser } = useSelector((state: RootState) => state.authStore);
+  console.log(currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -30,6 +31,9 @@ const AccountMenu = () => {
   };
   const handleGoToChangePassword = () => {
     navigate(ROUTE_PATH.ACCOUNT_CHANGE_PASSWORD);
+  };
+  const handleGoToAdminPage = () => {
+    navigate(ROUTE_PATH.ADMIN_DASHBOARD);
   };
   const accessToken = useMemo(() => {
     return getAccessToken();
@@ -59,6 +63,14 @@ const AccountMenu = () => {
       )}
       {accessToken && (
         <div className={cx("menu-list")}>
+          {currentUser?.groupRole.name === "admin" && (
+            <div onClick={handleGoToAdminPage} className={cx("menu-item")}>
+              <span className={cx("icon")}>
+                <BiEdit />
+              </span>
+              <span className={cx("name")}>Trang quản trị</span>
+            </div>
+          )}
           <div onClick={handleGoToMyProfile} className={cx("menu-item")}>
             <span className={cx("icon")}>
               <BiEdit />

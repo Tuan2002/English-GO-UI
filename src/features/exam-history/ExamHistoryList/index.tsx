@@ -11,18 +11,23 @@ import ButtonShow from "@/components/Button/ButtonShow";
 import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
 import { useNavigate } from "react-router-dom";
 import ROUTE_PATH from "@/routes/routePath";
+import { toast } from "react-toastify";
 const cx = classNames.bind(style);
 
-interface IScoreOfSkill {
-  score: number;
-  totalQuestion: number;
-}
-interface IScoreOfExam {
-  listening: IScoreOfSkill;
-  reading: IScoreOfSkill;
-  writing: IScoreOfSkill;
-  speaking: IScoreOfSkill;
-}
+// interface IScoreOfSkill {
+//   score: number;
+//   totalQuestion: number;
+// }
+// interface IScoreOfExam {
+//   listening: IScoreOfSkill;
+//   reading: IScoreOfSkill;
+//   writing: IScoreOfSkill;
+//   speaking: IScoreOfSkill;
+// }
+
+const handleRegisterMark = () => {
+  toast.warning("Chức năng đang được phát triển");
+};
 
 const ExamHistoryList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -101,7 +106,7 @@ const ExamHistoryList = () => {
         return (
           <div>
             <div>Chưa chấm điểm</div>
-            <Button type='primary' size='small'>
+            <Button onClick={handleRegisterMark} type='primary' size='small'>
               Đăng ký chấm
             </Button>
           </div>
@@ -118,7 +123,7 @@ const ExamHistoryList = () => {
         return (
           <div>
             <div>Chưa chấm điểm</div>
-            <Button type='primary' size='small'>
+            <Button onClick={handleRegisterMark} type='primary' size='small'>
               Đăng ký chấm
             </Button>
           </div>
