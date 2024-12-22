@@ -20,7 +20,8 @@ const ModalConfirm = ({
 }: IModalConfirmProps) => {
   return (
     <ModalCustom
-      confirmTitle='Confirm'
+      confirmTitle='Xác nhận'
+      cancelTitle='Huỷ bỏ'
       footerCenter
       width={500}
       modalTitle={modalTitle}

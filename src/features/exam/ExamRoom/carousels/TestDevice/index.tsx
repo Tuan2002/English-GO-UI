@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SpeakingRecord from "@/components/SpeakingRecord";
 import style from "../Carousel.module.scss";
 import classNames from "classnames/bind";
@@ -7,11 +8,32 @@ const cx = classNames.bind(style);
 const TestDevice = () => {
   const speakerRef = React.useRef<any>(null);
   const [isRecording, setIsRecording] = React.useState(false);
-  const handleEndRecord = (blob: any) => {
-    console.log(blob);
+  const [countDown, setCountDown] = React.useState(10);
+  const [audioBlobLink, setAudioBlobLink] = React.useState("");
+  const handleEndRecord = (blob: Blob) => {
+    const audioUrl = URL.createObjectURL(blob);
+    setAudioBlobLink(audioUrl);
+  };
+  const handleRestartRecord = () => {
+    setAudioBlobLink("");
   };
   const handleStartRecord = () => {
     setIsRecording(true);
+    setCountDown(10);
+    setAudioBlobLink("");
+    speakerRef.current.handleStartRecording();
+    const intervalId = setInterval(() => {
+      setCountDown((prev) => {
+        const newCountDown = prev - 1;
+        if (newCountDown === 0) {
+          setIsRecording(false);
+          speakerRef.current.handleStopRecording();
+          clearInterval(intervalId);
+          return 10;
+        }
+        return newCountDown;
+      });
+    }, 1000);
   };
 
   return (
@@ -31,7 +53,7 @@ const TestDevice = () => {
                 <span>- Bước 1: </span> Mở loa hoặc đeo tai nghe để nghe đoạn audio bên dưới
               </p>
               <audio controls className='full-width mt-10 mb-10'>
-                <source src='/audio-test.mp3' type='audio/mpeg' />
+                <source src='/audio-test.mp3' type='audio/webm' />
                 Your browser does not support the audio element.
               </audio>
               <p>
@@ -53,14 +75,22 @@ const TestDevice = () => {
                     <BiMicrophone />
                   </div>
                 ) : (
-                  <div onClick={handleEndRecord} className={cx("button", "button-record")}>
-                    <BiMicrophone />
+                  <div className={cx("button", "button-record")}>
+                    <span className={cx("countdown")}>00:{countDown > 9 ? countDown : `0${countDown}`}</span>
                   </div>
                 )}
-                <div className={cx("button", "button-small")}>
+                <div onClick={handleRestartRecord} className={cx("button", "button-small")}>
                   <BiRotateLeft />
                 </div>
               </div>
+              {audioBlobLink && audioBlobLink.trim() !== "" && (
+                <div>
+                  <audio controls className='full-width mt-10 mb-10'>
+                    <source src={audioBlobLink} type='audio/webm' />
+                    Your browser does not support the audio element.
+                  </audio>
+                </div>
+              )}
               <div className='d-none'>
                 <SpeakingRecord ref={speakerRef} handleEndRecording={handleEndRecord} />
               </div>

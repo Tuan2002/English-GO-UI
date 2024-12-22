@@ -17,6 +17,8 @@
   }
 
   .question-info {
+    padding: 5px;
+
     .question-description {
       font-size: 17px;
       margin-bottom: 10px;
@@ -24,7 +26,7 @@
     }
     .question-content {
       padding: 10px;
-      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 5px 5px rgb(30 27 27 / 20%);
       border-radius: 4px;
       user-select: none;
 

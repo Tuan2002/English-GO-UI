@@ -43,7 +43,7 @@ const FirstUpdateProfile = () => {
     >
       <div className={cx("update-profile-wrapper")}>
         <div className={cx("header", "text-center")}>
-          <h3 className={cx("title")}>Chào mừng bạn đến với JobViet</h3>
+          <h3 className={cx("title")}>Chào mừng bạn đến với English GO</h3>
           <p className={cx("description")}>Vui lòng cập nhật thông tin cá nhân của bạn để sử dụng hệ thống!</p>
         </div>
         <UpdateProfile ref={updateProfileRef} isDisabled={false} />

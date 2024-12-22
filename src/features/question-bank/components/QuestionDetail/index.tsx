@@ -36,19 +36,19 @@ const QuestionDetail = ({ question }: IQuestionDetailProps) => {
       </div>
       {question?.subQuestions && question?.subQuestions.length > 0 && (
         <div className={cx("sub-question-box")}>
-          {question?.subQuestions.map((subQuestion, index) => (
-            <div key={subQuestion.id} className={cx("sub-question-item")}>
+          {question?.subQuestions?.map((subQuestion, index) => (
+            <div key={subQuestion?.id} className={cx("sub-question-item")}>
               <div className={cx("sub-question-content")}>
                 <span className={cx("question-order")}>{index + 1}: </span>
-                <span className={cx("question-content")}>{subQuestion.content}</span>
+                <span className={cx("question-content")}>{subQuestion?.content}</span>
               </div>
               <div className={cx("sub-question-answers")}>
-                {subQuestion.answers.map((answer) => (
-                  <div key={answer.id} className={cx("answer-item")}>
+                {subQuestion?.answers?.map((answer) => (
+                  <div key={answer?.id} className={cx("answer-item")}>
                     <span className={cx("answer-order")}>
-                      <Radio checked={answer.isCorrect} disabled />
+                      <Radio checked={answer?.isCorrect} disabled />
                     </span>
-                    <span className={cx("answer-content")}>{answer.answerContent}</span>
+                    <span className={cx("answer-content")}>{answer?.answerContent}</span>
                   </div>
                 ))}
               </div>

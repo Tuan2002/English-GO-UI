@@ -66,9 +66,6 @@ const LeftBox = () => {
           {selectedQuestion?.attachedFile &&
             (selectedQuestion?.id ? (
               <AudioPlayer
-                // disabledPause
-                // disabledChangeProgress
-                // disabledRepeat
                 audioSrc={selectedQuestion?.attachedFile}
                 currentAudioTime={audioCurrentTimeRef.current} // Lấy từ useRef
                 changeCurrentAudioTime={(time) => changeCurrentAudioTime(time, selectedQuestion.id)}
