@@ -38,6 +38,7 @@ const ExamParticipateHeader = () => {
       setSelectedSkillInfo(listSkill.find((skill) => skill.id === selectedSkill.skillId));
     }
   }, [listSkill, selectedSkill]);
+  console.log("timeCountDown", timeCountDown);
   useEffect(() => {
     if (selectedSkill?.startTime && selectedSkill.skill.expiredTime) {
       setTimeCountDown(
@@ -81,7 +82,7 @@ const ExamParticipateHeader = () => {
           <div className={cx("time-box")}>
             <div className={cx("time")}>
               <div className={cx("wrapper")}>
-                {<ExpiredTime handleSubmit={handleSubmitSkill} initTime={timeCountDown} />}
+                {<ExpiredTime key={selectedSkill?.id} handleSubmit={handleSubmitSkill} initTime={timeCountDown} />}
                 <img src='/clock.svg' alt='' className={cx("clock-icon")} />
               </div>
             </div>

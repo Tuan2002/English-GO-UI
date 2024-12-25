@@ -2,6 +2,10 @@ import style from "./ChangePassword.module.scss";
 import classNames from "classnames/bind";
 import { Button, Col, Form, Input, Row } from "antd";
 import CardScroll from "@/components/CardScroll";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/stores";
+import { authAction } from "@/stores/authStore/authReducer";
+import { toast } from "react-toastify";
 
 type FieldType = {
   oldPassword?: string;
@@ -12,9 +16,40 @@ type FieldType = {
 const cx = classNames.bind(style);
 const ChangePassword = () => {
   const [form] = Form.useForm();
+  const dispatch: AppDispatch = useDispatch();
 
   const onFinish = (values: FieldType) => {
-    console.log(values);
+    if (!values.oldPassword || !values.newPassword || !values.confirmPassword) return;
+    if (values.newPassword !== values.confirmPassword) {
+      form.setFields([
+        {
+          name: "confirmPassword",
+          errors: ["Mật khẩu xác nhận không khớp!"],
+        },
+      ]);
+      return;
+    }
+    dispatch(
+      authAction.changePassword({
+        oldPassword: values.oldPassword,
+        newPassword: values.newPassword,
+      })
+    ).then((res: any) => {
+      if (res.payload.success) {
+        form.resetFields();
+        toast.success(res.payload.message);
+      } else {
+        if (res.payload?.data?.field) {
+          form.setFields([
+            {
+              name: res.payload.data.field,
+              errors: [res.payload.message],
+            },
+          ]);
+        }
+        toast.error(res.payload?.message);
+      }
+    });
   };
   return (
     <CardScroll cardHeader='Đổi mật khẩu'>
