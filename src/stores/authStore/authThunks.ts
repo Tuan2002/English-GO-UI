@@ -28,7 +28,26 @@ const firstUpdateProfile = createAsyncThunk(
   }
 );
 
+const changePassword = createAsyncThunk(
+  "auth/changePassword",
+  async (
+    payload: {
+      oldPassword: string;
+      newPassword: string;
+    },
+    { rejectWithValue }
+  ): Promise<IAppResposeBase<ICurrentUser | null>> => {
+    try {
+      const user: IAppResposeBase<ICurrentUser> = await http.put("/api/auth/change-password", payload);
+      return user;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+
 export const authThunks = {
   getCurrentUser,
   firstUpdateProfile,
+  changePassword,
 };

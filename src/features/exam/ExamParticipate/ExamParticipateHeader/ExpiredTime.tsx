@@ -6,13 +6,14 @@ const cx = classNames.bind(style);
 interface IExpiredTimeProps {
   initTime?: number;
   handleSubmit: () => void;
+  key?: string;
 }
-const ExpiredTime = ({ initTime, handleSubmit }: IExpiredTimeProps) => {
+const ExpiredTime = ({ initTime, handleSubmit, key }: IExpiredTimeProps) => {
   const [timeCountDown, setTimeCountDown] = useState(initTime);
 
   useEffect(() => {
     setTimeCountDown(initTime);
-  }, [initTime]);
+  }, [initTime, key]);
   useEffect(() => {
     const interval = setTimeout(() => {
       if (timeCountDown) {
