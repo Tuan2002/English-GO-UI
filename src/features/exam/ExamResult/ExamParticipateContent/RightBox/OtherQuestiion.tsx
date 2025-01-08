@@ -48,6 +48,7 @@ const OtherQuestion = () => {
       }
     }
   }, [currentTargetQuestion, selectedQuestion?.levelId]);
+  console.log(questionResult);
   return (
     <div className={cx("list-sub-question")}>
       {selectedQuestion?.id ? (

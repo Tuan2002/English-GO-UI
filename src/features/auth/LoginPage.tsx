@@ -7,7 +7,7 @@ const LoginPageComponent = () => {
   return (
     <div className={cx("login-wrapper")}>
       <Row className='full-height' align={"stretch"}>
-        <Col span={12}>
+        <Col span={12} xs={0} sm={0} md={12}>
           <div className={cx("login-left-box")}>
             <div className={cx("login-title")}>
               <img className={cx("logo")} src='/logo.png' />
@@ -18,7 +18,7 @@ const LoginPageComponent = () => {
             </div>
           </div>
         </Col>
-        <Col span={12}>
+        <Col span={12} xs={24} sm={24} md={12}>
           <div className={cx("login-right-box")}>
             <LoginForm />
           </div>

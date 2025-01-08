@@ -21,6 +21,7 @@ interface ModalCustomProps {
   scrollBody?: boolean;
   isLoading?: boolean;
   maskClosable?: boolean;
+  isFullScreen?: boolean;
 }
 
 const ModalCustom = ({
@@ -41,6 +42,7 @@ const ModalCustom = ({
   width = 1200,
   isLoading = false,
   maskClosable = true,
+  isFullScreen = false,
 }: ModalCustomProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () => {
@@ -60,12 +62,13 @@ const ModalCustom = ({
     <Modal
       maskClosable={maskClosable}
       centered
-      width={width}
+      width={isFullScreen ? "100vw" : width}
       open={open}
       closeIcon={showCloseButton}
       onOk={onOK}
       onCancel={onCancel}
       footer={false}
+      // height={isFullScreen ? "100vh" : "auto"}
     >
       {showHeader ? (
         customHeader ? (

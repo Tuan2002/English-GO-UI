@@ -63,7 +63,9 @@ const LoginForm = () => {
       scope: "openid profile email",
       nonce: requestId,
     });
-    const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent("/connect/authorize/callback?" + urlSearchParams.toString())}`;
+    const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent(
+      "/connect/authorize/callback?" + urlSearchParams.toString()
+    )}`;
     window.location.href = loginURL;
   };
 
@@ -108,9 +110,9 @@ const LoginForm = () => {
             Đăng nhập với SSO VinhUni
           </Button>
         </div>
-        <div className='mt-20 text-center'>
+        {/* <div className='mt-20 text-center'>
           <span>Bạn chưa có tài khoản </span> <Link to={ROUTE_PATH.REGISTER}>Đăng ký ngay</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

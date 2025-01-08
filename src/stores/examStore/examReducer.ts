@@ -11,8 +11,10 @@ import {
   IListeningSkillAudioStatus,
   IResultOfQuestion,
   ITargetQuestionOfSkill,
+  IUserExam,
 } from "../../types/exam/ExamTypes";
 import { ILevel } from "@/types/level/LevelTypes";
+import { IPaginationData } from "@/types/AppType";
 
 export interface ExamState {
   currentExam?: IExam;
@@ -29,9 +31,12 @@ export interface ExamState {
   currentTargetQuestion?: ITargetQuestionOfSkill;
   listeningAudioStatus?: IListeningSkillAudioStatus[];
   listMyExam?: IExamScore[];
+  listAllExams?: IUserExam[];
   currentExamScore?: IExamScore;
   isSubmitting: boolean;
   isLoading: boolean;
+  isOpenModalChooseUser: boolean;
+  examPageData?: IPaginationData;
 }
 
 const initialState: ExamState = {
@@ -40,6 +45,7 @@ const initialState: ExamState = {
   isLoading: false,
   targetQuestionOfSkill: [],
   openModalSubmitSkill: false,
+  isOpenModalChooseUser: false,
 };
 
 export const ExamSlice = createSlice({
@@ -48,6 +54,12 @@ export const ExamSlice = createSlice({
   reducers: {
     changeIsSubmitting: (state, action) => {
       state.isSubmitting = action.payload;
+    },
+    changeIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    changeIsOpenModalChooseUser: (state, action) => {
+      state.isOpenModalChooseUser = action.payload;
     },
     changeSelectedSkill: (state, action) => {
       state.selectedSkill = action.payload;
@@ -84,6 +96,15 @@ export const ExamSlice = createSlice({
     },
     changeListMyExam: (state, action) => {
       state.listMyExam = action.payload;
+    },
+    changeListAllExams: (state, action) => {
+      state.listAllExams = action.payload;
+    },
+    changeCurrentExamScore: (state, action) => {
+      state.currentExamScore = action.payload;
+    },
+    changeExamPageData: (state, action) => {
+      state.examPageData = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -304,6 +325,23 @@ export const ExamSlice = createSlice({
         state.listMyExam = action.payload.data as IExamScore[];
       })
       .addCase(examThunks.getMyExams.rejected, (state) => {
+        state.isLoading = false;
+      });
+    builder
+      .addCase(examThunks.getAllExams.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(examThunks.getAllExams.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.listAllExams = action.payload.data.items;
+        state.examPageData = {
+          page: action.payload.data.currentPage,
+          limit: action.payload.data.limit,
+          totalItems: action.payload.data.totalItems,
+          totalPages: action.payload.data.totalPages,
+        };
+      })
+      .addCase(examThunks.getAllExams.rejected, (state) => {
         state.isLoading = false;
       });
   },

@@ -20,9 +20,12 @@ enum ROUTE_PATH {
   ADMIN_LEVEL_DETAIL = "/admin/question-bank/:skillId/:levelId",
   ADMIN_CATEGORY_DETAIL = "/admin/question-bank/:skillId/:levelId/:categoryId",
   ADMIN_QUESTION_CREATE = "/admin/question-bank/:skillId/:levelId/:categoryId/create-question",
-  ADMIN_LIST_EXAM = "/admin/list-exam",
   ADMIN_MANAGE_ORGANIZATION = "/admin/manage-organization",
   ADMIN_MANAGE_SCHEDULE = "/admin/manage-schedule",
+  ADMIN_LIST_EXAM = "/admin/list-exam",
+  ADMIN_LIST_SPEAKING_EXAM = "/admin/list-exam/speaking",
+  ADMIN_LIST_WRITING_EXAM = "/admin/list-exam/writing",
+  ADMIN_EXAM_DETAIL = "/admin/list-exam/:examId",
 
   // recruiter routes
   EXAMINER_DASHBOARD = "/examiner/dashboard",

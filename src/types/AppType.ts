@@ -43,4 +43,27 @@ export interface IUploadImageResponse {
   format: string;
 }
 
+export interface IAppResponseWithPagination<T> {
+  status: number;
+  message?: string;
+  data: {
+    items: T[];
+    totalItems: number;
+    totalPages: number;
+    currentPage: number;
+    limit: number;
+  };
+  error?: {
+    message: string;
+    details: string;
+  };
+  success: boolean;
+}
+
+export interface IPaginationData {
+  page: number;
+  limit: number;
+  totalItems?: number;
+  totalPages?: number;
+}
 export type ActionModal = "create" | "update" | "delete" | "restore" | "active" | "inactive" | "show";

@@ -4,7 +4,7 @@ import type { TableColumnsType } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { UserActions } from "@/stores/userStore/userReducer";
 import { IUserData } from "@/types/user/UserType";
-import { RootState } from "@/stores";
+import { AppDispatch, RootState } from "@/stores";
 import style from "../ManageUser.module.scss";
 import classNames from "classnames/bind";
 import getFirstCharacterInName from "@/utils/Functions/getFirstCharacterInName";
@@ -20,7 +20,7 @@ interface DataType extends IUserData {
 }
 
 const TableUser: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const [data, setData] = React.useState<DataType[]>([]);
   const queryParams = new URLSearchParams(location.search);
@@ -28,11 +28,11 @@ const TableUser: React.FC = () => {
   const limit = parseInt(queryParams.get("limit") || "10", 10);
   const { listUser } = useSelector((state: RootState) => state.userStore);
   useEffect(() => {
-    dispatch<any>(UserActions.getAllUsers({ page: Number(page), limit: Number(limit) }));
-  }, [page]);
+    dispatch(UserActions.getAllUsers({ page: Number(page), limit: Number(limit) }));
+  }, [dispatch, limit, page]);
 
   const onConfirmDelete = (id: string) => {
-    dispatch<any>(UserActions.deleteUser(id));
+    dispatch(UserActions.deleteUser(id));
   };
 
   const handleUpdateUser = (user: IUserData) => {

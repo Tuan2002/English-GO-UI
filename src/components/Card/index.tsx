@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import ButtonBackPage from "../Button/ButtonBackPage";
 import style from "./Card.module.scss";
 import classNames from "classnames/bind";
@@ -11,6 +12,7 @@ interface ICardProps {
   showFooter?: boolean;
   fullHeight?: boolean;
   showBackButton?: boolean;
+  loading?: boolean;
 }
 const CardCustom = ({
   children,
@@ -19,6 +21,7 @@ const CardCustom = ({
   cardHeader = null,
   fullHeight = false,
   showBackButton = false,
+  loading = false,
 }: ICardProps) => {
   return (
     <div className={cx("card-wrapper")}>
@@ -27,7 +30,6 @@ const CardCustom = ({
         <div className={cx("card-header")}>
           {showBackButton && <ButtonBackPage />}
           <div className={cx("card-title")}>{cardHeader ? cardHeader : title}</div>
-          
         </div>
       )}
       <div
@@ -36,6 +38,11 @@ const CardCustom = ({
           // scrollbar: fullHeight,
         })}
       >
+        {loading && (
+          <div className={cx("spin-box")}>
+            <Spin />
+          </div>
+        )}
         {children}
       </div>
     </div>

@@ -10,9 +10,7 @@ import { ExamActions } from "@/stores/examStore/examReducer";
 const cx = classNames.bind(style);
 
 const ExamScoreContent = () => {
-  const { selectedLevel, selectedQuestion, resultOfQuestion, questionResult } = useSelector(
-    (state: RootState) => state.examStore
-  );
+  const { selectedLevel, selectedQuestion, resultOfQuestion } = useSelector((state: RootState) => state.examStore);
   const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
     if (!selectedLevel || !selectedQuestion) {
@@ -20,7 +18,7 @@ const ExamScoreContent = () => {
     }
     const question = resultOfQuestion?.find((question) => question.levelId === selectedLevel);
     dispatch(ExamActions.changeQuestionResult(question));
-  }, [selectedLevel, resultOfQuestion?.length]);
+  }, [selectedLevel, resultOfQuestion?.length, selectedQuestion, resultOfQuestion, dispatch]);
   return (
     <div className={cx("content-wrapper", "scrollbar")}>
       <Row className='full-height'>

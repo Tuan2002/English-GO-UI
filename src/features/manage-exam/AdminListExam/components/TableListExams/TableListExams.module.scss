@@ -1,0 +1,11 @@
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .info {
+    .name {
+      font-weight: 500;
+    }
+  }
+}

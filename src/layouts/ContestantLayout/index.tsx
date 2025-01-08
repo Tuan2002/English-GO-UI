@@ -13,7 +13,6 @@ const ContestantLayout = () => {
         <div className={cx("body")}>
           <Outlet />
         </div>
-        <div className='footer'></div>
       </div>
     </div>
   );

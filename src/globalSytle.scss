@@ -48,6 +48,9 @@
 .font-weight-500 {
   font-weight: 500;
 }
+.font-weight-600 {
+  font-weight: 600;
+}
 
 .cursor-pointer {
   cursor: pointer;
@@ -109,6 +112,9 @@
 }
 .text-start {
   text-align: start;
+}
+.text-justify {
+  text-align: justify;
 }
 
 .d-flex {
@@ -199,3 +205,21 @@
     }
   }
 }
+.ant-tabs-content.ant-tabs-content-top {
+  height: 100%;
+  // overflow: auto;
+}
+.ant-tabs-tabpane {
+  height: 100%;
+}
+// .ant-tabs-content::-webkit-scrollbar {
+//   width: 3px;
+//   height: 3px;
+// }
+// .ant-tabs-content::-webkit-scrollbar-thumb {
+//   background-color: #f178f1dd;
+//   border-radius: 6px;
+// }
+// .ant-tabs-content::-webkit-scrollbar-track {
+//   background-color: #f5f5f5;
+// }

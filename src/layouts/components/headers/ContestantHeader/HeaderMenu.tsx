@@ -19,9 +19,9 @@ const HeaderMenu = () => {
       link: ROUTE_PATH.EXAM,
     },
     {
-      title: "Lịch thi",
+      title: "Liên hệ",
       children: null,
-      link: ROUTE_PATH.HOME,
+      link: ROUTE_PATH.CONTACT,
     },
     {
       title: "Dịch vụ",
