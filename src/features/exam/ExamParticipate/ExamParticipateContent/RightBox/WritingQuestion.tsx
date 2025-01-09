@@ -23,6 +23,7 @@ const WritingQuestion = () => {
     <div className={cx("writing-answer-box")}>
       <div className={cx("writing-input-box")}>
         <TextEditor
+          height={300}
           placeholder='Enter your answer of your question here!'
           showToolbar={false}
           value={selectedQuestion?.questionData ?? ""}

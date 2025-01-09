@@ -51,7 +51,7 @@ const ContestantInfomation = () => {
         <span className={cx("number")}>3</span>
         <span className={cx("title")}>Thông tin thí sinh</span>
       </div>
-      <div className={cx("carousel-content")}>
+      <div className={cx("carousel-content", "scrollbar")}>
         <div className={cx("contestant-info-box", "content-box")}>
           <div className=''>
             <div className={cx("camera")}>

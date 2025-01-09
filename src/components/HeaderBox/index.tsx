@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { ReactNode } from "react";
-import style from "../HomePage.module.scss";
+import style from "./HeaderBox.module.scss";
 const cx = classNames.bind(style);
 
 interface HeaderBoxProps {

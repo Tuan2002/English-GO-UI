@@ -2,7 +2,7 @@ import { Col, Row } from "antd";
 import style from "../HomePage.module.scss";
 import classNames from "classnames/bind";
 import { BiBadgeCheck } from "react-icons/bi";
-import HeaderBox from "./HeaderBox";
+import HeaderBox from "@/components/HeaderBox";
 const cx = classNames.bind(style);
 const Achievement = () => {
   return (

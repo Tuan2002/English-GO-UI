@@ -1,32 +1,3 @@
-.header-box {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 30px;
-  margin-top: 30px;
-  .header-title {
-    text-align: center;
-    font-size: 24px;
-    color: #1a73e8;
-    font-weight: 500;
-  }
-
-  .uppercase {
-    text-transform: uppercase;
-  }
-
-  .trang-tri {
-    width: 250px;
-  }
-
-  .description {
-    font-size: 16px;
-  }
-}
-
 .service-wrapper {
   padding-top: 50px;
   padding-bottom: 50px;

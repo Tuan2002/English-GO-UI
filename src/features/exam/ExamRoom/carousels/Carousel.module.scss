@@ -37,6 +37,7 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    height: calc(100% - 55px);
     .content-box {
       max-width: 450px;
       text-align: justify;

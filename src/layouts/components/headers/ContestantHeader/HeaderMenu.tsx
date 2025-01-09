@@ -4,7 +4,7 @@ import classNames from "classnames/bind";
 import MenuWrapper from "@/components/MenuWrapper";
 import { BiHeart, BiLogoCodepen, BiSearchAlt2, BiWindowAlt } from "react-icons/bi";
 import ROUTE_PATH from "@/routes/routePath";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 const cx = classNames.bind(style);
 const HeaderMenu = () => {
   const listMenu = [
@@ -53,10 +53,10 @@ const HeaderMenu = () => {
                 <div className={cx("menu-children-wrapper")}>
                   {item.children.map((child, index) => {
                     return (
-                      <Link to={child.link || ""} className={cx("menu-children")} key={index}>
+                      <NavLink to={child.link || ""} className={cx("menu-children")} key={index}>
                         <div className={cx("menu-children-icon")}>{child.icon}</div>
                         <div className={cx("menu-children-title")}>{child.title}</div>
-                      </Link>
+                      </NavLink>
                     );
                   })}
                 </div>
@@ -67,9 +67,9 @@ const HeaderMenu = () => {
             <div className={cx("menu-item")}>{item.title}</div>
           </Popover>
         ) : (
-          <Link to={item.link} className={cx("menu-item")} key={index}>
+          <NavLink to={item.link} className={cx("menu-item", "active-link")} key={index}>
             {item.title}
-          </Link>
+          </NavLink>
         );
       })}
     </div>

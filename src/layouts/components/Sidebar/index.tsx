@@ -2,9 +2,9 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import style from "./Sidebar.module.scss";
 import classNames from "classnames/bind";
-import adminMenu from "./adminMenu";
-import examinerMenu from "./examinerMenu";
 import Version from "@/components/Version";
+import adminMenu from "../Menu/AdminMenu";
+import examinerMenu from "../Menu/ExaminerMenu";
 const cx = classNames.bind(style);
 
 type MenuItem = Required<MenuProps>["items"][number];

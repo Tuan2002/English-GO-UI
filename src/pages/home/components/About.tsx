@@ -25,11 +25,7 @@ const Achievement = () => {
           </ul>
         </div>
         <div className={cx("image-des")}>
-          <img
-            src='/laptop.png'
-            alt='Screenshot of the software on a mobile phone and a laptop'
-            className={cx("screenshot")}
-          />
+          <img src='/laptop.png' alt='Screenshot of the software on a mobile phone and a laptop' className={cx("screenshot")} />
         </div>
       </div>
     </div>

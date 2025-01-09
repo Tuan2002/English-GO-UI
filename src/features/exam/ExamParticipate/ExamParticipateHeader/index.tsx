@@ -51,7 +51,7 @@ const ExamParticipateHeader = () => {
   return (
     <div className={cx("exam-header-wrapper")}>
       <Row className='full-height full-width'>
-        <Col className='full-height' lg={12}>
+        <Col className='full-height' xs={0} lg={12}>
           <div className={cx("skill-info")}>
             {selectedSkillInfo?.id ? (
               <div className={cx("item")}>
