@@ -1,0 +1,117 @@
+.wrapper {
+  padding: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.wrapper + .wrapper {
+  margin-top: 10px;
+}
+.level-info {
+  margin-bottom: 10px;
+
+  .level-name {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .level-desc {
+    margin-left: 10px;
+  }
+}
+
+.question-info {
+  .question-description {
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+  .question-content {
+    // padding: 10px;
+    // box-shadow: 0 0 5px 5px rgb(30 27 27 / 20%);
+    border-radius: 4px;
+    user-select: none;
+
+    span,
+    p {
+      font-size: 15px !important;
+      font-family: inherit !important;
+      line-height: 1.5 !important;
+      text-align: justify !important;
+    }
+  }
+  .question-note {
+    font-size: 15px;
+    font-style: italic;
+    margin-top: 10px;
+  }
+}
+
+.sub-question-box {
+  .sub-question-item {
+    padding: 10px;
+    border-bottom: 1px solid #f1f1f1;
+    .sub-question-content {
+      display: flex;
+      margin-bottom: 10px;
+      font-weight: 500;
+      .question-order {
+        display: block;
+        width: 40px;
+        font-weight: 500;
+      }
+    }
+    .sub-question-answers {
+      padding-left: 10px;
+      .answer-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+.correct {
+  color: rgb(53, 233, 68);
+  .ant-radio-wrapper.ant-radio-wrapper-disabled {
+    color: rgb(53, 233, 68);
+  }
+}
+.incorrect {
+  color: red;
+  .ant-radio-wrapper.ant-radio-wrapper-disabled {
+    color: red;
+  }
+}
+.writing-answer-box {
+  .writing-input-box {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+.speaking-answer-box {
+  .speaking-input-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    padding: 10px;
+  }
+  .audio-player {
+    width: 100%;
+    max-width: 500px;
+  }
+  .result-error {
+    color: red;
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 10px;
+    font-style: italic;
+    font-family: "Times New Roman", Times, serif;
+  }
+}
+.answer-title {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 17px;
+}

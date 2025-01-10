@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { IAppResposeBase } from "@/types/AppType";
+import { IAppResponseWithPagination, IAppResposeBase } from "@/types/AppType";
 import {
   IContinueExamResponse,
   ICurrentExamResponse,
   IExam,
   IExamScore,
+  IGetAllExamDTO,
   IQuestionResultResponse,
   ISpeakingQuestionSubmit,
   ISubmitSkillRequest,
+  IUserExam,
 } from "@/types/exam/ExamTypes";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -118,6 +120,25 @@ const getMyExams = createAsyncThunk(
   }
 );
 
+const getAllExams = createAsyncThunk(
+  "exams/getAllExams",
+  async (data: IGetAllExamDTO, { rejectWithValue }): Promise<IAppResponseWithPagination<IUserExam>> => {
+    try {
+      const exam: IAppResponseWithPagination<IUserExam> = await http.post(
+        `/api/exams/get-all-exams?page=${data.page ?? 1}&${data.limit && "limit=" + data.limit}&${
+          data.search && data.search?.trim() !== "" && "search=" + data.search
+        }`,
+        {
+          userIds: data.userIds ?? [],
+        }
+      );
+      return exam;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+
 export const examThunks = {
   participateExam,
   getCurrentExam,
@@ -128,4 +149,5 @@ export const examThunks = {
   getExamScore,
   getResultOfExam,
   getMyExams,
+  getAllExams,
 };

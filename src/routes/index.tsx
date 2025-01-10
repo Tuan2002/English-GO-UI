@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectRoute from "./ProtectRoute";
 import ROUTE_PATH from "./routePath";
 import LoginPage from "@/pages/auth/LoginPage";
-import RegisterPage from "@/pages/auth/RegisterPage";
 import HomePage from "@/pages/home/HomePage";
 import AuthRoute from "./AuthRoute";
 import AdminProtectRoute from "./AdminProtectRoute";
@@ -16,7 +15,6 @@ import ExaminerLayout from "@/layouts/ExaminerLayout";
 import ExaminerDashboard from "@/pages/examiner/dashboard/Dashboard";
 import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/ExaminerQuestionBankPage";
 import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
-import AdminListExamPage from "@/pages/admin/admin-list-exam/AdminListExamPage";
 import AdminQuestionBankPage from "@/pages/admin/admin-question-bank/AdminQuestionBankPage";
 import AdminSkillDetailPage from "@/pages/admin/admin-question-bank/AdminSkillDetailPage";
 import AdminLevelDetailPage from "@/pages/admin/admin-question-bank/AdminLevelDetailPage";
@@ -38,6 +36,12 @@ import MyProfilePage from "@/pages/account/MyProfilePage";
 import ChangePasswordPage from "@/pages/account/ChangePasswordPage";
 import UpgradeAcountPage from "@/pages/account/UpgradeAccountPage";
 import NotFoundPage from "@/pages/error/NotFoundPage";
+import AdminListSpeakingPage from "@/pages/admin/manage-exam/AdminListSpeakingPage";
+import AdminListWritingPage from "@/pages/admin/manage-exam/AdminListWritingPage";
+import AdminListExamPage from "@/pages/admin/manage-exam/AdminListExamPage";
+import AdminExamDetailPage from "@/pages/admin/manage-exam/AdminExamDetailPage";
+import ContactPage from "@/pages/contact/ContactPage";
+import AdminFeedbackPage from "@/pages/admin/admin-feedback/AdminFeedbackPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -54,9 +58,14 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_LEVEL_DETAIL} element={<AdminLevelDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_CATEGORY_DETAIL} element={<AdminCategoryDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_QUESTION_CREATE} element={<AdminCreateQuestionPage />} />
-              <Route path={ROUTE_PATH.ADMIN_LIST_EXAM} element={<AdminListExamPage />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_ORGANIZATION} element={<AdminManageOrganizationPage />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SCHEDULE} element={<AdminManageSchedulePage />} />
+              <Route path={ROUTE_PATH.ADMIN_LIST_EXAM} element={<AdminListExamPage />} />
+              <Route path={ROUTE_PATH.ADMIN_LIST_SPEAKING_EXAM} element={<AdminListSpeakingPage />} />
+              <Route path={ROUTE_PATH.ADMIN_LIST_WRITING_EXAM} element={<AdminListWritingPage />} />
+              <Route path={ROUTE_PATH.ADMIN_EXAM_DETAIL} element={<AdminExamDetailPage />} />
+              <Route path={ROUTE_PATH.ADMIN_FEEDBACK} element={<AdminFeedbackPage />} />
+              <Route path={ROUTE_PATH.ADMIN_FEEDBACK_DETAIL} element={<AdminFeedbackPage />} />
             </Route>
           </Route>
 
@@ -87,12 +96,13 @@ const AppRoute = () => {
         </Route>
         <Route element={<AuthRoute />}>
           <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
-          <Route path={ROUTE_PATH.REGISTER} element={<RegisterPage />} />
+          {/* <Route path={ROUTE_PATH.REGISTER} element={<RegisterPage />} /> */}
         </Route>
         <Route element={<ContestantLayout />}>
           <Route path={ROUTE_PATH.HOME} element={<HomePage />} />
           <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
           <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
+          <Route path={ROUTE_PATH.CONTACT} element={<ContactPage />} />
         </Route>
         <Route path={ROUTE_PATH.LOGIN_SSO} element={<LoginSSO />} />
         <Route path='*' element={<NotFoundPage />} />

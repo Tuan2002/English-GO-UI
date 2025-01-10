@@ -11,22 +11,15 @@ const SpeakingQuestion = () => {
   const audioSrc = questionResult?.results[0]?.answer?.trim();
 
   return (
-    <div className={cx("speaking-wrapper")}>
-      <div className='speaking-result'>
-        {audioSrc ? (
-          <audio
-            key={audioSrc} // This forces the audio element to reload when the source changes
-            controls
-            className='full-width mt-10 mb-10'
-          >
-            <source src={audioSrc} type='audio/mpeg' />
-            Your browser does not support the audio element.
-          </audio>
-        ) : (
-          <div className='text-center'>
-            <span className='text-center'>Bạn chưa thực hiện bài nghe này</span>
-          </div>
-        )}
+    <div className={cx("speaking-answer-box")}>
+      <div className={cx("answer-title")}>
+        <span>Kết quả bài nói:</span>
+        {!audioSrc && <span className={cx("result-error")}>Bài nói chưa được thực hiện hoặc quá trình lưu bị lỗi</span>}
+      </div>
+      <div className={cx("speaking-input-box")}>
+        <audio key={audioSrc} controls className={cx("audio-player")}>
+          {audioSrc && <source src={audioSrc} type='audio/mpeg' />}
+        </audio>
       </div>
     </div>
   );

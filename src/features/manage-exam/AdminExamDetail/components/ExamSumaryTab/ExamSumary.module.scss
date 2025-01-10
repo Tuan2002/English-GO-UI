@@ -1,0 +1,43 @@
+.exam-score-box {
+  max-width: 800px;
+  width: 100%;
+
+  .info-box {
+    min-height: 200px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    .header {
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .body {
+      padding: 10px;
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 50px;
+        gap: 10px;
+        .value {
+          font-weight: 500;
+        }
+        .value-box {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+        }
+      }
+      .info-item + .info-item {
+        border-top: 1px solid #f1f1f1;
+      }
+    }
+  }
+}

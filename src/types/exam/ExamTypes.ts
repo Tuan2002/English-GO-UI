@@ -114,3 +114,20 @@ export interface ICurrentExamResponse {
   exam: IExam;
   currentSkill: IExamSkillStatus;
 }
+
+export interface IUserExam extends IExamScore {
+  user: {
+    id: string;
+    fullName: string;
+    email: string;
+    avatar: string;
+    username: string;
+  };
+}
+
+export interface IGetAllExamDTO {
+  page?: number;
+  limit?: number;
+  search?: string;
+  userIds?: string[];
+}

@@ -7,7 +7,6 @@ import { ILoginRequestData } from "@/types/auth/LoginType";
 import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
 import classNames from "classnames/bind";
 import React from "react";
-import { IoLogoGoogleplus } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -63,7 +62,9 @@ const LoginForm = () => {
       scope: "openid profile email",
       nonce: requestId,
     });
-    const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent("/connect/authorize/callback?" + urlSearchParams.toString())}`;
+    const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent(
+      "/connect/authorize/callback?" + urlSearchParams.toString()
+    )}`;
     window.location.href = loginURL;
   };
 
@@ -104,13 +105,16 @@ const LoginForm = () => {
       <div className='mt-10'>
         <p className='text-center'>Hoặc</p>
         <div className={cx("social-login", "text-center", "mt-10")}>
-          <Button onClick={handleLoginSSO} type='primary' danger size='large' icon={<IoLogoGoogleplus className={cx("icon")} />}>
-            Đăng nhập với SSO VinhUni
+          <Button onClick={handleLoginSSO} type='primary' danger size='large'>
+            <div className={cx("login-with-csv")}>
+              <img src='/logo-dhv.webp' className={cx("icon")} />
+              <span>Đăng nhập với Cổng Sinh Viên</span>
+            </div>
           </Button>
         </div>
-        <div className='mt-20 text-center'>
+        {/* <div className='mt-20 text-center'>
           <span>Bạn chưa có tài khoản </span> <Link to={ROUTE_PATH.REGISTER}>Đăng ký ngay</Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

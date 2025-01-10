@@ -8,7 +8,7 @@ const ExamInfomation = () => {
         <span className={cx("number")}>2</span>
         <span className={cx("title")}>Thông tin bài thi</span>
       </div>
-      <div className={cx("carousel-content")}>
+      <div className={cx("carousel-content", "scrollbar")}>
         <div className={cx("test-device-box", "content-box")}>
           <div className={cx("test-device-item", "content-item")}>
             <h5 className={cx("title")}>

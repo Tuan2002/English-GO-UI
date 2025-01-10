@@ -10,6 +10,7 @@ import { QuestionSlice } from "./questionStore/questionReducer";
 import { ExamSlice } from "./examStore/examReducer";
 import { OrganizationSlice } from "./organizationStore/organizationReducer";
 import { ScheduleSlice } from "./schedule/scheduleReducer";
+import { FeedbackSlice } from "./feedbackStore/feedbackReducer";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     examStore: ExamSlice.reducer,
     organizationStore: OrganizationSlice.reducer,
     scheduleStore: ScheduleSlice.reducer,
+    feedbackStore: FeedbackSlice.reducer,
   },
   // Added this mdware to fix error "A none-serializable value was detected..."
   middleware: (getDefaultMiddleware) =>

@@ -10,7 +10,10 @@ import { ExamActions } from "@/stores/examStore/examReducer";
 
 const cx = classNames.bind(style);
 
-const LeftBox = () => {
+interface LeftBoxProps {
+  isScroll?: boolean;
+}
+const LeftBox = ({ isScroll = true }: LeftBoxProps) => {
   const { selectedQuestion, listeningAudioStatus } = useSelector((state: RootState) => state.examStore);
   const dispatch: AppDispatch = useDispatch();
 
@@ -43,7 +46,7 @@ const LeftBox = () => {
   };
 
   return (
-    <div className={cx("left-box-wrapper", "scrollbar")}>
+    <div className={cx("left-box-wrapper", { scrollbar: isScroll })}>
       {selectedQuestion?.id ? (
         <div className={cx("level-info")}>
           <span className={cx("level-name")}>{selectedQuestion?.level?.displayName}: </span>

@@ -42,7 +42,7 @@ const TestDevice = () => {
         <span className={cx("number")}>1</span>
         <span className={cx("title")}>Kiểm tra thiết bị</span>
       </div>
-      <div className={cx("carousel-content")}>
+      <div className={cx("carousel-content", "scrollbar")}>
         <div className={cx("test-device-box", "content-box")}>
           <div className={cx("test-device-item", "content-item", "mb-10")}>
             <h5 className={cx("title")}>

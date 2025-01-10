@@ -14,6 +14,7 @@ export interface IUserData {
     name: string;
     displayName: string;
   };
+  lastLogin?: string;
   avatar?: string;
   isActive: boolean;
   isUpdated: boolean;

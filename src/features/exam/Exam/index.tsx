@@ -43,13 +43,13 @@ const Exam = () => {
             </h5>
           </div>
           <div className={cx("actions")}>
-            <Button loading={isSubmitting} onClick={gotoExamRoom} size='large' type='primary' className={cx("btn-start")}>
+            <Button loading={isSubmitting} onClick={gotoExamRoom} type='primary' className={cx("btn-start")}>
               Vào thi ngay
               <span className={cx("icon")}>
                 <BiHeadphone />
               </span>
             </Button>
-            <Button onClick={goToExamHistory} size='large' type='primary' className={cx("btn-schedule")}>
+            <Button onClick={goToExamHistory} type='primary' className={cx("btn-schedule")}>
               Lịch sử luyện thi
             </Button>
           </div>
