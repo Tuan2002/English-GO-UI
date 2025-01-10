@@ -45,5 +45,10 @@ const adminMenu: MenuItem[] = [
       { key: "6.3", label: <Link to={ROUTE_PATH.ADMIN_LIST_WRITING_EXAM}>Chấm bài thi viết</Link> },
     ],
   },
+  {
+    key: "7",
+    icon: <MailOutlined />,
+    label: <Link to={ROUTE_PATH.ADMIN_FEEDBACK}>Phản hồi từ người dùng</Link>,
+  },
 ];
 export default adminMenu;

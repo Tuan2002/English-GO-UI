@@ -1,0 +1,31 @@
+.modal-show-feedback {
+  .modal-show-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    .modal-show-item_title {
+      font-weight: 500;
+      margin-right: 10px;
+      width: 100px;
+      display: inline-block;
+    }
+    .modal-show-item_content {
+      flex: 1;
+    }
+  }
+  .modal-show-item-feedback {
+    .modal-show-item_title {
+      font-weight: 500;
+      margin-right: 10px;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .modal-show-item_content {
+      text-align: justify;
+      display: block;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 16px;
+      font-style: italic;
+    }
+  }
+}

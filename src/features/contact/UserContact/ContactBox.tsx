@@ -2,6 +2,11 @@ import HeaderBox from "@/components/HeaderBox";
 import { Button, Col, Form, Input, Row } from "antd";
 import style from "./UserContact.module.scss";
 import classNames from "classnames/bind";
+import { AppDispatch, RootState } from "@/stores";
+import { useDispatch, useSelector } from "react-redux";
+import { FeedbackActions } from "@/stores/feedbackStore/feedbackReducer";
+import { ISendFeedbackData } from "@/types/feedback/FeedbackTypes";
+import { IAppResposeBase } from "@/types/AppType";
 const cx = classNames.bind(style);
 
 type FieldType = {
@@ -13,8 +18,17 @@ type FieldType = {
 
 const ContactBox = () => {
   const [form] = Form.useForm();
+  const dispatch: AppDispatch = useDispatch();
+  const { isSubmiting } = useSelector((state: RootState) => state.feedbackStore);
   const onFinish = (values: FieldType) => {
-    console.log(values);
+    dispatch(FeedbackActions.sendFeedback(values as ISendFeedbackData)).then((res) => {
+      const payload = res.payload as IAppResposeBase<null>;
+      if (payload.success) {
+        form.resetFields();
+      } else {
+        console.log("Error", payload.message);
+      }
+    });
   };
   return (
     <div className={cx("contact-box")}>
@@ -140,7 +154,7 @@ const ContactBox = () => {
                     <Input.TextArea size='large' placeholder='Nhập nội dung bạn muốn phản hồi...' />
                   </Form.Item>
                   <Form.Item>
-                    <Button size='large' className='full-width' type='primary' htmlType='submit'>
+                    <Button loading={isSubmiting} size='large' className='full-width' type='primary' htmlType='submit'>
                       Gửi phản hồi
                     </Button>
                   </Form.Item>

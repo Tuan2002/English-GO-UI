@@ -41,6 +41,7 @@ import AdminListWritingPage from "@/pages/admin/manage-exam/AdminListWritingPage
 import AdminListExamPage from "@/pages/admin/manage-exam/AdminListExamPage";
 import AdminExamDetailPage from "@/pages/admin/manage-exam/AdminExamDetailPage";
 import ContactPage from "@/pages/contact/ContactPage";
+import AdminFeedbackPage from "@/pages/admin/admin-feedback/AdminFeedbackPage";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -63,6 +64,8 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_LIST_SPEAKING_EXAM} element={<AdminListSpeakingPage />} />
               <Route path={ROUTE_PATH.ADMIN_LIST_WRITING_EXAM} element={<AdminListWritingPage />} />
               <Route path={ROUTE_PATH.ADMIN_EXAM_DETAIL} element={<AdminExamDetailPage />} />
+              <Route path={ROUTE_PATH.ADMIN_FEEDBACK} element={<AdminFeedbackPage />} />
+              <Route path={ROUTE_PATH.ADMIN_FEEDBACK_DETAIL} element={<AdminFeedbackPage />} />
             </Route>
           </Route>
 

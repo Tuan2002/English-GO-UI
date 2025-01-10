@@ -26,6 +26,8 @@ enum ROUTE_PATH {
   ADMIN_LIST_SPEAKING_EXAM = "/admin/list-exam/speaking",
   ADMIN_LIST_WRITING_EXAM = "/admin/list-exam/writing",
   ADMIN_EXAM_DETAIL = "/admin/list-exam/:examId",
+  ADMIN_FEEDBACK = "/admin/feedback",
+  ADMIN_FEEDBACK_DETAIL = "/admin/feedback/:feedbackId",
 
   // recruiter routes
   EXAMINER_DASHBOARD = "/examiner/dashboard",
