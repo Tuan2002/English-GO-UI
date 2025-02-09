@@ -11,23 +11,7 @@ import ButtonShow from "@/components/Button/ButtonShow";
 import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
 import { useNavigate } from "react-router-dom";
 import ROUTE_PATH from "@/routes/routePath";
-import { toast } from "react-toastify";
 const cx = classNames.bind(style);
-
-// interface IScoreOfSkill {
-//   score: number;
-//   totalQuestion: number;
-// }
-// interface IScoreOfExam {
-//   listening: IScoreOfSkill;
-//   reading: IScoreOfSkill;
-//   writing: IScoreOfSkill;
-//   speaking: IScoreOfSkill;
-// }
-
-const handleRegisterMark = () => {
-  toast.warning("Chức năng đang được phát triển");
-};
 
 const ExamHistoryList = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -37,7 +21,9 @@ const ExamHistoryList = () => {
   const handleShowExamResult = (id: string) => {
     navigate(ROUTE_PATH.EXAM_RESULT.replace(":examId", id));
   };
-
+  const handleRegisterMark = (examId: string, skill: string) => {
+    navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER.replace(":examId", examId)}?skill=${skill}`);
+  };
   useEffect(() => {
     dispatch(ExamActions.getMyExams());
   }, [dispatch]);
@@ -65,7 +51,7 @@ const ExamHistoryList = () => {
       width: 70,
       align: "center",
       render: (_, record) => {
-        const skill = record.examSkillStatuses.find((item) => item.skillId === "listening");
+        const skill = record.examSkillStatuses?.find((item) => item.skillId === "listening");
         const score = (10 / (skill?.totalQuestion ?? 1)) * (skill?.score ?? 0);
         return (
           <div className=''>
@@ -84,7 +70,7 @@ const ExamHistoryList = () => {
       align: "center",
       width: 70,
       render: (_, record) => {
-        const skill = record.examSkillStatuses.find((item) => item.skillId === "reading");
+        const skill = record.examSkillStatuses?.find((item) => item.skillId === "reading");
         const score = (10 / (skill?.totalQuestion ?? 1)) * (skill?.score ?? 0);
         return (
           <div className=''>
@@ -106,7 +92,7 @@ const ExamHistoryList = () => {
         return (
           <div>
             <div>Chưa chấm điểm</div>
-            <Button onClick={handleRegisterMark} type='primary' size='small'>
+            <Button onClick={() => handleRegisterMark(record.id, "writing")} type='primary' size='small'>
               Đăng ký chấm
             </Button>
           </div>
@@ -123,7 +109,7 @@ const ExamHistoryList = () => {
         return (
           <div>
             <div>Chưa chấm điểm</div>
-            <Button onClick={handleRegisterMark} type='primary' size='small'>
+            <Button onClick={() => handleRegisterMark(record.id, "speaking")} type='primary' size='small'>
               Đăng ký chấm
             </Button>
           </div>

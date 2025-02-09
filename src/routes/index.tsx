@@ -5,7 +5,6 @@ import LoginPage from "@/pages/auth/LoginPage";
 import HomePage from "@/pages/home/HomePage";
 import AuthRoute from "./AuthRoute";
 import AdminProtectRoute from "./AdminProtectRoute";
-import MainLayout from "@/layouts/MainLayout";
 import AdminDashboard from "@/pages/admin/AdminDashboard";
 import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
 import ManageRolePage from "@/pages/admin/manage-user/ManageRolePage";
@@ -42,13 +41,20 @@ import AdminListExamPage from "@/pages/admin/manage-exam/AdminListExamPage";
 import AdminExamDetailPage from "@/pages/admin/manage-exam/AdminExamDetailPage";
 import ContactPage from "@/pages/contact/ContactPage";
 import AdminFeedbackPage from "@/pages/admin/admin-feedback/AdminFeedbackPage";
+import ExamGradingRegisterPage from "@/pages/exam-history/ExamGradingRegisterPage";
+import ExaminerIntroductionPage from "@/pages/examiner/examiner-introduction/ExaminerIntroductionPage";
+import UpdateExaminerIntroductionPage from "@/pages/examiner/examiner-introduction/UpdateExaminerIntroductionPage";
+import AdminLayout from "@/layouts/AdminLayout";
+import ManageService from "@/features/manage-service/ManageService";
+import ManageServiceType from "@/features/manage-service/ManageServiceType";
+import ManageServiceAttribute from "@/features/manage-service/ManageServiceAttribute";
 const AppRoute = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<ProtectRoute />}>
-          <Route element={<MainLayout />}>
-            <Route element={<AdminProtectRoute />}>
+          <Route element={<AdminProtectRoute />}>
+            <Route element={<AdminLayout />}>
               {/* add other route of admin here */}
               <Route path={ROUTE_PATH.ADMIN_DASHBOARD} element={<AdminDashboard />} />
               <Route path={ROUTE_PATH.ADMIN_USERS} element={<ManageUserPage />} />
@@ -66,13 +72,19 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_EXAM_DETAIL} element={<AdminExamDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_FEEDBACK} element={<AdminFeedbackPage />} />
               <Route path={ROUTE_PATH.ADMIN_FEEDBACK_DETAIL} element={<AdminFeedbackPage />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE} element={<ManageService />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_TYPE} element={<ManageServiceType />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_ATTRIBUTE} element={<ManageServiceAttribute />} />
             </Route>
           </Route>
 
-          <Route element={<ExaminerLayout />}>
-            <Route element={<ExaminerProtectRoute />}>
+          <Route element={<ExaminerProtectRoute />}>
+            <Route element={<ExaminerLayout />}>
+              {/* Add other route of examiner here */}
               <Route path={ROUTE_PATH.EXAMINER_DASHBOARD} element={<ExaminerDashboard />} />
+              <Route path={ROUTE_PATH.EXAMINER_INTRODUCTION} element={<ExaminerIntroductionPage />} />
               <Route path={ROUTE_PATH.EXAMINER_QUESTION_BANK} element={<ExaminerQuestionBankPage />} />
+              <Route path={ROUTE_PATH.EXAMINER_UPDATE_INTRODUCTION} element={<UpdateExaminerIntroductionPage />} />
               <Route path={ROUTE_PATH.EXAMINER_LIST_EXAM} element={<ExaminerListExamPage />} />
             </Route>
           </Route>
@@ -86,6 +98,7 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.EXAM_HISTORY_LIST} element={<ExamHistoryListPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_SPEAKING} element={<ExamHistorySpeakingPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_WRITING} element={<ExamHistoryWritingPage />} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER} element={<ExamGradingRegisterPage />} />
             </Route>
             <Route element={<ProfileLayout pageName='profile' />}>
               <Route path={ROUTE_PATH.ACCOUNT_PROFILE} element={<MyProfilePage />} />

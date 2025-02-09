@@ -5,12 +5,13 @@ import PermissionTab from "./PermissionTab";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { RoleActions } from "@/stores/roleStore/roleReducer";
+import { AppDispatch } from "@/stores";
 
 const ManageRole = () => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   useEffect(() => {
-    dispatch<any>(RoleActions.getAllGroupRoles());
-  }, []);
+    dispatch(RoleActions.getAllGroupRoles());
+  }, [dispatch]);
   return (
     <CardCustom title='Phân quyền người dùng' fullHeight>
       <div>

@@ -1,0 +1,96 @@
+.service-tab {
+  .select-service {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .service-infomation {
+    .service-infomation-list {
+      margin-left: 20px;
+      .service-infomation-item {
+        list-style-type: circle;
+        margin-bottom: 8px;
+        text-align: justify;
+        .title {
+          font-weight: 500;
+          margin-right: 10px;
+          min-width: 130px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
+.examiner-tab {
+  .list-examiner {
+    margin-top: 20px;
+  }
+}
+
+.examiner-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .examiner-item-box {
+    max-width: 250px;
+    width: 100%;
+    min-height: 150px;
+    padding: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+      background-color: #ededed4d;
+    }
+    &:active {
+      background-color: transparent;
+    }
+
+    .examiner-choose {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+    }
+    .examiner-avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 6px;
+      gap: 6px;
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+      }
+      span {
+        font-weight: 500;
+      }
+    }
+    .examiner-description {
+      padding-top: 6px;
+      text-align: justify;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 13px;
+      font-style: italic;
+      display: block;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      height: 85px;
+    }
+  }
+}
+
+.examiner-detail {
+  max-width: 400px;
+  width: 90vw;
+  min-height: 200px;
+}

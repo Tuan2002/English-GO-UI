@@ -1,4 +1,3 @@
-import { Col, Row } from "antd";
 import style from "./WritingAndSpeaking.module.scss";
 import classNames from "classnames/bind";
 import { useSelector } from "react-redux";

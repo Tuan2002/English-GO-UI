@@ -11,7 +11,7 @@ const ActionBox = () => {
   return (
     <div>
       <Button type='primary' shape='round' onClick={handleOpenModalSaveUser}>
-        Add User
+        Thêm người dùng
       </Button>
     </div>
   );
