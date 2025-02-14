@@ -1,17 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { AuthSlice } from "./authStore/authReducer";
-import { UserSlice } from "./userStore/userReducer";
 import { AppSlice } from "./appStore/appReducer";
-import { RoleSlice } from "./roleStore/roleReducer";
-import { SkillSlice } from "./skillStore/skillReducer";
-import { LevelSlice } from "./levelStore/levelReducer";
+import { AuthSlice } from "./authStore/authReducer";
 import { CategorySlice } from "./categoryStore/categoryReducer";
-import { QuestionSlice } from "./questionStore/questionReducer";
-import { ExamSlice } from "./examStore/examReducer";
-import { OrganizationSlice } from "./organizationStore/organizationReducer";
-import { ScheduleSlice } from "./schedule/scheduleReducer";
-import { FeedbackSlice } from "./feedbackStore/feedbackReducer";
 import { ExaminerIntroductionSlice } from "./examinerIntroduciton/examinerReducer";
+import { ExamSlice } from "./examStore/examReducer";
+import { FeedbackSlice } from "./feedbackStore/feedbackReducer";
+import { LevelSlice } from "./levelStore/levelReducer";
+import { OrganizationSlice } from "./organizationStore/organizationReducer";
+import { PlanSlice } from "./planStore/planReducer";
+import { QuestionSlice } from "./questionStore/questionReducer";
+import { RoleSlice } from "./roleStore/roleReducer";
+import { ScheduleSlice } from "./schedule/scheduleReducer";
+import { SkillSlice } from "./skillStore/skillReducer";
+import { UserSlice } from "./userStore/userReducer";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export const store = configureStore({
     scheduleStore: ScheduleSlice.reducer,
     feedbackStore: FeedbackSlice.reducer,
     examinerIntroductionStore: ExaminerIntroductionSlice.reducer,
+    planStore: PlanSlice.reducer,
   },
   // Added this mdware to fix error "A none-serializable value was detected..."
   middleware: (getDefaultMiddleware) =>

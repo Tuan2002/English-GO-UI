@@ -1,7 +1,7 @@
 import { Button, Modal } from "antd";
-import style from "./Modal.module.scss";
 import classNames from "classnames/bind";
 import { useEffect, useRef } from "react";
+import style from "./Modal.module.scss";
 const cx = classNames.bind(style);
 interface ModalCustomProps {
   open: boolean;
@@ -22,6 +22,7 @@ interface ModalCustomProps {
   isLoading?: boolean;
   maskClosable?: boolean;
   isFullScreen?: boolean;
+  disableActions?: boolean;
 }
 
 const ModalCustom = ({
@@ -43,6 +44,7 @@ const ModalCustom = ({
   isLoading = false,
   maskClosable = true,
   isFullScreen = false,
+  disableActions = false,
 }: ModalCustomProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () => {
@@ -92,10 +94,10 @@ const ModalCustom = ({
           customFooter
         ) : (
           <div className={cx("modal-footer", { footerCenter })}>
-            <Button type='primary' danger onClick={onCancel}>
+            <Button disabled={disableActions} type='primary' danger onClick={onCancel}>
               {cancelTitle}
             </Button>
-            <Button type='primary' onClick={onOK} loading={isLoading}>
+            <Button disabled={disableActions} type='primary' onClick={onOK} loading={isLoading}>
               {confirmTitle}
             </Button>
           </div>
