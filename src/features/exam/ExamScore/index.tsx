@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button, Col, Row } from "antd";
-import sytle from "./ExamScore.module.scss";
-import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import ROUTE_PATH from "@/routes/routePath";
 import { AppDispatch, RootState } from "@/stores";
 import { ExamActions } from "@/stores/examStore/examReducer";
 import { IExamSkillStatus } from "@/types/exam/ExamTypes";
-import ROUTE_PATH from "@/routes/routePath";
+import { Button, Col, Row } from "antd";
+import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import sytle from "./ExamScore.module.scss";
 const cx = classNames.bind(sytle);
 
 interface IScoreOfSkill {

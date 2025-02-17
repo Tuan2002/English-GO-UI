@@ -1,53 +1,54 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ProtectRoute from "./ProtectRoute";
-import ROUTE_PATH from "./routePath";
-import LoginPage from "@/pages/auth/LoginPage";
-import HomePage from "@/pages/home/HomePage";
-import AuthRoute from "./AuthRoute";
-import AdminProtectRoute from "./AdminProtectRoute";
-import AdminDashboard from "@/pages/admin/AdminDashboard";
-import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
-import ManageRolePage from "@/pages/admin/manage-user/ManageRolePage";
-import ExaminerProtectRoute from "./ExaminerProtectRoute";
+import ManageService from "@/features/manage-service/ManageService";
+import ManageServiceAttribute from "@/features/manage-service/ManageServiceAttribute";
+import ManageServiceType from "@/features/manage-service/ManageServiceType";
+import AdminLayout from "@/layouts/AdminLayout";
 import ContestantLayout from "@/layouts/ContestantLayout";
 import ExaminerLayout from "@/layouts/ExaminerLayout";
-import ExaminerDashboard from "@/pages/examiner/dashboard/Dashboard";
-import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/ExaminerQuestionBankPage";
-import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
-import AdminQuestionBankPage from "@/pages/admin/admin-question-bank/AdminQuestionBankPage";
-import AdminSkillDetailPage from "@/pages/admin/admin-question-bank/AdminSkillDetailPage";
-import AdminLevelDetailPage from "@/pages/admin/admin-question-bank/AdminLevelDetailPage";
-import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCategoryDetailPage";
-import AdminCreateQuestionPage from "@/pages/admin/admin-question-bank/AdminCreateQuestionPage";
-import ExamPage from "@/pages/exam/ExamPage";
-import ExamParticipatePage from "@/pages/exam/ExamParticipatePage";
+import ProfileLayout from "@/layouts/ProfileLayout";
+import ChangePasswordPage from "@/pages/account/ChangePasswordPage";
+import MyProfilePage from "@/pages/account/MyProfilePage";
+import UpgradeAcountPage from "@/pages/account/UpgradeAccountPage";
+import AdminEvaluatePage from "@/pages/admin/admin-evaluate/AdminEvaluatePage";
+import AdminFeedbackPage from "@/pages/admin/admin-feedback/AdminFeedbackPage";
 import AdminManageOrganizationPage from "@/pages/admin/admin-manage-organization/AdminManageOrganizationPage";
 import AdminManageSchedulePage from "@/pages/admin/admin-manage-schedule/AdminManageSchedulePage";
-import ExamScorePage from "@/pages/exam/ExamScorePage";
-import ExamRoomPage from "@/pages/exam/ExamRoomPage";
-import ExamResultPage from "@/pages/exam/ExamResultPage";
+import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCategoryDetailPage";
+import AdminCreateQuestionPage from "@/pages/admin/admin-question-bank/AdminCreateQuestionPage";
+import AdminLevelDetailPage from "@/pages/admin/admin-question-bank/AdminLevelDetailPage";
+import AdminQuestionBankPage from "@/pages/admin/admin-question-bank/AdminQuestionBankPage";
+import AdminSkillDetailPage from "@/pages/admin/admin-question-bank/AdminSkillDetailPage";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
+import AdminExamDetailPage from "@/pages/admin/manage-exam/AdminExamDetailPage";
+import AdminListExamPage from "@/pages/admin/manage-exam/AdminListExamPage";
+import AdminListSpeakingPage from "@/pages/admin/manage-exam/AdminListSpeakingPage";
+import AdminListWritingPage from "@/pages/admin/manage-exam/AdminListWritingPage";
+import ManageRolePage from "@/pages/admin/manage-user/ManageRolePage";
+import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
+import LoginPage from "@/pages/auth/LoginPage";
 import LoginSSO from "@/pages/auth/LoginSSO";
+import ContactPage from "@/pages/contact/ContactPage";
+import NotFoundPage from "@/pages/error/NotFoundPage";
+import ExamGradingRegisterPage from "@/pages/exam-history/ExamGradingRegisterPage";
 import ExamHistoryListPage from "@/pages/exam-history/ExamHistoryListPage";
 import ExamHistorySpeakingPage from "@/pages/exam-history/ExamHistorySpeakingPage";
 import ExamHistoryWritingPage from "@/pages/exam-history/ExamHistoryWritingPage";
-import ProfileLayout from "@/layouts/ProfileLayout";
-import MyProfilePage from "@/pages/account/MyProfilePage";
-import ChangePasswordPage from "@/pages/account/ChangePasswordPage";
-import UpgradeAcountPage from "@/pages/account/UpgradeAccountPage";
-import NotFoundPage from "@/pages/error/NotFoundPage";
-import AdminListSpeakingPage from "@/pages/admin/manage-exam/AdminListSpeakingPage";
-import AdminListWritingPage from "@/pages/admin/manage-exam/AdminListWritingPage";
-import AdminListExamPage from "@/pages/admin/manage-exam/AdminListExamPage";
-import AdminExamDetailPage from "@/pages/admin/manage-exam/AdminExamDetailPage";
-import ContactPage from "@/pages/contact/ContactPage";
-import AdminFeedbackPage from "@/pages/admin/admin-feedback/AdminFeedbackPage";
-import ExamGradingRegisterPage from "@/pages/exam-history/ExamGradingRegisterPage";
+import ExamPage from "@/pages/exam/ExamPage";
+import ExamParticipatePage from "@/pages/exam/ExamParticipatePage";
+import ExamResultPage from "@/pages/exam/ExamResultPage";
+import ExamRoomPage from "@/pages/exam/ExamRoomPage";
+import ExamScorePage from "@/pages/exam/ExamScorePage";
+import ExaminerDashboard from "@/pages/examiner/dashboard/Dashboard";
 import ExaminerIntroductionPage from "@/pages/examiner/examiner-introduction/ExaminerIntroductionPage";
 import UpdateExaminerIntroductionPage from "@/pages/examiner/examiner-introduction/UpdateExaminerIntroductionPage";
-import AdminLayout from "@/layouts/AdminLayout";
-import ManageService from "@/features/manage-service/ManageService";
-import ManageServiceType from "@/features/manage-service/ManageServiceType";
-import ManageServiceAttribute from "@/features/manage-service/ManageServiceAttribute";
+import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
+import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/ExaminerQuestionBankPage";
+import HomePage from "@/pages/home/HomePage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminProtectRoute from "./AdminProtectRoute";
+import AuthRoute from "./AuthRoute";
+import ExaminerProtectRoute from "./ExaminerProtectRoute";
+import ProtectRoute from "./ProtectRoute";
+import ROUTE_PATH from "./routePath";
 const AppRoute = () => {
   return (
     <BrowserRouter>
@@ -71,7 +72,7 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_LIST_WRITING_EXAM} element={<AdminListWritingPage />} />
               <Route path={ROUTE_PATH.ADMIN_EXAM_DETAIL} element={<AdminExamDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_FEEDBACK} element={<AdminFeedbackPage />} />
-              <Route path={ROUTE_PATH.ADMIN_FEEDBACK_DETAIL} element={<AdminFeedbackPage />} />
+              <Route path={ROUTE_PATH.ADMIN_EVALUATE} element={<AdminEvaluatePage />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE} element={<ManageService />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_TYPE} element={<ManageServiceType />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_ATTRIBUTE} element={<ManageServiceAttribute />} />

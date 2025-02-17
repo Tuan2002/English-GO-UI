@@ -1,16 +1,17 @@
+import ButtonShow from "@/components/Button/ButtonShow";
 import CardScroll from "@/components/CardScroll";
-import style from "./ExamHistoryList.module.scss";
+import ROUTE_PATH from "@/routes/routePath";
+import { AppDispatch, RootState } from "@/stores";
+import { ExamActions } from "@/stores/examStore/examReducer";
+import { IExamScore } from "@/types/exam/ExamTypes";
+import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
+import { Button, Table, TableColumnsType } from "antd";
 import classNames from "classnames/bind";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/stores";
-import { ExamActions } from "@/stores/examStore/examReducer";
-import { Button, Table, TableColumnsType } from "antd";
-import { IExamScore } from "@/types/exam/ExamTypes";
-import ButtonShow from "@/components/Button/ButtonShow";
-import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
 import { useNavigate } from "react-router-dom";
-import ROUTE_PATH from "@/routes/routePath";
+import { toast } from "react-toastify";
+import style from "./ExamHistoryList.module.scss";
 const cx = classNames.bind(style);
 
 const ExamHistoryList = () => {
@@ -22,7 +23,9 @@ const ExamHistoryList = () => {
     navigate(ROUTE_PATH.EXAM_RESULT.replace(":examId", id));
   };
   const handleRegisterMark = (examId: string, skill: string) => {
-    navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER.replace(":examId", examId)}?skill=${skill}`);
+    console.log(examId, skill);
+    toast.warning("Chức năng đang được phát triển");
+    // navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER.replace(":examId", examId)}?skill=${skill}`);
   };
   useEffect(() => {
     dispatch(ExamActions.getMyExams());

@@ -28,6 +28,8 @@ enum ROUTE_PATH {
   ADMIN_EXAM_DETAIL = "/admin/list-exam/:examId",
   ADMIN_FEEDBACK = "/admin/feedback",
   ADMIN_FEEDBACK_DETAIL = "/admin/feedback/:feedbackId",
+  ADMIN_EVALUATE = "/admin/evaluate",
+  ADMIN_EVALUATE_DETAIL = "/admin/evaluate/:evaluateId",
   ADMIN_MANAGE_SERVICE = "/admin/manage-service/:serviceType",
   ADMIN_MANAGE_SERVICE_ATTRIBUTE = "/admin/manage-service-attribute",
   ADMIN_MANAGE_SERVICE_TYPE = "/admin/manage-service",

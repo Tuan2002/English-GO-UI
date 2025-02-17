@@ -1,8 +1,9 @@
-import style from "./UserContact.module.scss";
 import classNames from "classnames/bind";
-import Container from "@/components/Container";
 import AboutBox from "./AboutBox";
 import ContactBox from "./ContactBox";
+import EvaluateBox from "./EvaluateBox";
+import FeedbackBox from "./FeedbackBox";
+import style from "./UserContact.module.scss";
 const cx = classNames.bind(style);
 const UserContact = () => {
   return (
@@ -10,10 +11,10 @@ const UserContact = () => {
       <div className={cx("banner")}>
         <div className={cx("overlay")}></div>
       </div>
-      <Container>
-        <AboutBox />
-        <ContactBox />
-      </Container>
+      <AboutBox />
+      <FeedbackBox />
+      <EvaluateBox />
+      <ContactBox />
     </div>
   );
 };
