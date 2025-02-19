@@ -1,0 +1,137 @@
+.modal-save-service-type {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.modal-save-service-type-box {
+  overflow: hidden;
+  position: relative;
+}
+
+.service-attributes-box {
+  border-top: 8px solid #f0f0f0;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  .header-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      border-bottom: 1px solid #1c1c1c;
+      width: 300px;
+      height: 1px;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .title {
+      font-weight: 500;
+    }
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &:active {
+      background-color: transparent;
+    }
+  }
+}
+
+.list-attributes {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .attribute-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 13px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 6px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #faf8f8;
+    }
+
+    .order {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 40px;
+    }
+    .body {
+      flex: 1;
+      .body-title {
+        font-weight: 500;
+      }
+      .body-content {
+        display: flex;
+        gap: 20px;
+        .item {
+          display: flex;
+          gap: 5px;
+          font-size: 11px;
+        }
+        .info-title {
+          font-weight: 500;
+        }
+        .info-content {
+          display: flex;
+        }
+      }
+    }
+    .actions {
+      width: 80px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+  }
+}
+
+.add-attribute-box {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    height: 40px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .button {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+  }
+}

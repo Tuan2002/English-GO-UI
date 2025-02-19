@@ -1,11 +1,11 @@
 import React from "react";
-import style from "./MainLayout.module.scss";
+import style from "./AdminLayout.module.scss";
 import classNames from "classnames/bind";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { AdminHeader } from "../components/headers";
 const cx = classNames.bind(style);
-const MainLayout: React.FC = () => {
+const AdminLayout: React.FC = () => {
   const [collapsed, setCollapsed] = React.useState(false);
   const [width, setWidth] = React.useState(window.innerWidth);
 
@@ -47,4 +47,4 @@ const MainLayout: React.FC = () => {
   );
 };
 
-export default MainLayout;
+export default AdminLayout;

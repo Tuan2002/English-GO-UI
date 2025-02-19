@@ -1,0 +1,112 @@
+.feedback-item {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+.feedback-item-box {
+  overflow: hidden;
+  min-height: 200px;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 5px;
+    background-color: #fafafa;
+  }
+
+  .btn-show {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 50%;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #f1f1f1;
+    color: #000;
+    transition: all 0.3s ease;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 2px 2px;
+    }
+    &:active {
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 1px;
+      scale: 0.98;
+    }
+  }
+
+  .btn-check {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 50%;
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    background-color: #f1f1f1;
+    color: #000;
+    transition: all 0.3s ease;
+
+    &.active {
+      color: black;
+      background-color: #d2f1a2;
+    }
+  }
+
+  .avatar-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    .avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+  }
+
+  .info-box {
+    text-align: center;
+    .name {
+      font-weight: 600;
+    }
+    .star-icon {
+      color: rgb(131 131 110);
+    }
+    .star-active {
+      color: rgb(197, 197, 10);
+    }
+  }
+  .content-box {
+    margin-top: 10px;
+    text-align: justify;
+    font-size: 13px;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    height: 80px;
+  }
+
+  .show-at-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    span {
+      cursor: pointer;
+    }
+  }
+}

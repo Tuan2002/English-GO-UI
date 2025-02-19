@@ -6,7 +6,17 @@ type MenuItem = Required<MenuProps>["items"][number];
 
 const examinerMenu: MenuItem[] = [
   {
-    key: "8",
+    key: "1",
+    label: <Link to={ROUTE_PATH.EXAMINER_DASHBOARD}>Bảng tin</Link>,
+    icon: <AppstoreOutlined />,
+  },
+  {
+    key: "2",
+    label: <Link to={ROUTE_PATH.EXAMINER_INTRODUCTION}>Thông tin giới thiệu</Link>,
+    icon: <AppstoreOutlined />,
+  },
+  {
+    key: "3",
     label: <Link to={ROUTE_PATH.EXAMINER_QUESTION_BANK}>Ngân hàng câu hỏi</Link>,
     icon: <AppstoreOutlined />,
   },

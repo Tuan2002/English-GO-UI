@@ -28,12 +28,20 @@ enum ROUTE_PATH {
   ADMIN_EXAM_DETAIL = "/admin/list-exam/:examId",
   ADMIN_FEEDBACK = "/admin/feedback",
   ADMIN_FEEDBACK_DETAIL = "/admin/feedback/:feedbackId",
+  ADMIN_EVALUATE = "/admin/evaluate",
+  ADMIN_EVALUATE_DETAIL = "/admin/evaluate/:evaluateId",
+  ADMIN_MANAGE_SERVICE = "/admin/manage-service/:serviceType",
+  ADMIN_MANAGE_SERVICE_ATTRIBUTE = "/admin/manage-service-attribute",
+  ADMIN_MANAGE_SERVICE_TYPE = "/admin/manage-service",
 
-  // recruiter routes
+  // examiner routes
   EXAMINER_DASHBOARD = "/examiner/dashboard",
+  EXAMINER_INTRODUCTION = "/examiner/introduction",
+  EXAMINER_UPDATE_INTRODUCTION = "/examiner/introduction/update",
   EXAMINER_QUESTION_BANK = "/examiner/question-bank",
   EXAMINER_LIST_EXAM = "/examiner/list-exam",
 
+  // exam routes
   EXAM = "/exam",
   EXAM_ROOM = "/exam/room",
   EXAM_PARTICIPATE = "/exam/participate",
@@ -42,5 +50,6 @@ enum ROUTE_PATH {
   EXAM_HISTORY_LIST = "/exam/history/list",
   EXAM_HISTORY_SPEAKING = "/exam/history/speaking",
   EXAM_HISTORY_WRITING = "/exam/history/writing",
+  EXAM_HISTORY_GRADING_REGISTER = "/exam/history/grading-register/:examId",
 }
 export default ROUTE_PATH;

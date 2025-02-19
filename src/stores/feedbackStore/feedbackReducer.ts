@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+import { IPaginationData } from "@/types/AppType";
 import { IFeedback } from "@/types/feedback/FeedbackTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import feedbackThunks from "./feedbackThunks";
 import { toast } from "react-toastify";
-import { IPaginationData } from "@/types/AppType";
+import feedbackThunks from "./feedbackThunks";
 
 export interface FeedbackState {
   feedbacks: IFeedback[];
@@ -53,7 +52,7 @@ export const FeedbackSlice = createSlice({
       });
     builder
       .addCase(feedbackThunks.getAllFeedbacks.pending, (state) => {
-        state.isSubmiting = true;
+        state.isLoading = true;
       })
       .addCase(feedbackThunks.getAllFeedbacks.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -66,7 +65,7 @@ export const FeedbackSlice = createSlice({
         };
       })
       .addCase(feedbackThunks.getAllFeedbacks.rejected, (state, action) => {
-        state.isSubmiting = false;
+        state.isLoading = false;
         console.log(action.payload);
         toast.error((action.payload as { message: string })?.message);
       });

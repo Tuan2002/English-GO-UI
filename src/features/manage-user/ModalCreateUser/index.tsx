@@ -1,5 +1,5 @@
 import ModalCustom from "@/components/Modal";
-import { RootState } from "@/stores";
+import { AppDispatch, RootState } from "@/stores";
 import { UserActions } from "@/stores/userStore/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import style from "./ModalCreateUser.module.scss";
@@ -23,8 +23,8 @@ type FieldType = {
 const ModalCreateUser = () => {
   const { openModalCreateUser, isSubmitting } = useSelector((state: RootState) => state.userStore);
   const { groupRoles } = useSelector((state: RootState) => state.appStore);
-  const [avatarFile, setAvatarFile] = useState<any | null>(null);
-  const dispatch = useDispatch();
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+  const dispatch: AppDispatch = useDispatch();
   const [form] = Form.useForm();
 
   const onCancel = () => {
@@ -55,7 +55,7 @@ const ModalCreateUser = () => {
       avatar: avatar,
       password: "123123",
     };
-    await dispatch<any>(
+    await dispatch(
       UserActions.createNewUser({
         data,
         callback: () => {

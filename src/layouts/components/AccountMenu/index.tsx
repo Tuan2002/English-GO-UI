@@ -33,7 +33,7 @@ const AccountMenu = () => {
     navigate(ROUTE_PATH.ACCOUNT_CHANGE_PASSWORD);
   };
   const handleGoToAdminPage = () => {
-    navigate(ROUTE_PATH.ADMIN_DASHBOARD);
+    navigate(currentUser?.groupRole?.name === "admin" ? ROUTE_PATH.ADMIN_DASHBOARD : ROUTE_PATH.EXAMINER_DASHBOARD);
   };
   const accessToken = useMemo(() => {
     return getAccessToken();
@@ -63,7 +63,15 @@ const AccountMenu = () => {
       )}
       {accessToken && (
         <div className={cx("menu-list")}>
-          {currentUser?.groupRole.name === "admin" && (
+          {currentUser?.groupRole?.name === "admin" && (
+            <div onClick={handleGoToAdminPage} className={cx("menu-item")}>
+              <span className={cx("icon")}>
+                <BiEdit />
+              </span>
+              <span className={cx("name")}>Trang quản trị</span>
+            </div>
+          )}
+          {currentUser?.groupRole?.name === "examiner" && (
             <div onClick={handleGoToAdminPage} className={cx("menu-item")}>
               <span className={cx("icon")}>
                 <BiEdit />
