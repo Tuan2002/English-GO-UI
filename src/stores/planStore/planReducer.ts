@@ -6,23 +6,31 @@ export interface PlanState {
   listPlanTypes: IPlanType[];
   planAttributeData: IPlanAttribute | null;
   listGeneralPlanAttributes: IPlanAttribute[];
+  currentPlanType: IPlanType | null;
+  listPlanAttributesOfPlanType: IPlanAttribute[];
 
   loading: boolean;
   isSubmitting: boolean;
   openModalSaveServiceAttribute: boolean;
+  openModalPlanTypeDetail: boolean;
   openModalSaveServiceType: boolean;
+  openModalSavePlan: boolean;
   actionModal: "create" | "update";
 }
 
 const initialState: PlanState = {
   listPlanTypes: [],
-  loading: false,
+  listPlanAttributesOfPlanType: [],
   isSubmitting: false,
   planAttributeData: null,
+  currentPlanType: null,
   openModalSaveServiceAttribute: false,
+  openModalPlanTypeDetail: false,
   openModalSaveServiceType: false,
+  openModalSavePlan: false,
   listGeneralPlanAttributes: [],
   actionModal: "create",
+  loading: false,
 };
 
 export const PlanSlice = createSlice({
@@ -49,6 +57,12 @@ export const PlanSlice = createSlice({
     },
     setPlanAttributeData: (state, action: PayloadAction<IPlanAttribute | null>) => {
       state.planAttributeData = action.payload;
+    },
+    changeOpenModalSavePlan: (state, action: PayloadAction<boolean>) => {
+      state.openModalSavePlan = action.payload;
+    },
+    changeOpenModalPlanTypeDetail: (state, action: PayloadAction<boolean>) => {
+      state.openModalPlanTypeDetail = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -127,6 +141,28 @@ export const PlanSlice = createSlice({
       })
       .addCase(planThunks.deletePlanAttribute.rejected, (state) => {
         state.isSubmitting = false;
+      });
+    builder
+      .addCase(planThunks.getPlanTypeById.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(planThunks.getPlanTypeById.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentPlanType = action.payload.data;
+      })
+      .addCase(planThunks.getPlanTypeById.rejected, (state) => {
+        state.loading = false;
+      });
+    builder
+      .addCase(planThunks.getPlanAttributeOfPlanType.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(planThunks.getPlanAttributeOfPlanType.fulfilled, (state, action) => {
+        state.loading = false;
+        state.listPlanAttributesOfPlanType = action.payload.data;
+      })
+      .addCase(planThunks.getPlanAttributeOfPlanType.rejected, (state) => {
+        state.loading = false;
       });
   },
 });

@@ -1,6 +1,3 @@
-import ManageService from "@/features/manage-service/ManageService";
-import ManageServiceAttribute from "@/features/manage-service/ManageServiceAttribute";
-import ManageServiceType from "@/features/manage-service/ManageServiceType";
 import AdminLayout from "@/layouts/AdminLayout";
 import ContestantLayout from "@/layouts/ContestantLayout";
 import ExaminerLayout from "@/layouts/ExaminerLayout";
@@ -43,6 +40,9 @@ import UpdateExaminerIntroductionPage from "@/pages/examiner/examiner-introducti
 import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
 import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/ExaminerQuestionBankPage";
 import HomePage from "@/pages/home/HomePage";
+import ManageServiceAttributePage from "@/pages/service/MangeServiceAttributePage";
+import ManageServicePage from "@/pages/service/MangeServicePage";
+import ManageServiceTypePage from "@/pages/service/MangeServiceTypePage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminProtectRoute from "./AdminProtectRoute";
 import AuthRoute from "./AuthRoute";
@@ -73,9 +73,9 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_EXAM_DETAIL} element={<AdminExamDetailPage />} />
               <Route path={ROUTE_PATH.ADMIN_FEEDBACK} element={<AdminFeedbackPage />} />
               <Route path={ROUTE_PATH.ADMIN_EVALUATE} element={<AdminEvaluatePage />} />
-              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE} element={<ManageService />} />
-              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_TYPE} element={<ManageServiceType />} />
-              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_ATTRIBUTE} element={<ManageServiceAttribute />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE} element={<ManageServicePage />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_TYPE} element={<ManageServiceTypePage />} />
+              <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_ATTRIBUTE} element={<ManageServiceAttributePage />} />
             </Route>
           </Route>
 

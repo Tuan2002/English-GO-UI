@@ -1,14 +1,16 @@
 import { IPlanType } from "@/types/plan/PlanTypes";
 import classNames from "classnames/bind";
+import { memo } from "react";
 import { BiShow } from "react-icons/bi";
 import style from "../ManageServiceType.module.scss";
 const cx = classNames.bind(style);
 interface ServiceTypeItemProps {
   serviceType: IPlanType;
+  onGoToServiceTypeDetail: (typeId: string) => void;
 }
-const ServiceTypeItem = ({ serviceType }: ServiceTypeItemProps) => {
+const ServiceTypeItem = ({ serviceType, onGoToServiceTypeDetail }: ServiceTypeItemProps) => {
   return (
-    <div className={cx("service-type-item")}>
+    <div onClick={() => onGoToServiceTypeDetail(serviceType.id)} className={cx("service-type-item")}>
       <div className={cx("left-box")}>
         <div className={cx("service-type-name")}>{serviceType.displayName}</div>
         <div className={cx("service-type-info")}>
@@ -32,4 +34,4 @@ const ServiceTypeItem = ({ serviceType }: ServiceTypeItemProps) => {
     </div>
   );
 };
-export default ServiceTypeItem;
+export default memo(ServiceTypeItem);

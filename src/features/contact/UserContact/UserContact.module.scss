@@ -234,12 +234,16 @@
   .feedback-slider {
     .feedback-item {
       width: 100%;
-      display: block;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
       padding: 10px;
     }
     .feedback-item-box {
       min-height: 200px;
       border-radius: 10px;
+      max-width: 380px;
+      width: 100%;
       padding: 10px;
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
       cursor: pointer;
@@ -408,6 +412,25 @@
       padding: 10px;
       border: 1px solid #ccc;
       text-align: center;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .contact-box {
+    .contact-info {
+      .contact-item {
+        flex-direction: column;
+        width: 100%;
+
+        .contact-item-avatar {
+          border-right: none;
+          margin-bottom: 10px;
+        }
+        .contact-item-info {
+          width: 100%;
+        }
+      }
     }
   }
 }

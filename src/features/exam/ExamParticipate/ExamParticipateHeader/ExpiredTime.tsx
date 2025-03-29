@@ -1,7 +1,7 @@
+import { message } from "antd";
+import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import style from "./ExamHeader.module.scss";
-import classNames from "classnames/bind";
-import { message } from "antd";
 const cx = classNames.bind(style);
 interface IExpiredTimeProps {
   initTime?: number;
@@ -36,15 +36,15 @@ const ExpiredTime = ({ initTime, handleSubmit, key }: IExpiredTimeProps) => {
   }, [handleSubmit, timeCountDown]);
   return (
     <div className={cx("time")}>
-      {timeCountDown && (
-        <div className={cx("time-countdown")}>
-          <span className={cx("minutes")}>
-            {Math.floor(timeCountDown / 60) >= 0 ? `0${Math.floor(timeCountDown / 60)}`.slice(-2) : "00"}
-          </span>
-          <span className={cx("space")}>:</span>
-          <span className={cx("seconds")}>{timeCountDown % 60 >= 0 ? `0${timeCountDown % 60}`.slice(-2) : "00"}</span>
-        </div>
-      )}
+      <div className={cx("time-countdown")}>
+        <span className={cx("minutes")}>
+          {timeCountDown && Math.floor(timeCountDown / 60) >= 0 ? `0${Math.floor(timeCountDown / 60)}`.slice(-2) : "00"}
+        </span>
+        <span className={cx("space")}>:</span>
+        <span className={cx("seconds")}>
+          {timeCountDown && timeCountDown % 60 >= 0 ? `0${timeCountDown % 60}`.slice(-2) : "00"}
+        </span>
+      </div>
     </div>
   );
 };

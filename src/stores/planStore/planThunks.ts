@@ -1,6 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
-import { ICreatePlanAttribute, ICreatePlanType, IPlanAttribute, IPlanType, IUpdatePlanAttribute } from "@/types/plan/PlanTypes";
+import {
+  ICreateNewPlanDTO,
+  ICreatePlanAttribute,
+  ICreatePlanType,
+  IPlanAttribute,
+  IPlanType,
+  IUpdatePlanAttribute,
+} from "@/types/plan/PlanTypes";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -72,6 +79,39 @@ const deletePlanAttribute = createAsyncThunk(
     }
   }
 );
+const getPlanTypeById = createAsyncThunk(
+  "plans/getPlanTypeById",
+  async (id: string, { rejectWithValue }): Promise<IAppResposeBase<IPlanType>> => {
+    try {
+      const response: IAppResposeBase<IPlanType> = await http.get(`/api/plans/get-plan-type/${id}`);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+const getPlanAttributeOfPlanType = createAsyncThunk(
+  "plans/getPlanAttributeOfPlanType",
+  async (id: string, { rejectWithValue }): Promise<IAppResposeBase<IPlanAttribute[]>> => {
+    try {
+      const response: IAppResposeBase<IPlanAttribute[]> = await http.get(`/api/plans/get-plan-attribute-by-type/${id}`);
+      return response;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
+const createNewPlan = createAsyncThunk(
+  "plans/createNewPlan",
+  async (data: ICreateNewPlanDTO, { rejectWithValue }): Promise<IAppResposeBase<IPlanAttribute[]>> => {
+    try {
+      const newPlan: IAppResposeBase<IPlanAttribute[]> = await http.post("/api/plans/create-new-plan", data);
+      return newPlan;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
 
 const planThunks = {
   getAllPlanTypes,
@@ -80,5 +120,8 @@ const planThunks = {
   createNewPlanType,
   getGeneralPlanAttributes,
   deletePlanAttribute,
+  getPlanTypeById,
+  getPlanAttributeOfPlanType,
+  createNewPlan,
 };
 export default planThunks;

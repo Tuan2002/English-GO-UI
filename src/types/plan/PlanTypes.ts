@@ -44,3 +44,18 @@ export interface IUpdatePlanAttribute {
   note?: string;
   dataType: string;
 }
+export interface IPlanAttributeDetailDTO {
+  planId: string;
+  attributeId: string;
+  value: string;
+  name: string;
+  dataType: string;
+  displayName: string;
+  isDefault: boolean;
+  note?: string;
+}
+
+export interface ICreateNewPlanDTO {
+  planTypeId: string;
+  planAttributeDetails: IPlanAttributeDetailDTO[];
+}
