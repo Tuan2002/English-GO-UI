@@ -1,10 +1,10 @@
-import { Popover } from "antd";
-import style from "./ContestantHeader.module.scss";
-import classNames from "classnames/bind";
 import MenuWrapper from "@/components/MenuWrapper";
-import { BiHeart, BiLogoCodepen, BiSearchAlt2, BiWindowAlt } from "react-icons/bi";
 import ROUTE_PATH from "@/routes/routePath";
-import { Link, NavLink } from "react-router-dom";
+import { Popover } from "antd";
+import classNames from "classnames/bind";
+import { BiHeart, BiLogoCodepen, BiSearchAlt2, BiWindowAlt } from "react-icons/bi";
+import { NavLink } from "react-router-dom";
+import style from "./ContestantHeader.module.scss";
 const cx = classNames.bind(style);
 const HeaderMenu = () => {
   const listMenu = [
@@ -14,14 +14,11 @@ const HeaderMenu = () => {
       link: ROUTE_PATH.HOME,
     },
     {
-      title: "Thi thử",
-      children: null,
-      link: ROUTE_PATH.EXAM,
-    },
-    {
-      title: "Liên hệ",
-      children: null,
-      link: ROUTE_PATH.CONTACT,
+      title: "Tra cứu",
+      children: [
+        { link: ROUTE_PATH.LOOKUP_TEST_SCORE, title: "Tra cứu điểm thi B1 - Đại học Vinh", icon: <BiSearchAlt2 /> },
+        { link: ROUTE_PATH.LOOKUP_EXAM_SCHEDULE, title: "Tra cứu lịch thi B1", icon: <BiWindowAlt /> },
+      ],
     },
     {
       title: "Dịch vụ",

@@ -1,0 +1,23 @@
+.description-box {
+  font-size: 14px;
+}
+
+.empty-result {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .empty-image {
+    width: 120px;
+    margin: 0 auto;
+  }
+  .empty-text {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #8c52ff;
+    margin-top: 10px;
+  }
+}

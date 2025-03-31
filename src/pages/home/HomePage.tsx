@@ -1,17 +1,18 @@
-import Banner from "./components/Banner";
-import Container from "@/components/Container";
-import Service from "./components/Service";
-import Achievement from "./components/Achievement";
+import AboutBox from "./components/AboutBox";
+import ContactBox from "./components/ContactBox";
+import EvaluateBox from "./components/EvaluateBox";
+import FeedbackBox from "./components/FeedbackBox";
 import Footer from "./components/Footer";
+import HomeHeader from "./components/HomeHeader";
 
 const HomePage = () => {
   return (
     <>
-      <Container>
-        <Banner />
-        <Service />
-        <Achievement />
-      </Container>
+      <HomeHeader />
+      <AboutBox />
+      <FeedbackBox />
+      <EvaluateBox />
+      <ContactBox />
       <Footer />
     </>
   );

@@ -44,6 +44,8 @@ import UpdateExaminerIntroductionPage from "@/pages/examiner/examiner-introducti
 import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
 import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/ExaminerQuestionBankPage";
 import HomePage from "@/pages/home/HomePage";
+import ExamScheduleLookupPage from "@/pages/lookup/ExamScheduleLookupPage";
+import TestScoreLookupPage from "@/pages/lookup/TestScoreLookupPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminProtectRoute from "./AdminProtectRoute";
 import AuthRoute from "./AuthRoute";
@@ -120,6 +122,8 @@ const AppRoute = () => {
           <Route path={ROUTE_PATH.ABOUT} element={<span>About</span>} />
           <Route path={ROUTE_PATH.EXAM} element={<ExamPage />} />
           <Route path={ROUTE_PATH.CONTACT} element={<ContactPage />} />
+          <Route path={ROUTE_PATH.LOOKUP_TEST_SCORE} element={<TestScoreLookupPage />} />
+          <Route path={ROUTE_PATH.LOOKUP_EXAM_SCHEDULE} element={<ExamScheduleLookupPage />} />
         </Route>
         <Route path={ROUTE_PATH.LOGIN_SSO} element={<LoginSSO />} />
         <Route path='*' element={<NotFoundPage />} />
