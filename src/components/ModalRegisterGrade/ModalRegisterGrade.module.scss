@@ -1,0 +1,66 @@
+.grade-register {
+  height: auto;
+  .grade-register-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .grade-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .grade-register-title {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+  }
+  .grade-register-description {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
+  }
+  .grade-item {
+    border: 2px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+    .grade-item-image {
+      width: 80px;
+      height: 80px;
+    }
+    .grade-item-content {
+      .grade-item-title {
+        font-weight: 500;
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+
+    &.selected-grade {
+      background-color: #e0e0e0;
+    }
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      transition: all 0.5s;
+    }
+
+    &:active {
+      background-color: transparent;
+      box-shadow: 0 0 0px 0 rgb(214, 112, 194);
+      transition: all 0.5s;
+      border: 2px solid #e0e0e0;
+    }
+  }
+}

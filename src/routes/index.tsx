@@ -1,3 +1,4 @@
+import ExamGradingWithAI from "@/features/exam-history/ExamGradingWithAI";
 import ManageService from "@/features/manage-service/ManageService";
 import ManageServiceAttribute from "@/features/manage-service/ManageServiceAttribute";
 import ManageServiceType from "@/features/manage-service/ManageServiceType";
@@ -99,6 +100,8 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.EXAM_HISTORY_LIST} element={<ExamHistoryListPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_SPEAKING} element={<ExamHistorySpeakingPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_WRITING} element={<ExamHistoryWritingPage />} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_AI} element={<ExamGradingWithAI />} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_TEACHER} element={<span>Exam Grading With Teacher</span>} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER} element={<ExamGradingRegisterPage />} />
             </Route>
             <Route element={<ProfileLayout pageName='profile' />}>

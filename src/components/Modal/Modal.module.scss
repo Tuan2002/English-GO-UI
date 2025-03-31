@@ -12,6 +12,18 @@
     font-weight: 500;
   }
 }
+.mask-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(192, 192, 192, 0.8);
+  z-index: 9999;
+}
 .modal-body {
   padding: 10px;
 }
