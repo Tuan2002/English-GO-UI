@@ -1,101 +1,86 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { ILevel } from "@/types/level/LevelTypes";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import levelThunks from "./levelThunks";
+import { IGradingFeedbackQuestion } from "@/types/gradingFeedback/GradingFeedbackType";
+import getQuestionName, { QuestionLevel } from "@/utils/Functions/getQuestionName";
+import { createSlice } from "@reduxjs/toolkit";
+import GradingThunks from "./gradingThunks";
 
-export interface LevelState {
+export interface GradingState {
   loading: boolean;
-  listLevelOfSkill: ILevel[];
-  listLevel?: ILevel[];
-  currentLevel?: ILevel;
-  selectedLevel?: ILevel;
-
-  openModalLevelInfomation: boolean;
   isSubmiting: boolean;
+  gradingFeedbackQuestions: IGradingFeedbackQuestion[];
+  listQuestionLevel: Array<{
+    value: string;
+    label: string;
+  }>;
+  selectedQuestionLevel?: string;
+  selectedQuestion?: IGradingFeedbackQuestion;
 }
 
-const initialState: LevelState = {
+const initialState: GradingState = {
   loading: false,
-  listLevelOfSkill: [],
-  selectedLevel: undefined,
-  openModalLevelInfomation: false,
   isSubmiting: false,
+  gradingFeedbackQuestions: [],
+  listQuestionLevel: [],
 };
 
-export const LevelSlice = createSlice({
-  name: "levels",
+export const GradingSlice = createSlice({
+  name: "grades",
   initialState,
   reducers: {
-    changeOpenModalLevelInfomation: (state, action) => {
-      state.openModalLevelInfomation = action.payload;
-    },
-    changeSelectedLevel: (state, action) => {
-      state.selectedLevel = action.payload;
-    },
     changeIsSubmiting: (state, action) => {
       state.isSubmiting = action.payload;
+    },
+    setGradingFeedbackQuestions: (state, action) => {
+      state.gradingFeedbackQuestions = action.payload;
+    },
+    setListQuestionLevel: (state, action) => {
+      state.listQuestionLevel = action.payload;
+    },
+    setSelectedQuestionLevel: (state, action) => {
+      state.selectedQuestionLevel = action.payload;
+      state.selectedQuestion = state.gradingFeedbackQuestions.find((item) => item.question.levelId === action.payload);
+    },
+    setSelectedQuestion: (state, action) => {
+      state.selectedQuestion = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(levelThunks.getAllLevels.pending, (state) => {
+      .addCase(GradingThunks.gradingWritingWithAI.pending, (state) => {
         state.loading = true;
       })
-      .addCase(levelThunks.getAllLevels.fulfilled, (state, action) => {
+      .addCase(GradingThunks.gradingWritingWithAI.fulfilled, (state) => {
         state.loading = false;
-        state.listLevel = action.payload.data;
       })
-      .addCase(levelThunks.getAllLevels.rejected, (state) => {
+      .addCase(GradingThunks.gradingWritingWithAI.rejected, (state) => {
         state.loading = false;
       });
     builder
-      .addCase(levelThunks.getLevelOfSkill.pending, (state) => {
+      .addCase(GradingThunks.getGradingFeedbackWithAI.pending, (state) => {
         state.loading = true;
       })
-      .addCase(levelThunks.getLevelOfSkill.fulfilled, (state, action) => {
+      .addCase(GradingThunks.getGradingFeedbackWithAI.fulfilled, (state, action) => {
         state.loading = false;
-        state.listLevelOfSkill = action.payload.data;
+        state.gradingFeedbackQuestions = action.payload.data;
+        const listQuestionLevel = action.payload.data.map((item) => {
+          return {
+            value: item.question.levelId,
+            label: getQuestionName(item.question.levelId as QuestionLevel),
+          };
+        });
+        state.listQuestionLevel = listQuestionLevel;
+        state.selectedQuestionLevel = listQuestionLevel[0].value;
+        state.selectedQuestion = action.payload.data[0];
       })
-      .addCase(levelThunks.getLevelOfSkill.rejected, (state) => {
+      .addCase(GradingThunks.getGradingFeedbackWithAI.rejected, (state) => {
         state.loading = false;
-      });
-    builder
-      .addCase(levelThunks.updateLevel.pending, (state) => {
-        state.isSubmiting = true;
-      })
-      .addCase(levelThunks.updateLevel.fulfilled, (state, action) => {
-        state.isSubmiting = false;
-        const index = state.listLevelOfSkill.findIndex((level) => level.id === action.payload.data.id);
-        if (index !== -1) {
-          state.listLevelOfSkill[index] = action.payload.data;
-        }
-        state.openModalLevelInfomation = false;
-        toast.success("Update skill successfully");
-      })
-      .addCase(levelThunks.updateLevel.rejected, (state, action: PayloadAction<any>) => {
-        state.isSubmiting = false;
-        toast.error(action.payload.errorMessage);
-      });
-    builder
-      .addCase(levelThunks.getLevelById.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(levelThunks.getLevelById.fulfilled, (state, action) => {
-        state.loading = false;
-        state.currentLevel = action.payload.data;
-      })
-      .addCase(levelThunks.getLevelById.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false;
-        toast.error(action.payload.errorMessage);
       });
   },
 });
 
 // Action creators are generated for each case reducer function
-export const LevelActions = {
-  ...LevelSlice.actions,
-  ...levelThunks,
+export const GradingActions = {
+  ...GradingSlice.actions,
+  ...GradingThunks,
 };
 
-export default LevelSlice.reducer;
+export default GradingSlice.reducer;

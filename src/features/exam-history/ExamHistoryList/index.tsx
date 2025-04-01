@@ -11,6 +11,7 @@ import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import style from "./ExamHistoryList.module.scss";
 const cx = classNames.bind(style);
 
@@ -31,9 +32,8 @@ const ExamHistoryList = () => {
     navigate(ROUTE_PATH.EXAM_RESULT.replace(":examId", id));
   };
   const handleRegisterMark = (examId: string, skill: string) => {
-    // console.log(examId, skill);
-    // toast.warning("Chức năng đang được phát triển");
-    navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER.replace(":examId", examId)}?skill=${skill}`);
+    console.log(examId, skill);
+    toast.warning("Chức năng đang được phát triển");
   };
   useEffect(() => {
     dispatch(ExamActions.getMyExams());

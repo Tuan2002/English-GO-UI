@@ -1,6 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ROUTE_PATH from "@/routes/routePath";
+import { AppDispatch, RootState } from "@/stores";
+import { GradingActions } from "@/stores/gradingStore/gradingReducer";
 import classNames from "classnames/bind";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ModalCustom from "../Modal";
@@ -15,8 +19,9 @@ interface IModalRegisterGradeProps {
 }
 const ModalRegisterGrade = ({ open, onCancel, selectedExamId, selectedSkill }: IModalRegisterGradeProps) => {
   const [selectedType, setSelectedType] = useState<string>("type-1");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { loading } = useSelector((state: RootState) => state.gradingStore);
   const navigate = useNavigate();
+  const dispatch: AppDispatch = useDispatch();
   const handleRegisterMark = () => {
     if (!selectedExamId || !selectedSkill) {
       toast.warning("Vui lòng chọn bài thi và kỹ năng để đăng ký chấm bài");
@@ -28,8 +33,11 @@ const ModalRegisterGrade = ({ open, onCancel, selectedExamId, selectedSkill }: I
     }
     if (selectedType === "type-1") {
       // Handle register with AI
-      // toast.success("Đăng ký chấm bài với AI thành công");
-      navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_AI.replace(":examId", selectedExamId)}?skill=${selectedSkill}`);
+      dispatch(GradingActions.gradingWritingWithAI(selectedExamId)).then((response) => {
+        if ((response as any).payload.success) {
+          navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_AI.replace(":examId", selectedExamId)}?skill=${selectedSkill}`);
+        }
+      });
     } else if (selectedType === "type-2") {
       // Handle register with teacher
       toast.warning("Chức năng đang được phát triển");
@@ -45,7 +53,7 @@ const ModalRegisterGrade = ({ open, onCancel, selectedExamId, selectedSkill }: I
       showHeader={false}
       showCloseButton={false}
       maskClosable={false}
-      maskLoading={isLoading}
+      maskLoading={loading}
     >
       <div className={cx("grade-register")}>
         <div className={cx("grade-register-header")}>
