@@ -91,11 +91,11 @@ const ExamGradingWithAI = () => {
                     ))}
                   </ul>
                   <h5 className={cx("score-title")}>
-                    {"=>  "}Cho điểm: {feedback?.score} / 10.0 điểm
+                    {"=>  "}Cho điểm: <span>{feedback?.score} / 10.0 điểm</span>
                   </h5>
                 </div>
                 <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>2. Về ngữ pháp: - {feedback?.grammar?.score} / 2.0 điểm</h5>
+                  <h5 className={cx("item-title")}>2. Về ngữ pháp - {feedback?.grammar?.score} / 2.0 điểm</h5>
                   <ul className={cx("list-comment")}>
                     {feedback?.grammar?.feedback?.map((item, index) => (
                       <li key={index} className={cx("comment-item")}>
@@ -105,7 +105,7 @@ const ExamGradingWithAI = () => {
                   </ul>
                 </div>
                 <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>3. Về từ vựng trong bài: - {feedback?.vocabulary?.score} / 2.0 điểm</h5>
+                  <h5 className={cx("item-title")}>3. Về từ vựng trong bài - {feedback?.vocabulary?.score} / 2.0 điểm</h5>
                   <ul className={cx("list-comment")}>
                     {feedback?.vocabulary?.feedback?.map((item, index) => (
                       <li key={index} className={cx("comment-item")}>
@@ -116,7 +116,7 @@ const ExamGradingWithAI = () => {
                 </div>
                 <div className={cx("grade-comment-item", "mt-10")}>
                   <h5 className={cx("item-title")}>
-                    4. Về mức độ hoàn thành yêu cầu của đề tài: - {feedback?.task_achievement?.score} / 2.0 điểm
+                    4. Về mức độ hoàn thành yêu cầu của đề tài - {feedback?.task_achievement?.score} / 2.0 điểm
                   </h5>
                   <ul className={cx("list-comment")}>
                     {feedback?.task_achievement?.feedback?.map((item, index) => (
@@ -127,9 +127,7 @@ const ExamGradingWithAI = () => {
                   </ul>
                 </div>
                 <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>
-                    5. Về tính mạch lạc của bài viết: - {feedback?.coherence?.score} / 2.0 điểm
-                  </h5>
+                  <h5 className={cx("item-title")}>5. Về tính mạch lạc của bài viết - {feedback?.coherence?.score} / 2.0 điểm</h5>
                   <ul className={cx("list-comment")}>
                     {feedback?.coherence?.feedback?.map((item, index) => (
                       <li key={index} className={cx("comment-item")}>
@@ -140,7 +138,7 @@ const ExamGradingWithAI = () => {
                 </div>
                 <div className={cx("grade-comment-item", "mt-10")}>
                   <h5 className={cx("item-title")}>
-                    6. Về mức độ phức tạp trong câu: - {feedback?.sentence_complexity?.score} / 2.0 điểm
+                    6. Về mức độ phức tạp trong câu - {feedback?.sentence_complexity?.score} / 2.0 điểm
                   </h5>
                   <ul className={cx("list-comment")}>
                     {feedback?.sentence_complexity?.feedback?.map((item, index) => (
