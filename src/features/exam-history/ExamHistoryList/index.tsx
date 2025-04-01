@@ -1,5 +1,6 @@
 import ButtonShow from "@/components/Button/ButtonShow";
 import CardScroll from "@/components/CardScroll";
+import ModalRegisterGrade from "@/components/ModalRegisterGrade";
 import ROUTE_PATH from "@/routes/routePath";
 import { AppDispatch, RootState } from "@/stores";
 import { ExamActions } from "@/stores/examStore/examReducer";
@@ -7,7 +8,7 @@ import { IExamScore } from "@/types/exam/ExamTypes";
 import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
 import { Button, Table, TableColumnsType } from "antd";
 import classNames from "classnames/bind";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -18,6 +19,14 @@ const ExamHistoryList = () => {
   const dispatch: AppDispatch = useDispatch();
   const { listMyExam, isLoading } = useSelector((state: RootState) => state.examStore);
   const navigate = useNavigate();
+  const [openModalRegisterGrade, setOpenModalRegisterGrade] = useState(false);
+  const [selectedExamId, setSelectedExamId] = useState<string | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const handleRegisterWritingSkill = (examId: string, skillId: string) => {
+    setOpenModalRegisterGrade(true);
+    setSelectedExamId(examId);
+    setSelectedSkill(skillId);
+  };
 
   const handleShowExamResult = (id: string) => {
     navigate(ROUTE_PATH.EXAM_RESULT.replace(":examId", id));
@@ -25,7 +34,6 @@ const ExamHistoryList = () => {
   const handleRegisterMark = (examId: string, skill: string) => {
     console.log(examId, skill);
     toast.warning("Chức năng đang được phát triển");
-    // navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER.replace(":examId", examId)}?skill=${skill}`);
   };
   useEffect(() => {
     dispatch(ExamActions.getMyExams());
@@ -95,7 +103,7 @@ const ExamHistoryList = () => {
         return (
           <div>
             <div>Chưa chấm điểm</div>
-            <Button onClick={() => handleRegisterMark(record.id, "writing")} type='primary' size='small'>
+            <Button onClick={() => handleRegisterWritingSkill(record.id, "writing")} type='primary' size='small'>
               Đăng ký chấm
             </Button>
           </div>
@@ -119,7 +127,6 @@ const ExamHistoryList = () => {
         );
       },
     },
-
     {
       key: "action",
       fixed: "right",
@@ -148,6 +155,12 @@ const ExamHistoryList = () => {
           pagination={false}
         />
       </div>
+      <ModalRegisterGrade
+        selectedExamId={selectedExamId}
+        selectedSkill={selectedSkill}
+        open={openModalRegisterGrade}
+        onCancel={() => setOpenModalRegisterGrade(false)}
+      />
     </CardScroll>
   );
 };

@@ -1,16 +1,22 @@
 import { Spin } from "antd";
-import style from "./CardScroll.module.scss";
 import classNames from "classnames/bind";
+import ButtonBackPage from "../Button/ButtonBackPage";
+import style from "./CardScroll.module.scss";
 const cx = classNames.bind(style);
 interface ICardScrollProps {
   cardHeader: React.ReactNode;
   children: React.ReactNode;
   loading?: boolean;
+  showBackButton?: boolean;
+  title?: string;
 }
-const CardScroll = ({ children, cardHeader, loading = false }: ICardScrollProps) => {
+const CardScroll = ({ children, cardHeader, loading = false, showBackButton, title }: ICardScrollProps) => {
   return (
     <div className={cx("card-wrapper")}>
-      <div className={cx("card-header")}>{cardHeader}</div>
+      <div className={cx("card-header")}>
+        {showBackButton && <ButtonBackPage />}
+        <div className={cx("card-title")}>{cardHeader ? cardHeader : title}</div>
+      </div>
       <div className={cx("card-body", "scrollbar")}>
         {loading && (
           <div className={cx("spin-box")}>

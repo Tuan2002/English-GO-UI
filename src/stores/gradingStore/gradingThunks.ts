@@ -1,58 +1,42 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
-import { ILevel, ILevelDataUpdate } from "@/types/level/LevelTypes";
+import { IGradingFeedbackQuestion } from "@/types/gradingFeedback/GradingFeedbackType";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const getAllLevels = createAsyncThunk(
-  "levels/getAllLevels",
-  async (_, { rejectWithValue }): Promise<IAppResposeBase<ILevel[]>> => {
+const gradingWritingWithAI = createAsyncThunk(
+  "grades/gradingWritingWithAI",
+  async (examId: string, { rejectWithValue }): Promise<IAppResposeBase<null>> => {
     try {
-      const levels: IAppResposeBase<ILevel[]> = await http.get("/api/levels/get-levels");
-      return levels;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data) as any;
-    }
-  }
-);
-const updateLevel = createAsyncThunk(
-  "levels/updateLevel",
-  async (levelData: ILevelDataUpdate, { rejectWithValue }): Promise<IAppResposeBase<ILevel>> => {
-    try {
-      const level: IAppResposeBase<ILevel> = await http.put(`/api/levels/update-level/${levelData.levelId}`, levelData);
-      return level;
+      const grades: IAppResposeBase<null> = await http.post("/api/grades/grade-writing-with-ai", {
+        examId,
+      });
+      return grades;
     } catch (error: any) {
       return rejectWithValue(error.response.data) as any;
     }
   }
 );
 
-const getLevelById = createAsyncThunk(
-  "levels/getLevelById",
-  async (levelId: string, { rejectWithValue }): Promise<IAppResposeBase<ILevel>> => {
+const getGradingFeedbackWithAI = createAsyncThunk(
+  "grades/getGradingFeedbackWithAI",
+  async (
+    { examId, skill }: { examId: string; skill: "writing" | "speaking" },
+    { rejectWithValue }
+  ): Promise<IAppResposeBase<IGradingFeedbackQuestion[]>> => {
     try {
-      const level: IAppResposeBase<ILevel> = await http.get(`/api/levels/get-level/${levelId}`);
-      return level;
+      const grades: IAppResposeBase<IGradingFeedbackQuestion[]> = await http.get(
+        `/api/grades/grading-feedback-with-ai/${examId}?skill=${skill}`
+      );
+      return grades;
     } catch (error: any) {
       return rejectWithValue(error.response.data) as any;
     }
   }
 );
-const getLevelOfSkill = createAsyncThunk(
-  "levels/getLevelOfSkill",
-  async (skillId: string, { rejectWithValue }): Promise<IAppResposeBase<ILevel[]>> => {
-    try {
-      const levels: IAppResposeBase<ILevel[]> = await http.get(`/api/levels/get-level-of-skill/${skillId}`);
-      return levels;
-    } catch (error: any) {
-      return rejectWithValue(error.response.data) as any;
-    }
-  }
-);
-const levelThunks = {
-  getAllLevels,
-  updateLevel,
-  getLevelById,
-  getLevelOfSkill,
+
+const GradingThunks = {
+  gradingWritingWithAI,
+  getGradingFeedbackWithAI,
 };
-export default levelThunks;
+export default GradingThunks;

@@ -50,6 +50,12 @@ enum ROUTE_PATH {
   EXAM_HISTORY_LIST = "/exam/history/list",
   EXAM_HISTORY_SPEAKING = "/exam/history/speaking",
   EXAM_HISTORY_WRITING = "/exam/history/writing",
+  EXAM_HISTORY_GRADING_WITH_AI = "/exam/history/grading-with-ai/:examId",
+  EXAM_HISTORY_GRADING_WITH_TEACHER = "/exam/history/grading-with-teacher/:examId",
   EXAM_HISTORY_GRADING_REGISTER = "/exam/history/grading-register/:examId",
+
+  // lookup routes
+  LOOKUP_TEST_SCORE = "/lookup/test-score",
+  LOOKUP_EXAM_SCHEDULE = "/lookup/exam-schedule",
 }
 export default ROUTE_PATH;

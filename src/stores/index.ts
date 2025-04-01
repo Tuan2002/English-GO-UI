@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { AppSlice } from "./appStore/appReducer";
 import { AuthSlice } from "./authStore/authReducer";
 import { CategorySlice } from "./categoryStore/categoryReducer";
+import { CheckPointSlice } from "./checkpointStore/checkpointReducer";
 import { EvaluateSlice } from "./evaluateStore/evaluateReducer";
 import { ExaminerIntroductionSlice } from "./examinerIntroduciton/examinerReducer";
 import { ExamSlice } from "./examStore/examReducer";
 import { FeedbackSlice } from "./feedbackStore/feedbackReducer";
+import { GradingSlice } from "./gradingStore/gradingReducer";
 import { LevelSlice } from "./levelStore/levelReducer";
 import { OrganizationSlice } from "./organizationStore/organizationReducer";
 import { PlanSlice } from "./planStore/planReducer";
@@ -32,6 +34,8 @@ export const store = configureStore({
     examinerIntroductionStore: ExaminerIntroductionSlice.reducer,
     planStore: PlanSlice.reducer,
     evaluateStore: EvaluateSlice.reducer,
+    checkpointStore: CheckPointSlice.reducer,
+    gradingStore: GradingSlice.reducer,
   },
   // Added this mdware to fix error "A none-serializable value was detected..."
   middleware: (getDefaultMiddleware) =>

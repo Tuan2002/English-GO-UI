@@ -1,4 +1,4 @@
-import { Button, Modal } from "antd";
+import { Button, Modal, Spin } from "antd";
 import classNames from "classnames/bind";
 import { useEffect, useRef } from "react";
 import style from "./Modal.module.scss";
@@ -23,6 +23,7 @@ interface ModalCustomProps {
   maskClosable?: boolean;
   isFullScreen?: boolean;
   disableActions?: boolean;
+  maskLoading?: boolean;
 }
 
 const ModalCustom = ({
@@ -45,6 +46,7 @@ const ModalCustom = ({
   maskClosable = true,
   isFullScreen = false,
   disableActions = false,
+  maskLoading = false,
 }: ModalCustomProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const scrollToTop = () => {
@@ -103,6 +105,11 @@ const ModalCustom = ({
           </div>
         )
       ) : null}
+      {maskLoading && (
+        <div className={cx("mask-loading")}>
+          <Spin size='large' />
+        </div>
+      )}
     </Modal>
   );
 };
