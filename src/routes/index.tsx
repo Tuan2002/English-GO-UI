@@ -27,6 +27,7 @@ import ManageRolePage from "@/pages/admin/manage-user/ManageRolePage";
 import ManageUserPage from "@/pages/admin/manage-user/ManageUserPage";
 import LoginPage from "@/pages/auth/LoginPage";
 import LoginSSO from "@/pages/auth/LoginSSO";
+import RegisterPage from "@/pages/auth/RegisterPage";
 import ContactPage from "@/pages/contact/ContactPage";
 import NotFoundPage from "@/pages/error/NotFoundPage";
 import ExamGradingRegisterPage from "@/pages/exam-history/ExamGradingRegisterPage";
@@ -115,7 +116,7 @@ const AppRoute = () => {
         </Route>
         <Route element={<AuthRoute />}>
           <Route path={ROUTE_PATH.LOGIN} element={<LoginPage />} />
-          {/* <Route path={ROUTE_PATH.REGISTER} element={<RegisterPage />} /> */}
+          <Route path={ROUTE_PATH.REGISTER} element={<RegisterPage />} />
         </Route>
         <Route element={<ContestantLayout />}>
           <Route path={ROUTE_PATH.HOME} element={<HomePage />} />

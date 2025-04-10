@@ -1,58 +1,52 @@
-import HeaderBox from "@/components/HeaderBox";
-import { AppDispatch, RootState } from "@/stores";
-import { CheckPointActions } from "@/stores/checkpointStore/checkpointReducer";
-import { IExamTrackingRequest } from "@/types/lookup/LookupTypes";
-import { Button, Input, Select } from "antd";
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import style from "./TestScoreLookup.module.scss";
 const cx = classNames.bind(style);
 const TestScoreLookup = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { examSessions, signature, loading, isSubmitted, checkpoints } = useSelector((state: RootState) => state.checkpointStore);
-  const [examSessionSelected, setExamSessionSelected] = useState<string | null>(null);
-  const [msv, setMsv] = useState<string | null>(null);
+  // const dispatch: AppDispatch = useDispatch();
+  // const { examSessions, signature, loading, isSubmitted, checkpoints } = useSelector((state: RootState) => state.checkpointStore);
+  // const [examSessionSelected, setExamSessionSelected] = useState<string | null>(null);
+  // const [msv, setMsv] = useState<string | null>(null);
 
-  const handleExamSessionChange = (value: string) => {
-    setExamSessionSelected(value);
-    setMsv(null);
-    dispatch(CheckPointActions.changeIsSubmitted(false));
-    dispatch(CheckPointActions.changeCheckpoints([]));
-  };
-  const handleMsvChange = (value: string) => {
-    setMsv(value);
-  };
-  const handleLookup = () => {
-    if (!examSessionSelected || !msv) {
-      toast.warning("Vui lòng chọn kì thi và nhập mã sinh viên để tra cứu điểm!");
-      return;
-    }
-    if (!signature || signature?.trim() === "") {
-      toast.warning("Hệ thống đang bảo trì, vui lòng quay lại sau!");
-      return;
-    }
-    const dataRequest: IExamTrackingRequest = {
-      examSessionId: examSessionSelected,
-      languageId: "2",
-      locationId: "1",
-      studentCode: msv,
-      signature: signature,
-    };
-    dispatch(CheckPointActions.getExamResults(dataRequest));
-  };
+  // const handleExamSessionChange = (value: string) => {
+  //   setExamSessionSelected(value);
+  //   setMsv(null);
+  //   dispatch(CheckPointActions.changeIsSubmitted(false));
+  //   dispatch(CheckPointActions.changeCheckpoints([]));
+  // };
+  // const handleMsvChange = (value: string) => {
+  //   setMsv(value);
+  // };
+  // const handleLookup = () => {
+  //   if (!examSessionSelected || !msv) {
+  //     toast.warning("Vui lòng chọn kì thi và nhập mã sinh viên để tra cứu điểm!");
+  //     return;
+  //   }
+  //   if (!signature || signature?.trim() === "") {
+  //     toast.warning("Hệ thống đang bảo trì, vui lòng quay lại sau!");
+  //     return;
+  //   }
+  //   const dataRequest: IExamTrackingRequest = {
+  //     examSessionId: examSessionSelected,
+  //     languageId: "2",
+  //     locationId: "1",
+  //     studentCode: msv,
+  //     signature: signature,
+  //   };
+  //   dispatch(CheckPointActions.getExamResults(dataRequest));
+  // };
 
-  useEffect(() => {
-    const getExamSessions = async () => {
-      dispatch(CheckPointActions.getExamSessions());
-    };
-    dispatch(CheckPointActions.changeIsSubmitted(false));
-    getExamSessions();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const getExamSessions = async () => {
+  //     dispatch(CheckPointActions.getExamSessions());
+  //   };
+  //   dispatch(CheckPointActions.changeIsSubmitted(false));
+  //   getExamSessions();
+  // }, [dispatch]);
   return (
     <div className={cx("test-score-lookup-wrapper")}>
-      <HeaderBox
+      <iframe src='https://dgnlnn.vinhuni.edu.vn/tra-cuu-ket-qua.aspx' className={cx("iframe")}></iframe>
+
+      {/* <HeaderBox
         title='Tra cứu điểm thi'
         isUpperCase={true}
         description={
@@ -143,7 +137,7 @@ const TestScoreLookup = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

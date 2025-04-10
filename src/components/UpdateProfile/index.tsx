@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import style from "./UpdateProfile.module.scss";
-import classNames from "classnames/bind";
-import { Button, Col, DatePicker, Form, FormProps, Input, Row, Select } from "antd";
-import dayjs from "dayjs";
 import Uploadimage from "@/components/UploadImage";
-import GenderStatus from "@/constants/GenderStatus";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/stores";
-import { useEffect, useRef, useState, forwardRef, useImperativeHandle } from "react";
-import { authAction } from "@/stores/authStore/authReducer";
-import uploadService from "@/services/uploadService";
 import { CloudPresets } from "@/constants/CloudPreset";
+import GenderStatus from "@/constants/GenderStatus";
+import uploadService from "@/services/uploadService";
+import { AppDispatch, RootState } from "@/stores";
+import { authAction } from "@/stores/authStore/authReducer";
 import { IUpdateProfilePayload } from "@/types/user/UserType";
+import { Button, Col, DatePicker, Form, FormProps, Input, Row, Select } from "antd";
+import classNames from "classnames/bind";
+import dayjs from "dayjs";
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import style from "./UpdateProfile.module.scss";
 
 const cx = classNames.bind(style);
 
@@ -127,13 +127,28 @@ const UpdateProfile = forwardRef(({ isDisabled = true }: IUpdateProfileProps, re
               <Form.Item<FieldType>
                 name='email'
                 label='Email'
-                rules={[{ required: true, message: "Vui lòng nhập email của bạn!" }]}
+                rules={[
+                  { required: true, message: "Vui lòng nhập email của bạn!" },
+                  {
+                    type: "email",
+                    message: "Email không đúng định dạng!",
+                  },
+                ]}
               >
                 <Input size='large' placeholder='Nhập email của bạn' />
               </Form.Item>
             </Col>
             <Col xs={24} sm={12}>
-              <Form.Item<FieldType> name='phoneNumber' label='Điện thoại'>
+              <Form.Item<FieldType>
+                name='phoneNumber'
+                label='Điện thoại'
+                rules={[
+                  {
+                    pattern: /^[0-9]{10,11}$/, // Kiểm tra số điện thoại có 10 hoặc 11 chữ số
+                    message: "Số điện thoại không đúng định dạng!",
+                  },
+                ]}
+              >
                 <Input size='large' placeholder='Số điện thoại liên hệ của bạn' />
               </Form.Item>
             </Col>

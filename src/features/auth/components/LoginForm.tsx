@@ -7,6 +7,7 @@ import { ILoginRequestData } from "@/types/auth/LoginType";
 import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
 import classNames from "classnames/bind";
 import React from "react";
+import { BiLogoGoogle } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -76,14 +77,42 @@ const LoginForm = () => {
       </div>
       <div className={cx("login-form")}>
         <Form name='basic' initialValues={{ remember: true }} autoComplete='off' onFinish={onFinish}>
-          <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền tài khoản để đăng nhập!" }]}>
+          <Form.Item<FieldType>
+            name='username'
+            rules={[
+              { required: true, message: "Vui lòng điền tài khoản để đăng nhập!" },
+              {
+                min: 4,
+                message: "Tên tài khoản phải có ít nhất 4 ký tự!",
+              },
+              {
+                validator: (_, value) => {
+                  if (value) {
+                    if (value.includes(" ")) {
+                      return Promise.reject("Tên tài khoản không được chứa dấu cách!");
+                    }
+                    if (!/^[a-zA-Z0-9_]+$/.test(value)) {
+                      return Promise.reject("Tên tài khoản không được chứa ký tự đặc biệt!");
+                    }
+                  }
+                  return Promise.resolve();
+                },
+              },
+            ]}
+          >
             <Input autoFocus size='large' placeholder='Tên tài khoản' className='full-width' />
           </Form.Item>
 
           <Form.Item<FieldType>
             className='mt-30'
             name='password'
-            rules={[{ required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" }]}
+            rules={[
+              { required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" },
+              {
+                validator: (_, value) =>
+                  value && value.includes(" ") ? Promise.reject("Mật khẩu không được chứa dấu cách!") : Promise.resolve(),
+              },
+            ]}
           >
             <Input.Password placeholder='Mật khẩu' size='large' className='full-width' />
           </Form.Item>
@@ -111,10 +140,15 @@ const LoginForm = () => {
           <div className={cx("social-login", "text-center", "mt-10")}>
             <Button onClick={handleLoginSSO} type='primary' danger size='large'>
               <div className={cx("login-with-csv")}>
-                <img src='/logo-dhv.webp' className={cx("icon")} />
-                <span>Đăng nhập với cổng sinh viên</span>
+                <BiLogoGoogle className={cx("icon")} />
+                <span>Đăng nhập bằng Google</span>
               </div>
             </Button>
+          </div>
+        </div>
+        <div className='mt-10'>
+          <div className='mt-20 text-center'>
+            <span>Bạn chưa có tài khoản! </span> <Link to={ROUTE_PATH.REGISTER}>Đăng kí tài khoản</Link>
           </div>
         </div>
       </div>
