@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Environment from "@/constants/env";
 import ROUTE_PATH from "@/routes/routePath";
 import authService from "@/services/authService";
 import { authAction } from "@/stores/authStore/authReducer";
@@ -51,22 +50,22 @@ const LoginForm = () => {
     }
   };
 
-  const handleLoginSSO = () => {
-    const requestId = new Date().valueOf().toString();
-    const BASE_URL = Environment.AUTH_SERVER_URL;
-    const urlSearchParams = new URLSearchParams({
-      response_type: "id_token token",
-      client_id: String(Environment.AUTH_CLIENT_ID),
-      state: requestId,
-      redirect_uri: String(Environment.REDIRECT_URL),
-      scope: "openid profile email",
-      nonce: requestId,
-    });
-    const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent(
-      "/connect/authorize/callback?" + urlSearchParams.toString()
-    )}`;
-    window.location.href = loginURL;
-  };
+  // const handleLoginSSO = () => {
+  //   const requestId = new Date().valueOf().toString();
+  //   const BASE_URL = Environment.AUTH_SERVER_URL;
+  //   const urlSearchParams = new URLSearchParams({
+  //     response_type: "id_token token",
+  //     client_id: String(Environment.AUTH_CLIENT_ID),
+  //     state: requestId,
+  //     redirect_uri: String(Environment.REDIRECT_URL),
+  //     scope: "openid profile email",
+  //     nonce: requestId,
+  //   });
+  //   const loginURL = `${BASE_URL}/Account/Login?ReturnUrl=${encodeURIComponent(
+  //     "/connect/authorize/callback?" + urlSearchParams.toString()
+  //   )}`;
+  //   window.location.href = loginURL;
+  // };
 
   return (
     <div className={cx("login-form-wrapper")}>
@@ -138,7 +137,7 @@ const LoginForm = () => {
         <div className='mt-10'>
           <p className='text-center font-weight-500'>Hoặc</p>
           <div className={cx("social-login", "text-center", "mt-10")}>
-            <Button onClick={handleLoginSSO} type='primary' danger size='large'>
+            <Button type='primary' danger size='large'>
               <div className={cx("login-with-csv")}>
                 <BiLogoGoogle className={cx("icon")} />
                 <span>Đăng nhập bằng Google</span>
