@@ -19,6 +19,27 @@ const FeedbackBox = () => {
     slidesToShow: 4,
     slidesToScroll: 1,
     arrows: false,
+    responsive: [
+      {
+        breakpoint: 976,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 750,
+        settings: {
+          slidesToShow: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 550,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   useEffect(() => {
     dispatch(EvaluateActions.getAllEvaluates({ page: 1, limit: 10, isShow: true }));

@@ -242,11 +242,15 @@
   .feedback-slider {
     .feedback-item {
       width: 100%;
-      display: block;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
       padding: 10px;
     }
     .feedback-item-box {
       min-height: 200px;
+      max-width: 300px;
+      width: 100%;
       border-radius: 10px;
       padding: 10px;
       box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;

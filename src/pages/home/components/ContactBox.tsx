@@ -62,13 +62,16 @@ const ContactBox = () => {
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Vị trí:</span>
-                        <span className={cx("contact-info-sub-title")}>Chịu trách nhiệm sản xuất</span>
+                        <span className={cx("contact-info-sub-title")}>Xây dựng sản phẩm</span>
                       </div>
                     </div>
                   </div>
                   <div className={cx("contact-item")}>
                     <div className={cx("contact-item-avatar")}>
-                      <img className={cx("avatar")} src='/avatar-ntq.png' />
+                      <img
+                        className={cx("avatar")}
+                        src='https://vienktcn.vinhuni.edu.vn/image/img.ashx?i=/Portals/0/DanhMuc/2660__05_59_14_07_2017_IMG_2569.JPG&w=112'
+                      />
                     </div>
                     <div className={cx("contact-item-info")}>
                       <div className={cx("contact-info-item")}>
@@ -77,7 +80,7 @@ const ContactBox = () => {
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Email:</span>
-                        <span className={cx("contact-info-sub-title")}>ta2k3quyen@gmail.com</span>
+                        <span className={cx("contact-info-sub-title")}>tamntm@gmail.com</span>
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Điện thoại:</span>
@@ -85,30 +88,30 @@ const ContactBox = () => {
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Vị trí:</span>
-                        <span className={cx("contact-info-sub-title")}>Hỗ trợ thực hiện</span>
+                        <span className={cx("contact-info-sub-title")}>Hướng dẫn thực hiện</span>
                       </div>
                     </div>
                   </div>
                   <div className={cx("contact-item")}>
                     <div className={cx("contact-item-avatar")}>
-                      <img className={cx("avatar")} src='/avatar-ntq.png' />
+                      <img className={cx("avatar")} src='/avt-nnat.jpg' />
                     </div>
                     <div className={cx("contact-item-info")}>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Họ và tên:</span>
-                        <span className={cx("contact-info-sub-title")}>Nguyễn Tạ Quyền</span>
+                        <span className={cx("contact-info-sub-title")}>Nguyễn Ngọc Anh Tuấn</span>
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Email:</span>
-                        <span className={cx("contact-info-sub-title")}>ta2k3quyen@gmail.com</span>
+                        <span className={cx("contact-info-sub-title")}>tuannna@gmail.com</span>
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Điện thoại:</span>
-                        <span className={cx("contact-info-sub-title")}>0867168267</span>
+                        <span className={cx("contact-info-sub-title")}>0827073961</span>
                       </div>
                       <div className={cx("contact-info-item")}>
                         <span className={cx("contact-info-title")}>Vị trí:</span>
-                        <span className={cx("contact-info-sub-title")}>Chịu trách nhiệm sản xuất</span>
+                        <span className={cx("contact-info-sub-title")}>Hỗ trợ thực hiện</span>
                       </div>
                     </div>
                   </div>

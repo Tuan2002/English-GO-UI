@@ -17,6 +17,9 @@ const TestScoreLookup = () => {
 
   const handleExamSessionChange = (value: string) => {
     setExamSessionSelected(value);
+    setMsv(null);
+    dispatch(CheckPointActions.changeIsSubmitted(false));
+    dispatch(CheckPointActions.changeCheckpoints([]));
   };
   const handleMsvChange = (value: string) => {
     setMsv(value);
