@@ -43,7 +43,6 @@ const LoginForm = () => {
         navigate(ROUTE_PATH.HOME);
       }
       setIsLoading(false);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.log(error);
       setIsLoading(false);
@@ -70,51 +69,54 @@ const LoginForm = () => {
 
   return (
     <div className={cx("login-form-wrapper")}>
-      <h4 className={cx("title")}>Đăng nhập tài khoản</h4>
-      <Form name='basic' initialValues={{ remember: true }} autoComplete='off' onFinish={onFinish}>
-        <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền tài khoản để đăng nhập!" }]}>
-          <Input autoFocus size='large' placeholder='Tên tài khoản' className='full-width' />
-        </Form.Item>
+      <div className={cx("login-form-header")}>
+        <img src='/logo-full-2.png' alt='logo' className={cx("logo")} />
+        <h4 className={cx("title")}>Đăng nhập tài khoản!</h4>
+        {/* <img src='/logo-dhv.webp' alt='logo' className={cx("logo")} /> */}
+      </div>
+      <div className={cx("login-form")}>
+        <Form name='basic' initialValues={{ remember: true }} autoComplete='off' onFinish={onFinish}>
+          <Form.Item<FieldType> name='username' rules={[{ required: true, message: "Vui lòng điền tài khoản để đăng nhập!" }]}>
+            <Input autoFocus size='large' placeholder='Tên tài khoản' className='full-width' />
+          </Form.Item>
 
-        <Form.Item<FieldType>
-          className='mt-30'
-          name='password'
-          rules={[{ required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" }]}
-        >
-          <Input.Password placeholder='Password' size='large' className='full-width' />
-        </Form.Item>
+          <Form.Item<FieldType>
+            className='mt-30'
+            name='password'
+            rules={[{ required: true, message: "Vui lòng điền mật khẩu để đăng nhập!" }]}
+          >
+            <Input.Password placeholder='Mật khẩu' size='large' className='full-width' />
+          </Form.Item>
 
-        <Row justify={"space-between"} className='mt-10'>
-          <Col span={12}>
-            <Checkbox>Nhớ tài khoản</Checkbox>
-          </Col>
-          <Col span={12} className='text-end'>
-            <Link className='' to={ROUTE_PATH.FORGET_PASSWORD}>
-              Quên mật khẩu?
-            </Link>
-          </Col>
-        </Row>
+          <Row justify={"space-between"} className='mt-10'>
+            <Col span={12}>
+              <Checkbox>Nhớ tài khoản</Checkbox>
+            </Col>
+            <Col span={12} className='text-end'>
+              <Link className='' to={ROUTE_PATH.FORGET_PASSWORD}>
+                Quên mật khẩu?
+              </Link>
+            </Col>
+          </Row>
 
-        <Form.Item className='mt-30'>
-          <Button loading={isLoading} type='primary' htmlType='submit' className='full-width' size='large'>
-            Đăng nhập
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item className='mt-30'>
+            <Button loading={isLoading} type='primary' htmlType='submit' className='full-width' size='large'>
+              Đăng nhập
+            </Button>
+          </Form.Item>
+        </Form>
 
-      <div className='mt-10'>
-        <p className='text-center'>Hoặc</p>
-        <div className={cx("social-login", "text-center", "mt-10")}>
-          <Button onClick={handleLoginSSO} type='primary' danger size='large'>
-            <div className={cx("login-with-csv")}>
-              <img src='/logo-dhv.webp' className={cx("icon")} />
-              <span>Đăng nhập với Cổng Sinh Viên</span>
-            </div>
-          </Button>
+        <div className='mt-10'>
+          <p className='text-center font-weight-500'>Hoặc</p>
+          <div className={cx("social-login", "text-center", "mt-10")}>
+            <Button onClick={handleLoginSSO} type='primary' danger size='large'>
+              <div className={cx("login-with-csv")}>
+                <img src='/logo-dhv.webp' className={cx("icon")} />
+                <span>Đăng nhập với cổng sinh viên</span>
+              </div>
+            </Button>
+          </div>
         </div>
-        {/* <div className='mt-20 text-center'>
-          <span>Bạn chưa có tài khoản </span> <Link to={ROUTE_PATH.REGISTER}>Đăng ký ngay</Link>
-        </div> */}
       </div>
     </div>
   );

@@ -1,12 +1,13 @@
-import { Button, Checkbox, Col, Form, Input, Row } from "antd";
-import style from "../auth.module.scss";
-import classNames from "classnames/bind";
-import { Link, useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ROUTE_PATH from "@/routes/routePath";
-import React from "react";
-import { toast } from "react-toastify";
 import authService from "@/services/authService";
 import { IRegisterRequestData } from "@/types/auth/RegisterType";
+import { Button, Checkbox, Col, Form, Input, Row } from "antd";
+import classNames from "classnames/bind";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import style from "../auth.module.scss";
 const cx = classNames.bind(style);
 
 type FieldType = {

@@ -32,6 +32,9 @@ export const CheckPointSlice = createSlice({
     changeSignature: (state, action) => {
       state.signature = action.payload;
     },
+    changeCheckpoints: (state, action) => {
+      state.checkpoints = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
