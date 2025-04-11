@@ -1,3 +1,4 @@
+import HeaderBox from "@/components/HeaderBox";
 import classNames from "classnames/bind";
 import style from "./TestScoreLookup.module.scss";
 const cx = classNames.bind(style);
@@ -44,9 +45,7 @@ const TestScoreLookup = () => {
   // }, [dispatch]);
   return (
     <div className={cx("test-score-lookup-wrapper")}>
-      <iframe src='https://dgnlnn.vinhuni.edu.vn/tra-cuu-ket-qua.aspx' className={cx("iframe")}></iframe>
-
-      {/* <HeaderBox
+      <HeaderBox
         title='Tra cứu điểm thi'
         isUpperCase={true}
         description={
@@ -58,7 +57,7 @@ const TestScoreLookup = () => {
         }
         maxWidth='100%'
       />
-      <div className={cx("test-score-lookup-form")}>
+      {/* <div className={cx("test-score-lookup-form")}>
         <div className={cx("kt-box")}>
           <Select
             className='full-width'
