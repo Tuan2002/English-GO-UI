@@ -6,7 +6,6 @@ import { ILoginRequestData } from "@/types/auth/LoginType";
 import { Button, Checkbox, Col, Form, FormProps, Input, Row } from "antd";
 import classNames from "classnames/bind";
 import React from "react";
-import { BiLogoGoogle } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -135,18 +134,11 @@ const LoginForm = () => {
         </Form>
 
         <div className='mt-10'>
-          <p className='text-center font-weight-500'>Hoặc</p>
-          <div className={cx("social-login", "text-center", "mt-10")}>
-            <Button type='primary' danger size='large'>
-              <div className={cx("login-with-csv")}>
-                <BiLogoGoogle className={cx("icon")} />
-                <span>Đăng nhập bằng Google</span>
-              </div>
-            </Button>
-          </div>
+          <p className={cx("login-with-csv")}>Đăng nhập bằng cổng sinh viên tạm thời không hỗ trợ!</p>
+          <div className={cx("social-login", "text-center", "mt-10")}></div>
         </div>
         <div className='mt-10'>
-          <div className='mt-20 text-center'>
+          <div className='text-center'>
             <span>Bạn chưa có tài khoản! </span> <Link to={ROUTE_PATH.REGISTER}>Đăng kí tài khoản</Link>
           </div>
         </div>
