@@ -1,19 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { IExaminerIntroduction } from "@/types/examinerIntroduction/ExaminerIntroductionTypes";
+import { IExaminerIntroduction, IExaminerWithIntroduction } from "@/types/examinerIntroduction/ExaminerIntroductionTypes";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import examinerIntroductionThunks from "./examinerThunks";
 import { toast } from "react-toastify";
+import examinerIntroductionThunks from "./examinerThunks";
 
 export interface ExaminerIntroductionState {
   loading: boolean;
   isSubmitting: boolean;
   myExaminerIntroduction: IExaminerIntroduction | null;
+  listExaminerIntroductions: IExaminerWithIntroduction[];
+  selectedExaminer: string | null;
 }
 
 const initialState: ExaminerIntroductionState = {
   loading: false,
   isSubmitting: false,
   myExaminerIntroduction: null,
+  listExaminerIntroductions: [],
+  selectedExaminer: null,
 };
 
 export const ExaminerIntroductionSlice = createSlice({
@@ -28,6 +31,12 @@ export const ExaminerIntroductionSlice = createSlice({
     },
     changeMyExaminerIntroduction: (state, action: PayloadAction<IExaminerIntroduction>) => {
       state.myExaminerIntroduction = action.payload;
+    },
+    changeListExaminerIntroductions: (state, action: PayloadAction<IExaminerWithIntroduction[]>) => {
+      state.listExaminerIntroductions = action.payload;
+    },
+    changeSelectedExaminer: (state, action: PayloadAction<string | null>) => {
+      state.selectedExaminer = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -53,6 +62,17 @@ export const ExaminerIntroductionSlice = createSlice({
       })
       .addCase(examinerIntroductionThunks.updateMyIntroduction.rejected, (state) => {
         state.isSubmitting = false;
+      });
+    builder
+      .addCase(examinerIntroductionThunks.getAllExaminerIntroduction.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(examinerIntroductionThunks.getAllExaminerIntroduction.fulfilled, (state, action) => {
+        state.loading = false;
+        state.listExaminerIntroductions = action.payload.data;
+      })
+      .addCase(examinerIntroductionThunks.getAllExaminerIntroduction.rejected, (state) => {
+        state.loading = false;
       });
   },
 });

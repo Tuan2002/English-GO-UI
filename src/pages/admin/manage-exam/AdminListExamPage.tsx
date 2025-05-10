@@ -1,6 +1,6 @@
 import AdminListExam from "@/features/manage-exam/AdminListExam";
 
 const AdminListExamPage = () => {
-  return <AdminListExam />;
+  return <AdminListExam role='admin' />;
 };
 export default AdminListExamPage;

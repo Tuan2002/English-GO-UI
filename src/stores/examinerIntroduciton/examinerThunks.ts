@@ -1,8 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { IAppResposeBase } from "@/types/AppType";
-import { IExaminerIntroduction } from "@/types/examinerIntroduction/ExaminerIntroductionTypes";
+import { IExaminerIntroduction, IExaminerWithIntroduction } from "@/types/examinerIntroduction/ExaminerIntroductionTypes";
 import http from "@/utils/axios/customAxios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
+const getAllExaminerIntroduction = createAsyncThunk(
+  "examinerIntroductions/getAllExaminerIntroduction",
+  async (_, { rejectWithValue }): Promise<IAppResposeBase<IExaminerWithIntroduction[]>> => {
+    try {
+      const examinerIntroductions: IAppResposeBase<IExaminerWithIntroduction[]> = await http.get(
+        "/api/examiner-introductions/get-all-examiners"
+      );
+      return examinerIntroductions;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data) as any;
+    }
+  }
+);
 
 const getMyIntroduction = createAsyncThunk(
   "examinerIntroductions/getMyIntroduction",
@@ -35,5 +49,6 @@ const updateMyIntroduction = createAsyncThunk(
 const examinerIntroductionThunks = {
   getMyIntroduction,
   updateMyIntroduction,
+  getAllExaminerIntroduction,
 };
 export default examinerIntroductionThunks;

@@ -1,4 +1,3 @@
-import ExamGradingWithAI from "@/features/exam-history/ExamGradingWithAI";
 import ManageService from "@/features/manage-service/ManageService";
 import ManageServiceAttribute from "@/features/manage-service/ManageServiceAttribute";
 import ManageServiceType from "@/features/manage-service/ManageServiceType";
@@ -11,6 +10,8 @@ import MyProfilePage from "@/pages/account/MyProfilePage";
 import UpgradeAcountPage from "@/pages/account/UpgradeAccountPage";
 import AdminEvaluatePage from "@/pages/admin/admin-evaluate/AdminEvaluatePage";
 import AdminFeedbackPage from "@/pages/admin/admin-feedback/AdminFeedbackPage";
+import AdminGradeExamPage from "@/pages/admin/admin-grade-exam/AdminGradeExamPage";
+import AdminListRegisteredGradingPage from "@/pages/admin/admin-grade-exam/AdminListRegisteredGradingPage";
 import AdminManageOrganizationPage from "@/pages/admin/admin-manage-organization/AdminManageOrganizationPage";
 import AdminManageSchedulePage from "@/pages/admin/admin-manage-schedule/AdminManageSchedulePage";
 import AdminCategoryDetailPage from "@/pages/admin/admin-question-bank/AdminCategoryDetailPage";
@@ -31,6 +32,8 @@ import RegisterPage from "@/pages/auth/RegisterPage";
 import ContactPage from "@/pages/contact/ContactPage";
 import NotFoundPage from "@/pages/error/NotFoundPage";
 import ExamGradingRegisterPage from "@/pages/exam-history/ExamGradingRegisterPage";
+import ExamGradingWithAIPage from "@/pages/exam-history/ExamGradingWithAIPage";
+import ExamGradingWithPersonPage from "@/pages/exam-history/ExamGradingWithPersonPage";
 import ExamHistoryListPage from "@/pages/exam-history/ExamHistoryListPage";
 import ExamHistorySpeakingPage from "@/pages/exam-history/ExamHistorySpeakingPage";
 import ExamHistoryWritingPage from "@/pages/exam-history/ExamHistoryWritingPage";
@@ -40,9 +43,12 @@ import ExamResultPage from "@/pages/exam/ExamResultPage";
 import ExamRoomPage from "@/pages/exam/ExamRoomPage";
 import ExamScorePage from "@/pages/exam/ExamScorePage";
 import ExaminerDashboard from "@/pages/examiner/dashboard/Dashboard";
+import ExaminerGradeExamPage from "@/pages/examiner/examiner-grade-exam/ExaminerGradeExamPage";
+import ExaminerListRegisteredGradingPage from "@/pages/examiner/examiner-grade-exam/ExaminerListRegisteredGradingPage";
 import ExaminerIntroductionPage from "@/pages/examiner/examiner-introduction/ExaminerIntroductionPage";
 import UpdateExaminerIntroductionPage from "@/pages/examiner/examiner-introduction/UpdateExaminerIntroductionPage";
-import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerQuestionBankPage";
+import ExaminerExamDetailPage from "@/pages/examiner/examiner-list-exam/ExaminerExamDetailPage";
+import ExaminerListExamPage from "@/pages/examiner/examiner-list-exam/ExaminerListExamPage";
 import ExaminerQuestionBankPage from "@/pages/examiner/examiner-question-bank/ExaminerQuestionBankPage";
 import HomePage from "@/pages/home/HomePage";
 import ExamScheduleLookupPage from "@/pages/lookup/ExamScheduleLookupPage";
@@ -80,6 +86,8 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE} element={<ManageService />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_TYPE} element={<ManageServiceType />} />
               <Route path={ROUTE_PATH.ADMIN_MANAGE_SERVICE_ATTRIBUTE} element={<ManageServiceAttribute />} />
+              <Route path={ROUTE_PATH.ADMIN_LIST_REGISTERED_GRADE_EXAM} element={<AdminListRegisteredGradingPage />} />
+              <Route path={ROUTE_PATH.ADMIN_GRADE_EXAM} element={<AdminGradeExamPage />} />
             </Route>
           </Route>
 
@@ -91,6 +99,9 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.EXAMINER_QUESTION_BANK} element={<ExaminerQuestionBankPage />} />
               <Route path={ROUTE_PATH.EXAMINER_UPDATE_INTRODUCTION} element={<UpdateExaminerIntroductionPage />} />
               <Route path={ROUTE_PATH.EXAMINER_LIST_EXAM} element={<ExaminerListExamPage />} />
+              <Route path={ROUTE_PATH.EXAMINER_EXAM_DETAIL} element={<ExaminerExamDetailPage />} />
+              <Route path={ROUTE_PATH.EXAMINER_LIST_REGISTERED_GRADE_EXAM} element={<ExaminerListRegisteredGradingPage />} />
+              <Route path={ROUTE_PATH.EXAMINER_GRADE_EXAM} element={<ExaminerGradeExamPage />} />
             </Route>
           </Route>
 
@@ -103,8 +114,8 @@ const AppRoute = () => {
               <Route path={ROUTE_PATH.EXAM_HISTORY_LIST} element={<ExamHistoryListPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_SPEAKING} element={<ExamHistorySpeakingPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_WRITING} element={<ExamHistoryWritingPage />} />
-              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_AI} element={<ExamGradingWithAI />} />
-              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_TEACHER} element={<span>Exam Grading With Teacher</span>} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_AI} element={<ExamGradingWithAIPage />} />
+              <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_PERSON} element={<ExamGradingWithPersonPage />} />
               <Route path={ROUTE_PATH.EXAM_HISTORY_GRADING_REGISTER} element={<ExamGradingRegisterPage />} />
             </Route>
             <Route element={<ProfileLayout pageName='profile' />}>

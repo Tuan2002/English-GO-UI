@@ -9,13 +9,15 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
 import style from "./ExamGradingWithAI.module.scss";
+import { GradeTargetLabels } from "@/constants/GradeTargets";
 const cx = classNames.bind(style);
 const ExamGradingWithAI = () => {
   const [searchParams] = useSearchParams();
   const skill = searchParams.get("skill") as "writing" | "speaking";
   const { examId } = useParams();
   const dispatch: AppDispatch = useDispatch();
-  const { listQuestionLevel, selectedQuestionLevel, selectedQuestion } = useSelector((state: RootState) => state.gradingStore);
+  const { listQuestionLevel, selectedQuestionLevel, selectedQuestion } =
+    useSelector((state: RootState) => state.gradingStore);
 
   const handleQuestionLevelChange = (value: string) => {
     dispatch(GradingActions.setSelectedQuestionLevel(value));
@@ -39,19 +41,27 @@ const ExamGradingWithAI = () => {
       parsedFeedback = {};
     }
     return parsedFeedback;
-  }, [selectedQuestion?.gradeFeedback?.id, selectedQuestion?.gradeFeedback?.feedback]);
+  }, [
+    selectedQuestion?.gradeFeedback?.id,
+    selectedQuestion?.gradeFeedback?.feedback,
+  ]);
   console.log("feedback", feedback);
   return (
-    <CardScroll showBackButton cardHeader={`Chấm điểm bài thi ${skill === "speaking" ? "nói" : "viết"} với AI`}>
+    <CardScroll
+      showBackButton
+      cardHeader={`Chấm điểm bài thi ${
+        skill === "speaking" ? "nói" : "viết"
+      } với AI`}
+    >
       <div className={cx("exam-grading-with-ai")}>
         <div className={cx("header-box")}>
           <Select
-            className='full-width'
+            className="full-width"
             style={{ maxWidth: 350 }}
             showSearch
             value={selectedQuestionLevel}
             onChange={(value) => handleQuestionLevelChange(value)}
-            placeholder='Chọn bài thi của bạn'
+            placeholder="Chọn bài thi của bạn"
             // filterOption={(input, option) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase())}
             options={listQuestionLevel}
           />
@@ -62,11 +72,17 @@ const ExamGradingWithAI = () => {
               <div className={cx("header-title")}>
                 <span className={cx("title-text")}>Đề bài</span>
               </div>
-              <div className={cx("question-description")}>{selectedQuestion.question.description}</div>
-              <div className={cx("question-content")}>
-                <HTMLDisplay htmlContent={selectedQuestion.question?.questionContent ?? ""} />
+              <div className={cx("question-description")}>
+                {selectedQuestion.question.description}
               </div>
-              <div className={cx("question-note")}>{selectedQuestion.question.questionNote}</div>
+              <div className={cx("question-content")}>
+                <HTMLDisplay
+                  htmlContent={selectedQuestion.question?.questionContent ?? ""}
+                />
+              </div>
+              <div className={cx("question-note")}>
+                {selectedQuestion.question.questionNote}
+              </div>
             </div>
             <div className={cx("box-item", "answer-box")}>
               <div className={cx("header-title")}>
@@ -94,70 +110,47 @@ const ExamGradingWithAI = () => {
                     {"=>  "}Cho điểm: <span>{feedback?.score} / 10.0 điểm</span>
                   </h5>
                 </div>
-                <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>2. Về ngữ pháp - {feedback?.grammar?.score} / 2.0 điểm</h5>
-                  <ul className={cx("list-comment")}>
-                    {feedback?.grammar?.feedback?.map((item, index) => (
-                      <li key={index} className={cx("comment-item")}>
-                        - {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>3. Về từ vựng trong bài - {feedback?.vocabulary?.score} / 2.0 điểm</h5>
-                  <ul className={cx("list-comment")}>
-                    {feedback?.vocabulary?.feedback?.map((item, index) => (
-                      <li key={index} className={cx("comment-item")}>
-                        - {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>
-                    4. Về mức độ hoàn thành yêu cầu của đề tài - {feedback?.task_achievement?.score} / 2.0 điểm
-                  </h5>
-                  <ul className={cx("list-comment")}>
-                    {feedback?.task_achievement?.feedback?.map((item, index) => (
-                      <li key={index} className={cx("comment-item")}>
-                        - {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>5. Về tính mạch lạc của bài viết - {feedback?.coherence?.score} / 2.0 điểm</h5>
-                  <ul className={cx("list-comment")}>
-                    {feedback?.coherence?.feedback?.map((item, index) => (
-                      <li key={index} className={cx("comment-item")}>
-                        - {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>
-                    6. Về mức độ phức tạp trong câu - {feedback?.sentence_complexity?.score} / 2.0 điểm
-                  </h5>
-                  <ul className={cx("list-comment")}>
-                    {feedback?.sentence_complexity?.feedback?.map((item, index) => (
-                      <li key={index} className={cx("comment-item")}>
-                        - {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className={cx("grade-comment-item", "mt-10")}>
-                  <h5 className={cx("item-title")}>7. Bài viết sau khi được chỉnh sửa:</h5>
-                  <div className={cx("corrected-essay")}>
-                    {feedback?.corrected_essay?.split("\n").map((paragraph, index) => (
-                      <p key={index} className={cx("corrected-paragraph")}>
-                        {paragraph}
-                      </p>
-                    ))}
+                {feedback?.feedbackDetail?.map((item, index) => (
+                  <div
+                    key={index}
+                    className={cx("grade-comment-item", "mt-10")}
+                  >
+                    <h5 className={cx("item-title")}>
+                      {index + 2}. {GradeTargetLabels[item.title]}
+                    </h5>
+                    <ul className={cx("list-comment")}>
+                      {item.feedback?.map((item, index) =>
+                        item?.trim() === "" ? null : (
+                          <li key={index} className={cx("comment-item")}>
+                            - {item}
+                          </li>
+                        )
+                      )}
+                    </ul>
                   </div>
-                </div>
+                ))}
+                {skill === "writing" &&
+                  feedback?.corrected_essay &&
+                  feedback?.corrected_essay?.length > 0 && (
+                    <div className={cx("grade-comment-item", "mt-10")}>
+                      <h5 className={cx("item-title")}>
+                        {feedback?.feedbackDetail &&
+                          feedback?.feedbackDetail.length + 2}
+                        . Bài viết sau khi được chỉnh sửa:
+                      </h5>
+                      <div className={cx("corrected-essay")}>
+                        {typeof feedback?.corrected_essay === "object" &&
+                          feedback?.corrected_essay?.map((paragraph, index) => (
+                            <p
+                              key={index}
+                              className={cx("corrected-paragraph")}
+                            >
+                              {paragraph}
+                            </p>
+                          ))}
+                      </div>
+                    </div>
+                  )}
               </div>
             </div>
           </>

@@ -1,12 +1,12 @@
+import { AppDispatch, RootState } from "@/stores";
+import { ExaminerIntroductionActions } from "@/stores/examinerIntroduciton/examinerReducer";
 import getAccessToken from "@/utils/Functions/getAccessToken";
-import { Navigate, Outlet, useNavigate } from "react-router-dom";
-import ROUTE_PATH from "./routePath";
-import { toast } from "react-toastify";
+import { Spin } from "antd";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/stores";
-import { Spin } from "antd";
-import { ExaminerIntroductionActions } from "@/stores/examinerIntroduciton/examinerReducer";
+import { Navigate, Outlet, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import ROUTE_PATH from "./routePath";
 
 const ExaminerProtectRoute = (): JSX.Element => {
   const navigate = useNavigate();
@@ -24,9 +24,15 @@ const ExaminerProtectRoute = (): JSX.Element => {
   const accessToken = getAccessToken();
   React.useEffect(() => {
     if (accessToken) {
-      dispatch(ExaminerIntroductionActions.getMyIntroduction());
+      dispatch(ExaminerIntroductionActions.getMyIntroduction()).then((res) => {
+        console.log("res", (res.payload as { success: boolean })?.success);
+        if (!(res.payload as { success: boolean })?.success) {
+          navigate(ROUTE_PATH.EXAMINER_UPDATE_INTRODUCTION);
+          return;
+        }
+      });
     }
-  }, [accessToken, dispatch]);
+  }, [accessToken, dispatch, navigate]);
   if (!accessToken) return <Navigate to={ROUTE_PATH.LOGIN} />;
 
   const decodedToken = parseJwt(accessToken);

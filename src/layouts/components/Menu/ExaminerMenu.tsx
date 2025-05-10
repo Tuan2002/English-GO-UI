@@ -25,5 +25,10 @@ const examinerMenu: MenuItem[] = [
     label: <Link to={ROUTE_PATH.EXAMINER_LIST_EXAM}>Danh sách bài thi</Link>,
     icon: <MailOutlined />,
   },
+  {
+    key: "5",
+    label: <Link to={ROUTE_PATH.EXAMINER_LIST_REGISTERED_GRADE_EXAM}>Chấm bài</Link>,
+    icon: <MailOutlined />,
+  },
 ];
 export default examinerMenu;

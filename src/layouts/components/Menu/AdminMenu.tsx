@@ -38,12 +38,12 @@ const adminMenu: MenuItem[] = [
   {
     key: "6",
     icon: <MailOutlined />,
-    label: "Quản lý bài thi",
-    children: [
-      { key: "6.1", label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Tổng hợp bài thi</Link> },
-      { key: "6.2", label: <Link to={ROUTE_PATH.ADMIN_LIST_SPEAKING_EXAM}>Chấm bài thi nói</Link> },
-      { key: "6.3", label: <Link to={ROUTE_PATH.ADMIN_LIST_WRITING_EXAM}>Chấm bài thi viết</Link> },
-    ],
+    label: <Link to={ROUTE_PATH.ADMIN_LIST_EXAM}>Tổng hợp bài thi</Link>,
+  },
+  {
+    key: "11",
+    icon: <MailOutlined />,
+    label: <Link to={ROUTE_PATH.ADMIN_LIST_REGISTERED_GRADE_EXAM}>Chấm bài</Link>,
   },
   {
     key: "7",

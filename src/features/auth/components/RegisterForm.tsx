@@ -86,7 +86,7 @@ const RegisterForm = () => {
           <Form.Item<FieldType>
             className='mt-30'
             name='fullName'
-            rules={[{ required: true, message: "Vui lòng điền họ tên để nhà tuyển dụng xem hồ sơ!" }]}
+            rules={[{ required: true, message: "Vui lòng điền họ và tên của bạn!" }]}
           >
             <Input size='large' placeholder='Họ và tên' className='full-width' />
           </Form.Item>

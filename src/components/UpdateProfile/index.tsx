@@ -56,9 +56,6 @@ const UpdateProfile = forwardRef(({ isDisabled = true }: IUpdateProfileProps, re
       if (uploadImage.data.public_id) {
         avatar = uploadImage.data.secure_url;
       }
-      if (currentUser?.avatar) {
-        await uploadService.deleteAnImage(currentUser?.avatar ?? "");
-      }
     }
     const data: IUpdateProfilePayload = {
       id: currentUser?.id ?? "",
