@@ -1,19 +1,19 @@
 import CardCustom from "@/components/Card";
-import ROUTE_PATH from "@/routes/routePath";
-import { Button, Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
-import style from "./UpdateExaminerIntroduction.module.scss";
-import classNames from "classnames/bind";
+import TextEditor from "@/components/TextEditor";
 import Uploadimage from "@/components/UploadImage";
+import { CloudPresets } from "@/constants/CloudPreset";
+import ROUTE_PATH from "@/routes/routePath";
+import uploadService from "@/services/uploadService";
+import { AppDispatch, RootState } from "@/stores";
+import { ExaminerIntroductionActions } from "@/stores/examinerIntroduciton/examinerReducer";
+import { IAppResposeBase } from "@/types/AppType";
+import { IExaminerIntroduction } from "@/types/examinerIntroduction/ExaminerIntroductionTypes";
+import { Button, Form, Input } from "antd";
+import classNames from "classnames/bind";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/stores";
-import TextEditor from "@/components/TextEditor";
-import { IExaminerIntroduction } from "@/types/examinerIntroduction/ExaminerIntroductionTypes";
-import { ExaminerIntroductionActions } from "@/stores/examinerIntroduciton/examinerReducer";
-import uploadService from "@/services/uploadService";
-import { CloudPresets } from "@/constants/CloudPreset";
-import { IAppResposeBase } from "@/types/AppType";
+import { useNavigate } from "react-router-dom";
+import style from "./UpdateExaminerIntroduction.module.scss";
 const cx = classNames.bind(style);
 type FieldType = {
   avatar?: string;
@@ -52,7 +52,7 @@ const UpdateExaminerIntroduction = () => {
     const dataUpdate: IExaminerIntroduction = {
       ...myExaminerIntroduction,
       id: myExaminerIntroduction?.id ?? "",
-      userId: myExaminerIntroduction?.userId ?? "",
+      userId: currentUser?.id ?? "",
       description: values.description,
       workPlace: values.workPlace,
       workAddress: values.workAddress,

@@ -1,3 +1,4 @@
+import { ERegisterGradeStatus } from "@/constants/RegisterGradeStatus";
 import { IQuestion, ISubQuestion } from "../question/QuestionTypes";
 
 export interface IExam {
@@ -108,6 +109,12 @@ export interface IExamScore {
   startTime: string;
   endTime: string;
   examSkillStatuses: IExamSkillStatus[];
+  registerGradeExams: Array<{
+    id: string;
+    examId: string;
+    skillId: string;
+    status: ERegisterGradeStatus;
+  }>;
 }
 
 export interface ICurrentExamResponse {

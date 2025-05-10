@@ -1,6 +1,8 @@
 import ButtonShow from "@/components/Button/ButtonShow";
 import CardScroll from "@/components/CardScroll";
-import ModalRegisterGrade from "@/components/ModalRegisterGrade";
+import RegisterGradingExam, {
+  RegisterGradingExamRef,
+} from "@/features/RegisterGradingExam";
 import ROUTE_PATH from "@/routes/routePath";
 import { AppDispatch, RootState } from "@/stores";
 import { ExamActions } from "@/stores/examStore/examReducer";
@@ -8,36 +10,34 @@ import { IExamScore } from "@/types/exam/ExamTypes";
 import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
 import { Button, Table, TableColumnsType } from "antd";
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import style from "./ExamHistoryList.module.scss";
+import EXAM_SKILLS from "@/constants/ExamSkills";
+import {
+  ERegisterGradeStatus,
+  RegisterGradeStatus,
+} from "@/constants/RegisterGradeStatus";
 const cx = classNames.bind(style);
 
 const ExamHistoryList = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { listMyExam, isLoading } = useSelector((state: RootState) => state.examStore);
+  const { listMyExam, isLoading } = useSelector(
+    (state: RootState) => state.examStore
+  );
   const navigate = useNavigate();
-  const [openModalRegisterGrade, setOpenModalRegisterGrade] = useState(false);
-  const [selectedExamId, setSelectedExamId] = useState<string | null>(null);
-  const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
-  const handleRegisterWritingSkill = (examId: string, skillId: string) => {
-    setOpenModalRegisterGrade(true);
-    setSelectedExamId(examId);
-    setSelectedSkill(skillId);
-  };
+  const registerGradingExamRef = useRef<RegisterGradingExamRef | null>(null);
 
   const handleShowExamResult = (id: string) => {
     navigate(ROUTE_PATH.EXAM_RESULT.replace(":examId", id));
   };
-  const handleRegisterMark = (examId: string, skill: string) => {
-    console.log(examId, skill);
-    toast.warning("Chức năng đang được phát triển");
-  };
+
   useEffect(() => {
     dispatch(ExamActions.getMyExams());
   }, [dispatch]);
+  console.log("listMyExam", listMyExam);
+
   const columns: TableColumnsType<IExamScore> = [
     {
       title: "STT",
@@ -62,10 +62,12 @@ const ExamHistoryList = () => {
       width: 70,
       align: "center",
       render: (_, record) => {
-        const skill = record.examSkillStatuses?.find((item) => item.skillId === "listening");
+        const skill = record.examSkillStatuses?.find(
+          (item) => item.skillId === "listening"
+        );
         const score = (10 / (skill?.totalQuestion ?? 1)) * (skill?.score ?? 0);
         return (
-          <div className=''>
+          <div className="">
             <div>
               {skill?.score} / {skill?.totalQuestion} câu
             </div>
@@ -81,10 +83,12 @@ const ExamHistoryList = () => {
       align: "center",
       width: 70,
       render: (_, record) => {
-        const skill = record.examSkillStatuses?.find((item) => item.skillId === "reading");
+        const skill = record.examSkillStatuses?.find(
+          (item) => item.skillId === "reading"
+        );
         const score = (10 / (skill?.totalQuestion ?? 1)) * (skill?.score ?? 0);
         return (
-          <div className=''>
+          <div className="">
             <div>
               {skill?.score} / {skill?.totalQuestion} câu
             </div>
@@ -100,11 +104,53 @@ const ExamHistoryList = () => {
       width: 70,
       align: "center",
       render: (_, record) => {
+        const registerGraded = record.registerGradeExams?.find(
+          (item) => item.skillId === EXAM_SKILLS.WRITING
+        );
+        if (!registerGraded) {
+          return (
+            <div>
+              <div>Chưa chấm điểm</div>
+              <Button
+                onClick={() =>
+                  registerGradingExamRef.current?.handleRegisterGradingExam(
+                    record.id,
+                    EXAM_SKILLS.WRITING
+                  )
+                }
+                type="primary"
+                size="small"
+                className="mt-10"
+              >
+                Đăng ký chấm
+              </Button>
+            </div>
+          );
+        }
+        const skill = record?.examSkillStatuses?.find(
+          (item) => item.skillId === EXAM_SKILLS.WRITING
+        );
         return (
           <div>
-            <div>Chưa chấm điểm</div>
-            <Button onClick={() => handleRegisterWritingSkill(record.id, "writing")} type='primary' size='small'>
-              Đăng ký chấm
+            <div>
+              {registerGraded?.status !== ERegisterGradeStatus.GRADED
+                ? RegisterGradeStatus[
+                    registerGraded?.status ?? ERegisterGradeStatus.REGISTERED
+                  ]
+                : skill?.score}
+            </div>
+            <Button
+              onClick={() =>
+                registerGradingExamRef.current?.handleRegisterGradingExam(
+                  record.id,
+                  EXAM_SKILLS.WRITING
+                )
+              }
+              type="primary"
+              size="small"
+              className="mt-10"
+            >
+              Xem kết quả
             </Button>
           </div>
         );
@@ -117,11 +163,53 @@ const ExamHistoryList = () => {
       width: 70,
       align: "center",
       render: (_, record) => {
+        const registerGraded = record.registerGradeExams?.find(
+          (item) => item.skillId === EXAM_SKILLS.SPEAKING
+        );
+        if (!registerGraded) {
+          return (
+            <div>
+              <div>Chưa chấm điểm</div>
+              <Button
+                onClick={() =>
+                  registerGradingExamRef.current?.handleRegisterGradingExam(
+                    record.id,
+                    EXAM_SKILLS.SPEAKING
+                  )
+                }
+                type="primary"
+                size="small"
+                className="mt-10"
+              >
+                Đăng ký chấm
+              </Button>
+            </div>
+          );
+        }
+        const skill = record?.examSkillStatuses?.find(
+          (item) => item.skillId === EXAM_SKILLS.SPEAKING
+        );
         return (
           <div>
-            <div>Chưa chấm điểm</div>
-            <Button onClick={() => handleRegisterMark(record.id, "speaking")} type='primary' size='small'>
-              Đăng ký chấm
+            <div>
+              {registerGraded?.status !== ERegisterGradeStatus.GRADED
+                ? RegisterGradeStatus[
+                    registerGraded?.status ?? ERegisterGradeStatus.REGISTERED
+                  ]
+                : skill?.score}
+            </div>
+            <Button
+              onClick={() =>
+                registerGradingExamRef.current?.handleRegisterGradingExam(
+                  record.id,
+                  EXAM_SKILLS.SPEAKING
+                )
+              }
+              type="primary"
+              size="small"
+              className="mt-10"
+            >
+              Xem kết quả
             </Button>
           </div>
         );
@@ -142,11 +230,12 @@ const ExamHistoryList = () => {
     },
   ];
   return (
-    <CardScroll cardHeader='Lịch sử tham gia luyện thi'>
+    <CardScroll cardHeader="Lịch sử tham gia luyện thi">
       <div className={cx("exam-history-list")}>
         <Table
+          rowKey="id"
           loading={isLoading}
-          className='table-centered '
+          className="table-centered "
           columns={columns}
           key={"id"}
           virtual
@@ -155,12 +244,7 @@ const ExamHistoryList = () => {
           pagination={false}
         />
       </div>
-      <ModalRegisterGrade
-        selectedExamId={selectedExamId}
-        selectedSkill={selectedSkill}
-        open={openModalRegisterGrade}
-        onCancel={() => setOpenModalRegisterGrade(false)}
-      />
+      <RegisterGradingExam ref={registerGradingExamRef} />
     </CardScroll>
   );
 };

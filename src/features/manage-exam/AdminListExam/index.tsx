@@ -1,16 +1,19 @@
 import CardCustom from "@/components/Card";
-import HeaderListExam from "./components/HeaderListExam";
-import TableListExams from "./components/TableListExams";
-import React, { useEffect } from "react";
+import ModalChooseUser from "@/components/ModalChooseUser";
+import PaginationCustom from "@/components/Pagination";
 import { AppDispatch, RootState } from "@/stores";
-import { useDispatch, useSelector } from "react-redux";
 import { ExamActions } from "@/stores/examStore/examReducer";
 import { IGetAllExamDTO } from "@/types/exam/ExamTypes";
-import PaginationCustom from "@/components/Pagination";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import ModalChooseUser from "@/components/ModalChooseUser";
+import HeaderListExam from "./components/HeaderListExam";
+import TableListExams from "./components/TableListExams";
 
-const AdminListExam = () => {
+interface IAdminListExamProps {
+  role: "admin" | "examiner";
+}
+const AdminListExam = ({ role }: IAdminListExamProps) => {
   const dispatch: AppDispatch = useDispatch();
   const location = useLocation();
   const { examPageData, isOpenModalChooseUser } = useSelector((state: RootState) => state.examStore);
@@ -37,7 +40,7 @@ const AdminListExam = () => {
     <CardCustom title='Tổng hợp bài thi của thí sinh' fullHeight>
       <HeaderListExam />
       <div className='mt-10'>
-        <TableListExams />
+        <TableListExams role={role} />
         <div className='flex justify-content-end'>
           <PaginationCustom total={examPageData?.totalItems || 0} limit={examPageData?.limit} />
         </div>

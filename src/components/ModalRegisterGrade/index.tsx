@@ -9,17 +9,25 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import ModalCustom from "../Modal";
 import style from "./ModalRegisterGrade.module.scss";
+import EXAM_SKILLS from "@/constants/ExamSkills";
 const cx = classNames.bind(style);
 
 interface IModalRegisterGradeProps {
   open: boolean;
   onCancel: () => void;
+  handleRegisterWithExaminer: () => void;
   selectedExamId?: string | null;
   selectedSkill?: string | null;
 }
-const ModalRegisterGrade = ({ open, onCancel, selectedExamId, selectedSkill }: IModalRegisterGradeProps) => {
+const ModalRegisterGrade = ({
+  open,
+  onCancel,
+  selectedExamId,
+  selectedSkill,
+  handleRegisterWithExaminer,
+}: IModalRegisterGradeProps) => {
   const [selectedType, setSelectedType] = useState<string>("type-1");
-  const { loading } = useSelector((state: RootState) => state.gradingStore);
+  const { loading, isSubmiting } = useSelector((state: RootState) => state.gradingStore);
   const navigate = useNavigate();
   const dispatch: AppDispatch = useDispatch();
   const handleRegisterMark = () => {
@@ -31,16 +39,22 @@ const ModalRegisterGrade = ({ open, onCancel, selectedExamId, selectedSkill }: I
       toast.warning("Vui lòng chọn hình thức chấm bài");
       return;
     }
-    if (selectedType === "type-1") {
+    if (selectedType === "type-1" && selectedSkill === EXAM_SKILLS.SPEAKING) {
+      toast.warning("Chức năng này không khả dụng cho kỹ năng nói");
+      return;
+    }
+    if (selectedType === "type-1" && selectedSkill === EXAM_SKILLS.WRITING) {
       // Handle register with AI
       dispatch(GradingActions.gradingWritingWithAI(selectedExamId)).then((response) => {
         if ((response as any).payload.success) {
           navigate(`${ROUTE_PATH.EXAM_HISTORY_GRADING_WITH_AI.replace(":examId", selectedExamId)}?skill=${selectedSkill}`);
         }
       });
-    } else if (selectedType === "type-2") {
-      // Handle register with teacher
-      toast.warning("Chức năng đang được phát triển");
+      return;
+    }
+    if (selectedType === "type-2") {
+      // handle register with examiner
+      handleRegisterWithExaminer();
     }
   };
 
@@ -53,7 +67,8 @@ const ModalRegisterGrade = ({ open, onCancel, selectedExamId, selectedSkill }: I
       showHeader={false}
       showCloseButton={false}
       maskClosable={false}
-      maskLoading={loading}
+      maskLoading={loading || isSubmiting}
+      isLoading={loading || isSubmiting}
     >
       <div className={cx("grade-register")}>
         <div className={cx("grade-register-header")}>

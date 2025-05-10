@@ -33,6 +33,8 @@ enum ROUTE_PATH {
   ADMIN_MANAGE_SERVICE = "/admin/manage-service/:serviceType",
   ADMIN_MANAGE_SERVICE_ATTRIBUTE = "/admin/manage-service-attribute",
   ADMIN_MANAGE_SERVICE_TYPE = "/admin/manage-service",
+  ADMIN_LIST_REGISTERED_GRADE_EXAM = "/admin/grade-exam",
+  ADMIN_GRADE_EXAM = "/admin/grade-exam/:registeredGradeExamId",
 
   // examiner routes
   EXAMINER_DASHBOARD = "/examiner/dashboard",
@@ -40,6 +42,9 @@ enum ROUTE_PATH {
   EXAMINER_UPDATE_INTRODUCTION = "/examiner/introduction/update",
   EXAMINER_QUESTION_BANK = "/examiner/question-bank",
   EXAMINER_LIST_EXAM = "/examiner/list-exam",
+  EXAMINER_EXAM_DETAIL = "/examiner/list-exam/:examId",
+  EXAMINER_LIST_REGISTERED_GRADE_EXAM = "/examiner/grade-exam",
+  EXAMINER_GRADE_EXAM = "/examiner/grade-exam/:registeredGradeExamId",
 
   // exam routes
   EXAM = "/exam",
@@ -51,6 +56,7 @@ enum ROUTE_PATH {
   EXAM_HISTORY_SPEAKING = "/exam/history/speaking",
   EXAM_HISTORY_WRITING = "/exam/history/writing",
   EXAM_HISTORY_GRADING_WITH_AI = "/exam/history/grading-with-ai/:examId",
+  EXAM_HISTORY_GRADING_WITH_PERSON = "/exam/history/grading-with-person/:registeredGradeExamId",
   EXAM_HISTORY_GRADING_WITH_TEACHER = "/exam/history/grading-with-teacher/:examId",
   EXAM_HISTORY_GRADING_REGISTER = "/exam/history/grading-register/:examId",
 

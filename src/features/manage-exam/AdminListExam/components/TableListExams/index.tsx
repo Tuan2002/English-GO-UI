@@ -1,27 +1,29 @@
+import ButtonShow from "@/components/Button/ButtonShow";
+import ROUTE_PATH from "@/routes/routePath";
 import { RootState } from "@/stores";
 import { IUserExam } from "@/types/exam/ExamTypes";
-import { Button, Table, TableColumnsType } from "antd";
-import { useSelector } from "react-redux";
-import style from "./TableListExams.module.scss";
-import classNames from "classnames/bind";
-import { Avatar } from "antd";
-import ButtonShow from "@/components/Button/ButtonShow";
-import React, { useEffect } from "react";
 import getFirstCharacterInName from "@/utils/Functions/getFirstCharacterInName";
 import roundToHalfOrZero from "@/utils/Functions/RoundPointToHalfOrZero";
+import { Avatar, Button, Table, TableColumnsType } from "antd";
+import classNames from "classnames/bind";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import ROUTE_PATH from "@/routes/routePath";
+import style from "./TableListExams.module.scss";
 const cx = classNames.bind(style);
 interface DataType extends IUserExam {
   key: React.Key;
 }
-const TableListExams = () => {
+interface ITableListExamsProps {
+  role: "admin" | "examiner";
+}
+const TableListExams = ({ role }: ITableListExamsProps) => {
   const { listAllExams, isLoading } = useSelector((state: RootState) => state.examStore);
   const [data, setData] = React.useState<DataType[]>([]);
   const navigate = useNavigate();
 
   const handleShowExamResult = (id: string) => {
-    navigate(ROUTE_PATH.ADMIN_EXAM_DETAIL.replace(":examId", id));
+    navigate((role === "admin" ? ROUTE_PATH.ADMIN_EXAM_DETAIL : ROUTE_PATH.EXAMINER_EXAM_DETAIL).replace(":examId", id));
   };
 
   const columns: TableColumnsType<DataType> = [

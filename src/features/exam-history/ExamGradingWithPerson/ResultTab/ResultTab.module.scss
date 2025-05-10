@@ -1,0 +1,96 @@
+.header-box {
+  display: flex;
+  justify-content: flex-end;
+}
+.box-item {
+  min-height: 150px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+
+  .header-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    .title-text {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      text-align: center;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+  }
+}
+.question-box {
+  .question-description {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: justify;
+  }
+  .question-content {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: justify;
+  }
+  .question-note {
+    font-size: 14px;
+    color: #555;
+    text-align: justify;
+    font-style: italic;
+    margin-top: 5px;
+  }
+}
+
+.answer-box {
+  .answer-content {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 5px;
+    text-align: justify;
+  }
+}
+
+.feedback-content {
+  .grade-comment-item {
+    .score-title {
+      margin-top: 5px;
+      span {
+        color: #8c52ff;
+        font-weight: 500;
+        font-size: 14px;
+        margin-left: 5px;
+      }
+    }
+    .list-comment {
+      list-style-type: none;
+      margin-left: 10px;
+    }
+    .comment-item {
+      margin-top: 5px;
+    }
+    .corrected-essay {
+      padding: 10px;
+      .corrected-paragraph {
+        text-align: justify;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}
+.no-feedback {
+  text-align: center;
+  font-size: 14px;
+  color: #fb6262;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}

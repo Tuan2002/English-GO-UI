@@ -35,16 +35,15 @@ const CardCustom = ({
       <div
         className={cx("card-body", "scrollbar", {
           "full-height": fullHeight,
-          // scrollbar: fullHeight,
         })}
       >
-        {loading && (
-          <div className={cx("spin-box")}>
-            <Spin />
-          </div>
-        )}
         {children}
       </div>
+      {loading && (
+        <div className={cx("spin-box")}>
+          <Spin />
+        </div>
+      )}
     </div>
   );
 };
